@@ -1,10 +1,15 @@
 import React from "react";
 import { Global, css } from "@emotion/core";
 
-function GlobalStyles() {
+type GlobalStylesProps = {
+  bg: string;
+  theme?: any;
+};
+function GlobalStyles(props: GlobalStylesProps) {
+  const background = props.bg === "landing" ? "unicolor" : "";
   return (
     <Global
-      styles={(theme) => css`
+      styles={({ theme }: any) => css`
         *,
         *:before,
         *:after {
@@ -19,6 +24,9 @@ function GlobalStyles() {
         #root {
           min-height: 100vh;
           height: 100%;
+          background: ${background === "unicolor"
+            ? ""
+            : `linear-gradient(${props.theme.primary300} 0%, ${props.theme.primary200} 70%)`};
         }
       `}
     />
