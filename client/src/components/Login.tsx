@@ -43,10 +43,12 @@ const Button = styled("button")<ThemeProps>`
   border-radius: 4px;
 `;
 
-const SmallPrint = styled("h6")`
+const SmallPrint = styled("a")<ThemeProps>`
   margin: 0;
   margin-top: 20px;
   font-size: 10px;
+  text-decoration: none;
+  color: ${({ theme }) => theme.font};
 `;
 const Login = () => {
   return (
@@ -65,7 +67,7 @@ const Login = () => {
           <Button type="button">Register</Button>
         </FlexContainer>
         <FlexContainer>
-          <SmallPrint>continue without login</SmallPrint>
+          <SmallPrint href="./main">continue without login</SmallPrint>
         </FlexContainer>
       </form>
     </Container>
