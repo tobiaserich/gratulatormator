@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { Heading } from "./Heading";
+import SeparationLine from "./SeparationLine";
 
 const Container = styled("header")`
   display: flex;
@@ -8,20 +9,14 @@ const Container = styled("header")`
   align-items: center;
 `;
 
-const SeparationLine = styled("div")`
-  height: 1px;
-  width: 280px;
-  background-color: ${({ theme }: any) => theme.secondary300};
-  margin-top: -18px;
-  border-radius: 25px;
-`;
+
 const Header = () => {
   return (
     <Container>
-      <Heading strokeColor="white" topSpacing={0}>
+      <Heading strokeColor="white" topSpacing={0} fontSize={1.9}>
         Gratulatormator
       </Heading>
-      <SeparationLine />
+      <SeparationLine distanceTop="-18" />
     </Container>
   );
 };
