@@ -1,5 +1,6 @@
 import React from "react";
 import NextBirthday from "../components/NextBirthday";
+
 const Main = () => {
   return (
     <>
@@ -9,3 +10,4 @@ const Main = () => {
 };
 
 export default Main;
+
