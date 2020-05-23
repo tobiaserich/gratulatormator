@@ -9,14 +9,13 @@ const Container = styled("header")`
   align-items: center;
 `;
 
-
 const Header = () => {
   return (
     <Container>
       <Heading strokeColor="white" topSpacing={0} fontSize={1.9}>
         Gratulatormator
       </Heading>
-      <SeparationLine distanceTop="-18" />
+      <SeparationLine distanceTop={-18} />
     </Container>
   );
 };
