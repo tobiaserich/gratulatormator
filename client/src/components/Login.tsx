@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
+import Button from "./Button";
 
 type ThemeProps = {
   theme: any;
@@ -35,12 +36,6 @@ const Input = styled("input")`
   height: 25px;
   border-radius: 5px;
   margin-top: 3px;
-`;
-
-const Button = styled("button")<ThemeProps>`
-  background-color: transparent;
-  border: 2.3px solid ${({ theme }) => theme.action100};
-  border-radius: 4px;
 `;
 
 const SmallPrint = styled("a")<ThemeProps>`
