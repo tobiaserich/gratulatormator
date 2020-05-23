@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 type SeparationLineProps = {
   distanceTop?: number;
   distanceBottom?: number;
+  autoMargin?: boolean;
 };
 
 const SeparationLine = styled("div")<SeparationLineProps>`
@@ -12,6 +13,13 @@ const SeparationLine = styled("div")<SeparationLineProps>`
   margin-top: ${({ distanceTop = 0 }) => distanceTop}px;
   margin-bottom: ${({ distanceBottom = 0 }) => distanceBottom}px;
   border-radius: 25px;
+  ${({ autoMargin }) => (autoMargin ? "margin:auto;" : "")};
 `;
 
-export default SeparationLine;
+const ShortSeparationLine = styled(SeparationLine)`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+`;
+export { SeparationLine, ShortSeparationLine };
