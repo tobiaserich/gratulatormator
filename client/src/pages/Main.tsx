@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import NextBirthday from "../components/NextBirthday";
 import Button from "../components/Button";
 import Link from "../components/Link";
+import BirthdayCalendar from "../components/BirthdayCalendar";
 
 const MainContainer = styled("main")`
   display: flex;
@@ -18,6 +19,7 @@ const Main = () => {
       <Button fontSize={20}>
         <Link href="./AddPerson">Add new person</Link>
       </Button>
+      <BirthdayCalendar />
     </MainContainer>
   );
 };

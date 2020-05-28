@@ -2,14 +2,13 @@ import React from "react";
 import styled from "@emotion/styled";
 import { SubHeading } from "../components/Heading";
 import user from "../assets/user.svg";
-import SeparationLine from "./SeparationLine";
+import { SeparationLine } from "./SeparationLine";
 
 const Container = styled("section")`
   margin-top: 7px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: "Arima Madurai";
 `;
 
 const Image = styled("img")`
@@ -48,7 +47,7 @@ const NextBirthday = () => {
           <UserDetail>31 Years old</UserDetail>
         </UserDetails>
       </UserContainer>
-      <SeparationLine distanceTop="0" />
+      <SeparationLine distanceBottom={10} />
     </Container>
   );
 };
