@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "@emotion/styled";
 import MainContainer from "../components/MainContainer";
 import NextBirthday from "../components/NextBirthday";
 import Button from "../components/Button";
