@@ -9,15 +9,24 @@ import Button from "../components/Button";
 import Link from "../components/Link";
 
 type userDataProps = {
-  [index: string]: string | boolean;
   firstName: string;
   lastName: string;
   birthday: string;
   remindMe: boolean;
+  [index: string]: string | boolean;
 };
 
+type validationDataProps = {
+  firstName: boolean;
+  lastName: boolean;
+  birthday: boolean;
+  [index: string]: boolean;
+};
 type checkBoxProps = {
   checkBoxChecked: boolean | undefined;
+};
+type themeProps = {
+  theme: any;
 };
 
 const Formular = styled("form")`
@@ -79,13 +88,52 @@ const Input = styled("input")`
   box-shadow: inset 3px 3px 7px -6px ${({ theme }: any) => theme.neutral500};
 `;
 
+const InputValidation = styled("div")<themeProps>`
+  margin-top: -10px;
+  font-size: 12px;
+  color: ${({ theme }) => theme.error200};
+`;
+
 const AddNewPerson = () => {
-  const [userData, setUserData] = React.useState({
+  const [userData, setUserData] = React.useState<userDataProps>({
     firstName: "",
     lastName: "",
     birthday: "",
     remindMe: false,
   });
+
+  const [validationCheck, setValidationCheck] = React.useState<
+    validationDataProps
+  >({
+    firstName: false,
+    lastName: false,
+    birthday: false,
+  });
+
+  const [submit, setSubmit] = React.useState(false);
+
+  const inputValidationPopUp = (
+    <InputValidation>This field is required</InputValidation>
+  );
+
+  const inputValidation = () => {
+    const birthdayVerification = /^([1-9]{2}).([1-9]{2}).([1-9]{4})/;
+    const validationData: validationDataProps = { ...validationCheck };
+
+    Object.keys(userData).map((value) => {
+      if (value === "birthday") {
+        userData[value].match(birthdayVerification)
+          ? (validationData[value] = true)
+          : (validationData[value] = false);
+      } else if (value === "remindMe") {
+      } else {
+        userData[value] === ""
+          ? (validationData[value] = false)
+          : (validationData[value] = true);
+      }
+    });
+    setValidationCheck(validationData);
+  };
 
   const handleChange = (
     arrayPos: string,
@@ -105,6 +153,8 @@ const AddNewPerson = () => {
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
+    setSubmit(true);
+    console.log(validationCheck);
   };
 
   return (
@@ -129,6 +179,13 @@ const AddNewPerson = () => {
             onChange={(event) => handleChange("firstName", event)}
           />
         </Label>
+
+        {!validationCheck["firstName"]
+          ? submit
+            ? inputValidationPopUp
+            : ""
+          : ""}
+
         <Label>
           Last Name
           <Input
@@ -138,7 +195,11 @@ const AddNewPerson = () => {
             onChange={(event) => handleChange("lastName", event)}
           />
         </Label>
-
+        {!validationCheck["lastName"]
+          ? submit
+            ? inputValidationPopUp
+            : ""
+          : ""}
         <Label>
           Birthday
           <Input
@@ -149,7 +210,11 @@ const AddNewPerson = () => {
             onChange={(event) => handleChange("birthday", event)}
           />
         </Label>
-
+        {!validationCheck["birthday"]
+          ? submit
+            ? inputValidationPopUp
+            : ""
+          : ""}
         <Label>
           <RemindContainer checkBoxChecked={userData["remindMe"]}>
             Remind me <br />
@@ -167,7 +232,7 @@ const AddNewPerson = () => {
               cancel
             </Button>
           </Link>
-          <Button fontSize={20} type="submit">
+          <Button fontSize={20} type="submit" onClick={() => inputValidation()}>
             submit
           </Button>
         </div>
