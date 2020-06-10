@@ -4,6 +4,7 @@ type ThemeProps = {
   theme: any;
   fontSize?: number;
   spacingRight?: number;
+  spacingTop?: number;
 };
 
 const Button = styled("button")<ThemeProps>`
@@ -12,7 +13,8 @@ const Button = styled("button")<ThemeProps>`
   background-color: transparent;
   border: 2.3px solid ${({ theme }) => theme.action100};
   border-radius: 4px;
-  margin-right: ${({ spacingRight }) => spacingRight + "px"};
+   ${({ spacingRight }) => `margin-right: ${spacingRight}px`};
+   ${({ spacingTop }) => `margin-top: ${spacingTop}px`};
 `;
 
 export default Button;
