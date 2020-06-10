@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "@emotion/styled";
-import Button from "../components/Button";
+import Button from "./Button";
 import { SeparationLine, ShortSeparationLine } from "./SeparationLine";
+import Link from "./Link";
 
 type MonthProps = {
   month: string;
@@ -97,7 +98,9 @@ const MonthlyBirthdayCalendar = ({ month }: MonthProps) => {
           <Birthdate>22.11.1998</Birthdate>
           <Age>22 y </Age>
           <SeeMore>
-            <Button>more</Button>
+            <Link href="/userInfo">
+              <Button>more</Button>
+            </Link>
           </SeeMore>
         </Person>
         <tr>
