@@ -9,7 +9,7 @@ type ThemeProps = {
 const Container = styled("section")`
   width: 300px;
   height: 230px;
-  position: absolute;
+  position: relative;
   bottom: 0;
   background-color: #fbf3cb;
   box-shadow: inset 5px 5px 10px rgba(255, 255, 255, 1),
@@ -17,6 +17,7 @@ const Container = styled("section")`
   font-family: "Luckiest guy", "sans-serif";
   display: flex;
   flex-direction: column;
+  margin-top: 10px;
 `;
 
 const FlexContainer = styled("div")`
