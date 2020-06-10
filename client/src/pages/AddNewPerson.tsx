@@ -66,6 +66,7 @@ const RemindContainer = styled("label")<checkBoxProps>`
 
 const AddImage = styled("img")`
   width: 120px;
+  border-radius: 50%;
 `;
 
 const HiddenFileUpload = styled("input")`

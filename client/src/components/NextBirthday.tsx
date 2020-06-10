@@ -13,6 +13,7 @@ const Container = styled("section")`
 
 const Image = styled("img")`
   width: 70px;
+  border-radius: 50%;
 `;
 
 const UserContainer = styled("div")`
