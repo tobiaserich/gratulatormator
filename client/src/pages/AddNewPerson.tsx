@@ -120,13 +120,12 @@ const AddNewPerson = () => {
     const birthdayVerification = /^([1-9]{2}).([1-9]{2}).([1-9]{4})/;
     const validationData: validationDataProps = { ...validationCheck };
 
-    Object.keys(userData).map((value) => {
+    Object.keys(userData).forEach((value) => {
       if (value === "birthday") {
         userData[value].match(birthdayVerification)
           ? (validationData[value] = true)
           : (validationData[value] = false);
-      } else if (value === "remindMe") {
-      } else {
+      } else if (value !== "remindMe" && value !== "birthday") {
         userData[value] === ""
           ? (validationData[value] = false)
           : (validationData[value] = true);
