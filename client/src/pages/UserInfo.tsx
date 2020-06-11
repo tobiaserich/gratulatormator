@@ -35,10 +35,13 @@ const UserInfo = () => {
   const birthdayRearrange = (birthday: string) => {
     const birthdayArr = birthday.split(".").reverse();
     const birthdayMonth = new Date(birthdayArr.join("-")).getMonth();
+    const birthdayDay = new Date(birthdayArr.join("-")).getDate();
     const currentMonth = new Date().getMonth();
+    const currentDay = new Date().getDate();
+    console.log(birthdayDay);
     const currentYear = new Date().getFullYear();
     birthdayArr[0] =
-      birthdayMonth >= currentMonth
+      birthdayMonth >= currentMonth && birthdayDay >= currentDay
         ? currentYear.toString()
         : (currentYear + 1).toString();
     return Date.parse(birthdayArr.join("-"));
