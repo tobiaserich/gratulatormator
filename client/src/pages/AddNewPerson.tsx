@@ -154,7 +154,6 @@ const AddNewPerson = () => {
   const handleSubmit = (event: any) => {
     event.preventDefault();
     setSubmit(true);
-    console.log(validationCheck);
   };
 
   return (
