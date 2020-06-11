@@ -66,6 +66,7 @@ const RemindContainer = styled("label")<checkBoxProps>`
 
 const AddImage = styled("img")`
   width: 120px;
+  border-radius: 50%;
 `;
 
 const HiddenFileUpload = styled("input")`
@@ -153,7 +154,6 @@ const AddNewPerson = () => {
   const handleSubmit = (event: any) => {
     event.preventDefault();
     setSubmit(true);
-    console.log(validationCheck);
   };
 
   return (
