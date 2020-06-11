@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { SubHeading } from "../components/Heading";
+import UserImage from "../components/UserImage";
 import user from "../assets/user.svg";
 import { SeparationLine } from "./SeparationLine";
 
@@ -9,11 +10,6 @@ const Container = styled("section")`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-const Image = styled("img")`
-  width: 70px;
-  border-radius: 50%;
 `;
 
 const UserContainer = styled("div")`
@@ -41,7 +37,7 @@ const NextBirthday = () => {
     <Container>
       <SubHeading>Next Birthday</SubHeading>
       <UserContainer>
-        <Image src={user} />
+        <UserImage src={user} imageWidth={70} />
         <UserDetails>
           <UserDetail>Fridolin Müller</UserDetail>
           <UserDetail>21.03.1989</UserDetail>

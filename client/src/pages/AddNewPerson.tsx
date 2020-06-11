@@ -2,6 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import MainContainer from "../components/MainContainer";
 import { SubHeading } from "../components/Heading";
+import UserImage from "../components/UserImage";
 import user from "../assets/user.svg";
 import unchecked from "../assets/checkboxUnchecked.svg";
 import checked from "../assets/checkboxChecked.svg";
@@ -62,11 +63,6 @@ const RemindContainer = styled("label")<checkBoxProps>`
     background-image: ${({ checkBoxChecked }) =>
       checkBoxChecked ? `url(${checked})` : `url(${unchecked})`};
   }
-`;
-
-const AddImage = styled("img")`
-  width: 120px;
-  border-radius: 50%;
 `;
 
 const HiddenFileUpload = styled("input")`
@@ -161,7 +157,7 @@ const AddNewPerson = () => {
       <SubHeading>Add New Person</SubHeading>
       <Formular onSubmit={(event) => handleSubmit(event)}>
         <ImageLabel>
-          <AddImage src={user} />
+          <UserImage src={user} imageWidth={120} />
           Add image
           <HiddenFileUpload
             type="file"
