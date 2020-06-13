@@ -56,7 +56,7 @@ const Item = styled("li")<itemProps>`
 
 const DaysDropdown = () => {
   const [select, setSelect] = React.useState("01");
-  const [openDropdown, setOpenDropdown] = React.useState(true);
+  const [openDropdown, setOpenDropdown] = React.useState(false);
   const [touch, setTouch] = React.useState(false);
   const [items, setItems] = React.useState([
     "01",
