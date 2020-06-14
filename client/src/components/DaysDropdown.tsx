@@ -1,16 +1,17 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { ArrowDown } from "../components/Arrows";
+type daysDropdownProps = {
+  days: number;
+};
 
 type itemProps = {
   colorChangeOnHover?: boolean;
-  initalItem?: boolean;
-  dropdownActive?: boolean;
-  touch?: boolean;
 };
 
 type dropdownProps = {
   dropdownActive: boolean;
+  theme: any;
 };
 
 const ModalBackground = styled("div")`
@@ -18,9 +19,15 @@ const ModalBackground = styled("div")`
   top: 0;
   left: 0;
   z-index: 1;
-  background-color: transparent;
   height: 100%;
   width: 100%;
+  background-color: transparent;
+`;
+const Container = styled("div")<dropdownProps>`
+  position: relative;
+  display: inline-block;
+  width: ${({ dropdownActive }) => (dropdownActive ? "48px" : "34px")};
+  height: 22px;
 `;
 
 const Dropdown = styled("div")<dropdownProps>`
@@ -29,47 +36,34 @@ const Dropdown = styled("div")<dropdownProps>`
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  padding: 0px;
-  margin: 0px;
   max-height: 170px;
+  width: 44px;
+  margin-left: -5px;
   overflow: auto;
-  width: ${({ dropdownActive }) => (dropdownActive ? "48px" : "")};
-
   scrollbar-width: thin;
+
+  ${({ dropdownActive, theme }) =>
+    dropdownActive
+      ? `background-color:${theme.primary200};box-shadow:4px 4px 3px ${theme.neutral400};`
+      : ""};
 `;
 
 const Item = styled("li")<itemProps>`
-  width: auto;
   list-style-type: none;
+  width: 34px;
   text-align: center;
-  min-width: 34px;
   cursor: default;
-  padding-right: ${({ dropdownActive }) => (dropdownActive ? "14px" : "")};
+  margin-right: 5px;
   ${({ colorChangeOnHover = true }) =>
     colorChangeOnHover
       ? `
       :hover {background-color: lightblue;}`
       : ""};
-  ${({ colorChangeOnHover, touch }) =>
-    colorChangeOnHover && touch ? `background-color:green;` : ""};
 `;
 
-const DaysDropdown = () => {
+const DaysDropdown: React.FC<daysDropdownProps> = ({ days }) => {
   const [select, setSelect] = React.useState("01");
   const [openDropdown, setOpenDropdown] = React.useState(false);
-  const [touch, setTouch] = React.useState(false);
-  const [items, setItems] = React.useState([
-    "01",
-    "02",
-    "03",
-    "04",
-    "05",
-    "06",
-    "07",
-    "08",
-    "09",
-    "10",
-  ]);
 
   const openDropdownMenu = () => {
     setOpenDropdown(true);
@@ -79,27 +73,18 @@ const DaysDropdown = () => {
     setOpenDropdown(false);
   };
 
-  const startTouch = () => {
-    setTouch(true);
-  };
-  const endTouch = () => {
-    setTouch(false);
-  };
-
   const showItems = () => {
-    return items.map((item) => {
+    return new Array(days).fill("").map((day, index) => {
+      const dayDate =
+        index + 1 < 10 ? "0" + (index + 1) : (index + 1).toString();
       return (
         <Item
           onClick={() => {
-            setSelect(item);
+            setSelect(dayDate);
             closeDropdownMenu();
           }}
-          onTouchStart={() => startTouch()}
-          onTouchEnd={() => endTouch()}
-          dropdownActive={openDropdown}
-          touch={touch}
         >
-          {item}
+          {dayDate}
         </Item>
       );
     });
@@ -107,21 +92,22 @@ const DaysDropdown = () => {
 
   return (
     <>
-      <Dropdown dropdownActive={openDropdown}>
-        {openDropdown ? (
-          showItems()
-        ) : (
-          <Item
-            onClick={() => {
-              openDropdownMenu();
-            }}
-            colorChangeOnHover={false}
-            initalItem={true}
-          >
-            {select}
-          </Item>
-        )}
-      </Dropdown>
+      <Container dropdownActive={openDropdown}>
+        <Dropdown dropdownActive={openDropdown}>
+          {openDropdown ? (
+            showItems()
+          ) : (
+            <Item
+              onClick={() => {
+                openDropdownMenu();
+              }}
+              colorChangeOnHover={false}
+            >
+              {select}
+            </Item>
+          )}
+        </Dropdown>
+      </Container>
       {!openDropdown ? <ArrowDown onClick={() => openDropdownMenu()} /> : ""}
       {openDropdown ? (
         <ModalBackground onClick={() => closeDropdownMenu()} />
