@@ -1,5 +1,4 @@
 import React from "react";
-
 import MainContainer from "../components/MainContainer";
 import Info from "../components/Info";
 import UserImage from "../components/UserImage";
@@ -11,6 +10,8 @@ import BigButton from "../components/BigButton";
 import DeleteModal from "../components/DeleteModal";
 
 const UserSettings = () => {
+  const [deleteUser, setDeleteUser] = React.useState(true);
+
   return (
     <MainContainer font="Arima Madurai">
       <Info topSpacing={20}>Max Mustermann</Info>
@@ -23,7 +24,14 @@ const UserSettings = () => {
         Generate gratulation
       </Button>
 
-      <Button borderColor="red" spacingTop={50} buttonWidth={110}>
+      <Button
+        borderColor="red"
+        spacingTop={50}
+        buttonWidth={110}
+        onClick={() => {
+          setDeleteUser(true);
+        }}
+      >
         delete Person
       </Button>
       <Link href="./userInfo">
@@ -31,10 +39,14 @@ const UserSettings = () => {
           back to details
         </Button>
       </Link>
+      <Link href="./main">
+        {" "}
+        <BigButton fontFamily="montserrat" fontSize={23} spacingTop={15}>
+          back
+        </BigButton>
+      </Link>
 
-      <BigButton fontFamily="montserrat" fontSize={23} spacingTop={15}>
-        back
-      </BigButton>
+      {deleteUser ? <DeleteModal handleVisibility={setDeleteUser} /> : ""}
     </MainContainer>
   );
 };
