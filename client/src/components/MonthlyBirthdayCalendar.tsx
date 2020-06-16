@@ -93,43 +93,45 @@ const MonthlyBirthdayCalendar = ({ month }: MonthProps) => {
         <ShortSeparationLine />
       </Month>
       <table>
-        <Person>
-          <Name>Johannes Mittermayer</Name>
-          <Birthdate>22.11.1998</Birthdate>
-          <Age>22 y </Age>
-          <SeeMore>
-            <Link href="/userInfo">
-              <Button>more</Button>
-            </Link>
-          </SeeMore>
-        </Person>
-        <tr>
-          <Separation colSpan={4}>
-            <SeparationLine autoMargin={true} />
-          </Separation>
-        </tr>
+        <tbody>
+          <Person>
+            <Name>Johannes Mittermayer</Name>
+            <Birthdate>22.11.1998</Birthdate>
+            <Age>22 y </Age>
+            <SeeMore>
+              <Link href="/userInfo">
+                <Button>more</Button>
+              </Link>
+            </SeeMore>
+          </Person>
+          <tr>
+            <Separation colSpan={4}>
+              <SeparationLine autoMargin={true} />
+            </Separation>
+          </tr>
 
-        <Person>
-          <Name>Martin Müller</Name>
-          <Birthdate>11.01.2020</Birthdate>
-          <Age>9 y </Age>
-          <SeeMore>
-            <Button>more</Button>
-          </SeeMore>
-        </Person>
-        <tr>
-          <Separation colSpan={4}>
-            <SeparationLine autoMargin={true} />
-          </Separation>
-        </tr>
-        <Person>
-          <Name>Johannes Mittermayer</Name>
-          <Birthdate>22.11.1998</Birthdate>
-          <Age>22 y </Age>
-          <SeeMore>
-            <Button>more</Button>
-          </SeeMore>
-        </Person>
+          <Person>
+            <Name>Martin Müller</Name>
+            <Birthdate>11.01.2020</Birthdate>
+            <Age>9 y </Age>
+            <SeeMore>
+              <Button>more</Button>
+            </SeeMore>
+          </Person>
+          <tr>
+            <Separation colSpan={4}>
+              <SeparationLine autoMargin={true} />
+            </Separation>
+          </tr>
+          <Person>
+            <Name>Johannes Mittermayer</Name>
+            <Birthdate>22.11.1998</Birthdate>
+            <Age>22 y </Age>
+            <SeeMore>
+              <Button>more</Button>
+            </SeeMore>
+          </Person>
+        </tbody>
       </table>
     </Container>
   );
