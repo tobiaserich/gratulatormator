@@ -10,7 +10,7 @@ import BigButton from "../components/BigButton";
 import DeleteModal from "../components/DeleteModal";
 
 const UserSettings = () => {
-  const [deleteUser, setDeleteUser] = React.useState(true);
+  const [deleteUser, setDeleteUser] = React.useState(false);
 
   return (
     <MainContainer font="Arima Madurai">
