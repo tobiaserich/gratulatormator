@@ -98,7 +98,6 @@ Partner`,
 
   const handleChange = (event: any) => {
     setTextBoxText(event.target.value);
-    console.log(textBoxText);
   };
 
   return (
