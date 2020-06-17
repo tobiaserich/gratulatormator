@@ -5,16 +5,18 @@ import UserImage from "../components/UserImage";
 import userImg from "../assets/user.svg";
 import UserInformation from "../components/UserInformation";
 import UserSettings from "../components/UserSettings";
+import GenerateGratulation from "../components/GenerateGratulation";
 
 const UserInfo = () => {
-  const [activeMenu, setActiveMenu] = React.useState("userInfo");
+  const [activeMenu, setActiveMenu] = React.useState("generateGratulation");
   const component = () => {
     switch (activeMenu) {
-      case "options":
-        return <UserSettings handleMenu={setActiveMenu} />;
-
       case "userInfo":
         return <UserInformation handleMenu={setActiveMenu} />;
+      case "options":
+        return <UserSettings handleMenu={setActiveMenu} />;
+      case "generateGratulation":
+        return <GenerateGratulation handleMenu={setActiveMenu} />;
     }
   };
 
