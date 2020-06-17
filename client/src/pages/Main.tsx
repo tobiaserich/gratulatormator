@@ -8,9 +8,7 @@ import BirthdayCalendar from "../components/BirthdayCalendar";
 
 const Main = () => {
   const [animationName, setForwarding] = useTransition("slideIn");
-  React.useEffect(() => {
-    console.log(animationName);
-  }, [animationName]);
+  React.useEffect(() => {}, [animationName]);
   return (
     <MainContainer font="Arima Madurai" animation={animationName}>
       <NextBirthday />
