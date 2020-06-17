@@ -14,7 +14,7 @@ const UserSettings: React.FC<UserSettingsProps> = ({ handleMenu }) => {
   const [deleteUser, setDeleteUser] = React.useState(false);
   const generateDaysDropdownItems = () => {
     let items: string[] = new Array(30).fill("");
-    items.map((item, index) => {
+    items.forEach((item, index) => {
       const newValue =
         index + 1 < 10 ? "0" + (index + 1) : (index + 1).toString();
       items[index] = newValue;
