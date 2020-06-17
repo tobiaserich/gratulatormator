@@ -1,6 +1,6 @@
 import React from "react";
 import Info from "./Info";
-import DaysDropdown from "./DaysDropdown";
+import DropdownMenu from "./DropdownMenu";
 import Button from "./Button";
 import Link from "./Link";
 import BigButton from "./BigButton";
@@ -12,13 +12,27 @@ type UserSettingsProps = {
 
 const UserSettings: React.FC<UserSettingsProps> = ({ handleMenu }) => {
   const [deleteUser, setDeleteUser] = React.useState(false);
+  const generateDaysDropdownItems = () => {
+    let items: string[] = new Array(30).fill("");
+    items.map((item, index) => {
+      const newValue =
+        index + 1 < 10 ? "0" + (index + 1) : (index + 1).toString();
+      items[index] = newValue;
+    });
+    return items;
+  };
+
   return (
     <>
       <Info fontSize={1.4} topSpacing={4}>
-        Remind me <DaysDropdown days={30} />
+        Remind me <DropdownMenu items={generateDaysDropdownItems()} />
         days before
       </Info>
-      <Button fontSize={18} weight="bold">
+      <Button
+        fontSize={18}
+        weight="bold"
+        onClick={() => handleMenu("generateGratulation")}
+      >
         Generate gratulation
       </Button>
 
