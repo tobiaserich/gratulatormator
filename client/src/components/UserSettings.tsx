@@ -2,15 +2,13 @@ import React from "react";
 import Info from "./Info";
 import DropdownMenu from "./DropdownMenu";
 import Button from "./Button";
-import Link from "./Link";
-import BigButton from "./BigButton";
 import DeleteModal from "./DeleteModal";
 
 type UserSettingsProps = {
-  handleMenu: React.Dispatch<React.SetStateAction<string>>;
+  handleClick: any;
 };
 
-const UserSettings: React.FC<UserSettingsProps> = ({ handleMenu }) => {
+const UserSettings: React.FC<UserSettingsProps> = ({ handleClick }) => {
   const [deleteUser, setDeleteUser] = React.useState(false);
   const generateDaysDropdownItems = () => {
     let items: string[] = new Array(30).fill("");
@@ -31,7 +29,9 @@ const UserSettings: React.FC<UserSettingsProps> = ({ handleMenu }) => {
       <Button
         fontSize={18}
         weight="bold"
-        onClick={() => handleMenu("generateGratulation")}
+        onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+          handleClick(event, "generateGratulation");
+        }}
       >
         Generate gratulation
       </Button>
@@ -50,17 +50,12 @@ const UserSettings: React.FC<UserSettingsProps> = ({ handleMenu }) => {
       <Button
         spacingTop={5}
         buttonWidth={110}
-        onClick={() => handleMenu("userInfo")}
+        onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+          handleClick(event, "userInfo");
+        }}
       >
         back to details
       </Button>
-
-      <Link href="./main">
-        {" "}
-        <BigButton fontFamily="montserrat" fontSize={23} spacingTop={15}>
-          back
-        </BigButton>
-      </Link>
 
       {deleteUser ? <DeleteModal handleVisibility={setDeleteUser} /> : ""}
     </>

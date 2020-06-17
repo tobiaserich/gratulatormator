@@ -6,7 +6,7 @@ import Login from "../components/Login";
 
 const LandingPage = () => {
   return (
-    <MainContainer>
+    <MainContainer animation="zoomIn">
       <Heading strokeColor="default" topSpacing={30}>
         Gratulatormator
       </Heading>

@@ -10,7 +10,7 @@ import randomizeButton from "../assets/randomizeButton.svg";
 import copyButton from "../assets/copyButton.svg";
 
 type generateGratulationProps = {
-  handleMenu: React.Dispatch<React.SetStateAction<string>>;
+  handleClick: any;
 };
 
 type themeProps = {
@@ -73,7 +73,7 @@ const CopyButton = styled("div")<copyButtonProps>`
 `;
 
 const GenerateGratulation: React.FC<generateGratulationProps> = ({
-  handleMenu,
+  handleClick,
 }) => {
   const [textBoxText, setTextBoxText] = React.useState("");
   const [dropdownValue, setDropdownValue] = React.useState("friend");
@@ -125,15 +125,14 @@ Partner`,
           <img src={copyButton} />
         </CopyButton>
       </TextContainer>
-      <Button spacingTop={5} onClick={() => handleMenu("options")}>
+      <Button
+        spacingTop={5}
+        onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
+          handleClick(event, "options")
+        }
+      >
         back to options
       </Button>
-      <Link href="./main">
-        {" "}
-        <BigButton fontFamily="montserrat" fontSize={23} spacingTop={15}>
-          back
-        </BigButton>
-      </Link>
     </>
   );
 };

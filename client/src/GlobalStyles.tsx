@@ -24,6 +24,7 @@ function GlobalStyles(props: GlobalStylesProps) {
         #root {
           min-height: 100vh;
           height: 100%;
+          overflow-x: hidden;
           background: ${background === "unicolor"
             ? ""
             : `linear-gradient(${props.theme.primary300} 0%, ${props.theme.primary200} 70%)`};

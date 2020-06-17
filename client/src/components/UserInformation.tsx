@@ -1,14 +1,12 @@
 import React from "react";
 import Info from "../components/Info";
 import Button from "../components/Button";
-import BigButton from "../components/BigButton";
-import Link from "../components/Link";
 
 type UserInformationProps = {
-  handleMenu: React.Dispatch<React.SetStateAction<string>>;
+  handleClick: any;
 };
 
-const UserSettings: React.FC<UserInformationProps> = ({ handleMenu }) => {
+const UserSettings: React.FC<UserInformationProps> = ({ handleClick }) => {
   const [birthday, setBirthday] = React.useState("10.06.1989");
   const [daysToBirthday, setDaysToBirthday] = React.useState(0);
 
@@ -48,15 +46,12 @@ const UserSettings: React.FC<UserInformationProps> = ({ handleMenu }) => {
       <Button
         fontSize={14}
         spacingTop={30}
-        onClick={() => handleMenu("options")}
+        onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+          handleClick(event, "options");
+        }}
       >
         options
       </Button>
-      <Link href="./main">
-        <BigButton fontFamily="montserrat" fontSize={23} spacingTop={18}>
-          back
-        </BigButton>
-      </Link>
     </>
   );
 };
