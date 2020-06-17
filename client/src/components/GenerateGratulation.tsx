@@ -3,8 +3,6 @@ import styled from "@emotion/styled";
 import DropdownMenu from "./DropdownMenu";
 import { SubHeading } from "./Heading";
 import Button from "./Button";
-import BigButton from "./BigButton";
-import Link from "./Link";
 import Info from "./Info";
 import randomizeButton from "../assets/randomizeButton.svg";
 import copyButton from "../assets/copyButton.svg";

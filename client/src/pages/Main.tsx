@@ -3,7 +3,6 @@ import useTransition from "../hooks/useTransition";
 import MainContainer from "../components/MainContainer";
 import NextBirthday from "../components/NextBirthday";
 import Button from "../components/Button";
-import Link from "../components/Link";
 import BirthdayCalendar from "../components/BirthdayCalendar";
 
 const Main = () => {
