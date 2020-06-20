@@ -40,7 +40,7 @@ const UserInfo = () => {
             handleDeleteUser={setDeleteUser}
           />
         );
-      case "generateGratulation":
+     case "generateGratulation":
         return <GenerateGratulation handleClick={transition} />;
     }
   };

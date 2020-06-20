@@ -10,6 +10,7 @@ const MainContainer = styled("main")<ContainerProps>`
   position:relative;
   flex-direction: column;
   align-items: center;
+
   ${({ font }) => (font ? `font-family:"${font}"` : "")};
 
   animation: 0.250s ${({ animation }) => animation} both;
