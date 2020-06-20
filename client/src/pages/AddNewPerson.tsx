@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
+import useTransition from "../hooks/useTransition";
 import MainContainer from "../components/MainContainer";
 import { SubHeading } from "../components/Heading";
 import UserImage from "../components/UserImage";
@@ -7,7 +8,6 @@ import user from "../assets/user.svg";
 import unchecked from "../assets/checkboxUnchecked.svg";
 import checked from "../assets/checkboxChecked.svg";
 import Button from "../components/Button";
-import Link from "../components/Link";
 
 type userDataProps = {
   firstName: string;
@@ -92,6 +92,7 @@ const InputValidation = styled("div")<themeProps>`
 `;
 
 const AddNewPerson = () => {
+  const [animationName, setForwarding] = useTransition("slideIn");
   const [userData, setUserData] = React.useState<userDataProps>({
     firstName: "",
     lastName: "",
@@ -153,7 +154,7 @@ const AddNewPerson = () => {
   };
 
   return (
-    <MainContainer font="Arima Madurai">
+    <MainContainer font="Arima Madurai" animation={animationName}>
       <SubHeading>Add New Person</SubHeading>
       <Formular onSubmit={(event) => handleSubmit(event)}>
         <ImageLabel>
@@ -222,11 +223,17 @@ const AddNewPerson = () => {
           </RemindContainer>
         </Label>
         <div>
-          <Link href="./main">
-            <Button fontSize={20} spacingRight={15} type="button">
-              cancel
-            </Button>
-          </Link>
+          <Button
+            fontSize={20}
+            spacingRight={15}
+            type="button"
+            onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
+              setForwarding(event, "slideOut", "./main")
+            }
+          >
+            cancel
+          </Button>
+
           <Button fontSize={20} type="submit" onClick={() => inputValidation()}>
             submit
           </Button>

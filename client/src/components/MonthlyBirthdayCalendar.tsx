@@ -12,7 +12,11 @@ type summaryProps = {
   rendered: boolean;
 };
 
+type tableProps = {
+  animation: string;
+};
 const Container = styled("details")`
+  position: relative;
   width: 300px;
   padding: 0px 3px;
   margin-top: 10px;
@@ -84,15 +88,52 @@ const SeeMore = styled("td")``;
 
 const Separation = styled("td")``;
 
+const Table = styled("table")<tableProps>`
+  display: block;
+  overflow:hidden;
+  animation: 0.5s ${({ animation }) => animation} both;
+  @keyframes open {
+    0% {
+      max-height:30px;
+    }
+    100% {
+      max-height:1000px;
+    }
+  }
+}
+
+
+  
+`;
 const MonthlyBirthdayCalendar = ({ month }: MonthProps) => {
   const [notInitialRendering, setNotInitialRendering] = React.useState(false);
+  const [animation, setAnimation] = React.useState("");
+
+  const handleAnimation = () => {
+    switch (animation) {
+      case "open":
+        setAnimation("close");
+        break;
+      case "close":
+        setAnimation("open");
+        break;
+      default:
+        setAnimation("open");
+        break;
+    }
+  };
   return (
-    <Container onClick={() => setNotInitialRendering(true)}>
+    <Container
+      onClick={() => {
+        setNotInitialRendering(true);
+        handleAnimation();
+      }}
+    >
       <Month rendered={notInitialRendering}>
         {month}
         <ShortSeparationLine />
       </Month>
-      <table>
+      <Table animation={animation}>
         <tbody>
           <Person>
             <Name>Johannes Mittermayer</Name>
@@ -132,7 +173,7 @@ const MonthlyBirthdayCalendar = ({ month }: MonthProps) => {
             </SeeMore>
           </Person>
         </tbody>
-      </table>
+      </Table>
     </Container>
   );
 };
