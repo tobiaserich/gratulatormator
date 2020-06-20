@@ -74,18 +74,18 @@ const GenerateGratulation: React.FC<generateGratulationProps> = ({
   handleClick,
 }) => {
   const [textBoxText, setTextBoxText] = React.useState("");
-  const [dropdownValue, setDropdownValue] = React.useState("friend");
+  const [dropdownValue, setDropdownValue] = React.useState("Friend");
   const items = ["Friend", "Boss", "Partner"];
   const exampleText: exampleProps = {
-    friend: `Ich
+    Friend: `Ich
 bin
 ein
 Freund`,
-    boss: `Ich
+    Boss: `Ich
 bin
 ein
 Boss`,
-    partner: `Ich
+    Partner: `Ich
 bin
 ein
 Partner`,
