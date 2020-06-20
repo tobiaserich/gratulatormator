@@ -16,9 +16,9 @@ type themeProps = {
 };
 
 type exampleProps = {
-  friend: string;
-  boss: string;
-  partner: string;
+  Friend: string;
+  Boss: string;
+  Partner: string;
   [index: string]: string;
 };
 
