@@ -58,6 +58,7 @@ const UserInfo = () => {
           onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
             setForwarding(event, "slideOut", "./main")
           }
+          onTouchStart={() => ""}
         >
           back
         </BigButton>

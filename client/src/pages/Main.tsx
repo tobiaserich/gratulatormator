@@ -16,6 +16,7 @@ const Main = () => {
         onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
           setForwarding(event, "slideOut", "./addNewPerson");
         }}
+        onTouchStart={() => ""}
       >
         Add new person
       </Button>

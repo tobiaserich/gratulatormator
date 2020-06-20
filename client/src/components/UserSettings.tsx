@@ -35,6 +35,7 @@ const UserSettings: React.FC<UserSettingsProps> = ({
         onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
           handleClick(event, "generateGratulation");
         }}
+        onTouchStart={() => ""}
       >
         Generate gratulation
       </Button>
@@ -46,6 +47,7 @@ const UserSettings: React.FC<UserSettingsProps> = ({
         onClick={() => {
           handleDeleteUser(true);
         }}
+        onTouchStart={() => ""}
       >
         delete Person
       </Button>
@@ -56,6 +58,7 @@ const UserSettings: React.FC<UserSettingsProps> = ({
         onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
           handleClick(event, "userInfo");
         }}
+        onTouchStart={() => ""}
       >
         back to details
       </Button>

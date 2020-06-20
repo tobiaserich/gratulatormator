@@ -4,7 +4,6 @@ type ThemeProps = {
   theme: any;
   fontSize?: number;
   fontFamily?: string;
-
   spacingTop?: number;
 };
 
@@ -17,6 +16,9 @@ const BigButton = styled("button")<ThemeProps>`
   padding:5px 20px 5px 20px;
   border-radius: 4px;
    ${({ spacingTop }) => `margin-top: ${spacingTop}px`};
+   :active {
+    background-color: ${({ theme }) => theme.action300};
+  }
 `;
 
 export default BigButton;

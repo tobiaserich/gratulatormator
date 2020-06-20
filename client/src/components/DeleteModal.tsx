@@ -78,6 +78,7 @@ const DeleteModal: React.FC<modalProps> = ({ handleVisibility }) => {
             fontFamily="montserrat"
             fontSize={16}
             onClick={() => deleteUser()}
+            onTouchStart={() => ""}
           >
             yes
           </Button>
@@ -85,6 +86,7 @@ const DeleteModal: React.FC<modalProps> = ({ handleVisibility }) => {
             fontFamily="montserrat"
             fontSize={16}
             onClick={() => handleVisibility(false)}
+            onTouchStart={() => ""}
           >
             no
           </Button>

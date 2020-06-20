@@ -59,8 +59,12 @@ const Login = () => {
           <Input name="Password" type="password" />
         </Label>
         <FlexContainer>
-          <Button type="submit">Login</Button>
-          <Button type="button">Register</Button>
+          <Button type="submit" onTouchStart={() => ""}>
+            Login
+          </Button>
+          <Button type="button" onTouchStart={() => ""}>
+            Register
+          </Button>
         </FlexContainer>
         <FlexContainer>
           <SmallPrint href="./main">continue without login</SmallPrint>

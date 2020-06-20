@@ -22,6 +22,9 @@ const Button = styled("button")<ThemeProps>`
   ${({ spacingRight }) => `margin-right: ${spacingRight}px`};
   ${({ spacingTop }) => `margin-top: ${spacingTop}px`};
  ${({ buttonWidth }) => (buttonWidth ? `width:${buttonWidth}px` : "")};
+ :active {
+  background-color: ${({ theme }) => theme.primary300};
+}
   `;
 
 export default Button;
