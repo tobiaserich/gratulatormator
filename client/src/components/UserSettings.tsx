@@ -6,10 +6,13 @@ import DeleteModal from "./DeleteModal";
 
 type UserSettingsProps = {
   handleClick: any;
+  handleDeleteUser: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const UserSettings: React.FC<UserSettingsProps> = ({ handleClick }) => {
-  const [deleteUser, setDeleteUser] = React.useState(false);
+const UserSettings: React.FC<UserSettingsProps> = ({
+  handleClick,
+  handleDeleteUser,
+}) => {
   const generateDaysDropdownItems = () => {
     let items: string[] = new Array(30).fill("");
     items.forEach((item, index) => {
@@ -41,7 +44,7 @@ const UserSettings: React.FC<UserSettingsProps> = ({ handleClick }) => {
         spacingTop={50}
         buttonWidth={110}
         onClick={() => {
-          setDeleteUser(true);
+          handleDeleteUser(true);
         }}
       >
         delete Person
@@ -56,8 +59,6 @@ const UserSettings: React.FC<UserSettingsProps> = ({ handleClick }) => {
       >
         back to details
       </Button>
-
-      {deleteUser ? <DeleteModal handleVisibility={setDeleteUser} /> : ""}
     </>
   );
 };

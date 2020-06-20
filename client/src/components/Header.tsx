@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { Heading } from "./Heading";
 import { SeparationLine } from "./SeparationLine";
 import Link from "../components/Link";
+
 const Container = styled("header")`
   display: flex;
   flex-direction: column;
