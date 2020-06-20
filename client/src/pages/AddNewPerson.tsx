@@ -230,11 +230,17 @@ const AddNewPerson = () => {
             onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
               setForwarding(event, "slideOut", "./main")
             }
+            onTouchStart={() => ""}
           >
             cancel
           </Button>
 
-          <Button fontSize={20} type="submit" onClick={() => inputValidation()}>
+          <Button
+            fontSize={20}
+            type="submit"
+            onClick={() => inputValidation()}
+            onTouchStart={() => ""}
+          >
             submit
           </Button>
         </div>

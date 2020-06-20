@@ -16,9 +16,9 @@ type themeProps = {
 };
 
 type exampleProps = {
-  friend: string;
-  boss: string;
-  partner: string;
+  Friend: string;
+  Boss: string;
+  Partner: string;
   [index: string]: string;
 };
 
@@ -41,6 +41,9 @@ const RandomizButton = styled("div")<themeProps>`
   background-color: transparent;
   padding: 2px;
   border: 2px solid ${({ theme }) => theme.action200};
+  :active {
+    background-color: ${({ theme }) => theme.primary300};
+  }
 `;
 
 const TextContainer = styled("div")`
@@ -105,7 +108,7 @@ Partner`,
         <Info fontSize={1.2}>
           <DropdownMenu items={items} dropdownValue={setDropdownValue} />
         </Info>
-        <RandomizButton>
+        <RandomizButton onTouchStart={() => ""}>
           <img src={randomizeButton} />
         </RandomizButton>
       </CategoryContainer>
@@ -116,9 +119,7 @@ Partner`,
         ></TextBox>
         <CopyButton
           onClick={() => navigator.clipboard.writeText(textBoxText)}
-          onTouchStart={() => {
-            "";
-          }}
+          onTouchStart={() => ""}
         >
           <img src={copyButton} />
         </CopyButton>

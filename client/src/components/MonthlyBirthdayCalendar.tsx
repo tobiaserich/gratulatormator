@@ -141,7 +141,7 @@ const MonthlyBirthdayCalendar = ({ month }: MonthProps) => {
             <Age>22 y </Age>
             <SeeMore>
               <Link href="/userInfo">
-                <Button>more</Button>
+                <Button onTouchStart={() => ""}>more</Button>
               </Link>
             </SeeMore>
           </Person>
@@ -156,7 +156,7 @@ const MonthlyBirthdayCalendar = ({ month }: MonthProps) => {
             <Birthdate>11.01.2020</Birthdate>
             <Age>9 y </Age>
             <SeeMore>
-              <Button>more</Button>
+              <Button onTouchStart={() => ""}>more</Button>
             </SeeMore>
           </Person>
           <tr>
@@ -169,7 +169,7 @@ const MonthlyBirthdayCalendar = ({ month }: MonthProps) => {
             <Birthdate>22.11.1998</Birthdate>
             <Age>22 y </Age>
             <SeeMore>
-              <Button>more</Button>
+              <Button onTouchStart={() => ""}>more</Button>
             </SeeMore>
           </Person>
         </tbody>

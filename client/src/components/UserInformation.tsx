@@ -49,6 +49,7 @@ const UserSettings: React.FC<UserInformationProps> = ({ handleClick }) => {
         onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
           handleClick(event, "options");
         }}
+        onTouchStart={() => ""}
       >
         options
       </Button>
