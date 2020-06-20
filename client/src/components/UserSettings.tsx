@@ -2,7 +2,6 @@ import React from "react";
 import Info from "./Info";
 import DropdownMenu from "./DropdownMenu";
 import Button from "./Button";
-import DeleteModal from "./DeleteModal";
 
 type UserSettingsProps = {
   handleClick: any;
