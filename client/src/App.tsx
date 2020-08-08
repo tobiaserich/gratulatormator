@@ -8,6 +8,7 @@ import Header from "./components/Header";
 import Main from "./pages/Main";
 import AddNewPerson from "./pages/AddNewPerson";
 import UserInfo from "./pages/UserInfo";
+import Registration from "./pages/Registration";
 
 function App() {
   const [currentBackground, setCurrentBackground] = React.useState("none");
@@ -35,6 +36,10 @@ function App() {
               </Route>
               <Route path="/userInfo">
                 <UserInfo />
+              </Route>
+
+              <Route path="/registration">
+                <Registration />
               </Route>
             </Switch>
           </Route>

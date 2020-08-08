@@ -5,6 +5,12 @@ import MainContainer from "../components/MainContainer";
 import { SubHeading } from "../components/Heading";
 import UserImage from "../components/UserImage";
 import user from "../assets/user.svg";
+import {
+  Formular,
+  Label,
+  Input,
+  InputValidation,
+} from "../components/Formular";
 import unchecked from "../assets/checkboxUnchecked.svg";
 import checked from "../assets/checkboxChecked.svg";
 import Button from "../components/Button";
@@ -26,22 +32,10 @@ type validationDataProps = {
 type checkBoxProps = {
   checkBoxChecked: boolean | undefined;
 };
+
 type themeProps = {
   theme: any;
 };
-
-const Formular = styled("form")`
-  font-weight: 600;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const Label = styled("label")`
-  width: 55%;
-  display: flex;
-  flex-direction: column;
-`;
 
 const ImageLabel = styled("label")`
   display: flex;
@@ -71,24 +65,6 @@ const HiddenFileUpload = styled("input")`
 
 const InputCheckbox = styled("input")`
   opacity: 0;
-`;
-
-const Input = styled("input")`
-  font-size: 24px;
-  background-color: transparent;
-  color: ${({ theme }: any) => theme.neutral500};
-  border: none;
-  margin-top: -5px;
-  margin-bottom: 10px;
-  padding-left: 4px;
-  border-radius: 5px;
-  box-shadow: inset 3px 3px 7px -6px ${({ theme }: any) => theme.neutral500};
-`;
-
-const InputValidation = styled("div")<themeProps>`
-  margin-top: -10px;
-  font-size: 12px;
-  color: ${({ theme }) => theme.error200};
 `;
 
 const AddNewPerson = () => {

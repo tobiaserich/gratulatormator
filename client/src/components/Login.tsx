@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import Button from "./Button";
+import Link from "./Link";
 
 type ThemeProps = {
   theme: any;
@@ -63,7 +64,7 @@ const Login = () => {
             Login
           </Button>
           <Button type="button" onTouchStart={() => ""}>
-            Register
+            <Link href="./registration"> Register</Link>
           </Button>
         </FlexContainer>
         <FlexContainer>
