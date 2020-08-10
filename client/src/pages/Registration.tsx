@@ -1,5 +1,4 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
 import styled from "@emotion/styled";
 import { Heading } from "../components/Heading";
 import {
