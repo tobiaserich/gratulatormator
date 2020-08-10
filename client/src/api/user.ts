@@ -6,9 +6,7 @@ const registerUser = async (userData: any) => {
     },
     body: JSON.stringify(userData),
   });
-
   const result = await response.json();
-  console.log(result);
   return result;
 };
 
