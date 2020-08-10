@@ -1,12 +1,15 @@
 const registerUser = async (userData: any) => {
-  console.log(userData);
-  return await fetch("/user/registration/", {
+  const response = await fetch("/user/registration/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(userData),
   });
+
+  const result = await response.json();
+  console.log(result);
+  return result;
 };
 
 export { registerUser };

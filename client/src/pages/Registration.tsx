@@ -42,10 +42,19 @@ const Registration = () => {
     password: false,
   });
 
+  const [emailUsed, setEmailUsed] = React.useState(false);
+  const [usernameUsed, setUsernameUsed] = React.useState(false);
   const [isSubmitted, setIsSubmitted] = React.useState(false);
 
   const inputValidationPopUp = (
     <InputValidation>This field is required</InputValidation>
+  );
+
+  const emailInUsePopUp = (
+    <InputValidation>This email is already in use</InputValidation>
+  );
+  const usernameInUsePopUp = (
+    <InputValidation>This username is already in use</InputValidation>
   );
 
   const validateInput = () => {
@@ -61,10 +70,22 @@ const Registration = () => {
     setIsSubmitted(true);
 
     if (validation.username && validation.email && validation.password) {
-      registerUser(registrationData);
-      setTimeout(() => {
-        window.location.replace("/");
-      }, 20);
+      const response = await registerUser(registrationData);
+      if (response[0] === "success") {
+        setTimeout(() => {
+          window.location.replace("/");
+        }, 20);
+      } else {
+        setEmailUsed(false);
+        setUsernameUsed(false);
+        response.map((item: string) => {
+          if (item === "emailInUse") {
+            setEmailUsed(true);
+          } else if (item === "usernameInUse") {
+            setUsernameUsed(true);
+          }
+        });
+      }
     }
   };
 
@@ -95,6 +116,7 @@ const Registration = () => {
             ? inputValidationPopUp
             : ""
           : ""}
+        {usernameUsed ? (isSubmitted ? usernameInUsePopUp : "") : ""}
         <Label labelWidth="90%">
           Email
           <Input
@@ -107,6 +129,7 @@ const Registration = () => {
           ></Input>
         </Label>
         {!validation["email"] ? (isSubmitted ? inputValidationPopUp : "") : ""}
+        {emailUsed ? (isSubmitted ? emailInUsePopUp : "") : ""}
         <Label labelWidth="90%">
           Password
           <Input

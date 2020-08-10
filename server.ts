@@ -17,10 +17,10 @@ app.get("/lol", (req, res) => {
   res.send(JSON.stringify(hello));
 });
 
-app.post("/user/registration", (req, res) => {
+app.post("/user/registration", async (req, res) => {
   const data = req.body;
-  registerUser(data);
-  res.end();
+  const register = await registerUser(data);
+  res.end(JSON.stringify(register));
 });
 
 // Serve any static files
