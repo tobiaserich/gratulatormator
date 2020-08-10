@@ -32,7 +32,6 @@ const ButtonContainer = styled("div")`
 `;
 
 const Registration = () => {
-  const [password, setPassword] = React.useState("");
   const [registrationData, setRegistrationData] = React.useState({
     username: "",
     email: "",
