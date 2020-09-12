@@ -61,10 +61,6 @@ const Login = () => {
     }
   };
 
-  const submitter = (event: any) => {
-    event.preventDefault();
-  };
-
   return (
     <Container>
       <form onSubmit={(event) => handleSubmit(event)}>
