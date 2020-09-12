@@ -19,7 +19,6 @@ function App() {
     const verificateUser = async () => {
       const verification = await verifyUser();
       setUserVerification(verification);
-      console.log(userVerification);
     };
     verificateUser();
     const background = actualPath === "/" ? "landing" : "general";
