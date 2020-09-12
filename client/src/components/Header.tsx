@@ -17,10 +17,26 @@ const Header = () => {
     const verificateUser = async () => {
       const verification = await verifyUser();
       setUserVerification(verification);
-      console.log(userVerification);
     };
     verificateUser();
   }, []);
+  const redirection = () => {
+    if (
+      window.location.pathname === "/registration" &&
+      userVerification === true
+    ) {
+      window.location.replace("/main");
+    }
+
+    if (
+      userVerification === false &&
+      window.location.pathname !== "/registration"
+    ) {
+      window.location.replace("/");
+    }
+  };
+
+  redirection();
   return (
     <Link href="./main">
       <Container>
