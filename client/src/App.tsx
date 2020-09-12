@@ -9,21 +9,35 @@ import Main from "./pages/Main";
 import AddNewPerson from "./pages/AddNewPerson";
 import UserInfo from "./pages/UserInfo";
 import Registration from "./pages/Registration";
+import { verifyUser } from "./api/user";
 
 function App() {
   const [currentBackground, setCurrentBackground] = React.useState("none");
+  const [userVerification, setUserVerification] = React.useState(false);
+  const actualPath = window.location.pathname;
   React.useEffect(() => {
-    const actualPath = window.location.pathname;
+    const verificateUser = async () => {
+      const verification = await verifyUser();
+      setUserVerification(verification);
+      console.log(userVerification);
+    };
+    verificateUser();
     const background = actualPath === "/" ? "landing" : "general";
     setCurrentBackground(background);
   }, []);
+
+  const redirection =
+    userVerification === true && actualPath === "/"
+      ? window.location.replace("/main")
+      : "";
+
   return (
     <Router>
       <ThemeProvider theme={colors}>
         <GlobalStyles bg={currentBackground} theme={colors} />
         <Switch>
           <Route exact path="/">
-            <LandingPage />
+            {userVerification === true ? "" : <LandingPage />}
           </Route>
           <Route>
             <Header />

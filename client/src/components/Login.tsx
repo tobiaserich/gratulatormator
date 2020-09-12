@@ -1,4 +1,5 @@
 import React from "react";
+import { loginUser } from "../api/user";
 import styled from "@emotion/styled";
 import Button from "./Button";
 import Link from "./Link";
@@ -48,16 +49,42 @@ const SmallPrint = styled("a")<ThemeProps>`
   color: ${({ theme }) => theme.font};
 `;
 const Login = () => {
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const login = await loginUser(username, password);
+    if (login === "success") {
+      localStorage.setItem("loggedin", "true");
+      window.location.replace("/main");
+    }
+  };
+
+  const submitter = (event: any) => {
+    event.preventDefault();
+  };
+
   return (
     <Container>
-      <form>
+      <form onSubmit={(event) => handleSubmit(event)}>
         <Label>
           Username
-          <Input name="Username" type="text" />
+          <Input
+            name="Username"
+            type="text"
+            value={username}
+            onChange={(event) => setUsername(event.target.value)}
+          />
         </Label>
         <Label>
           Password
-          <Input name="Password" type="password" />
+          <Input
+            name="Password"
+            type="password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+          />
         </Label>
         <FlexContainer>
           <Button type="submit" onTouchStart={() => ""}>
