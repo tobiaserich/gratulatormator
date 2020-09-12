@@ -10,4 +10,28 @@ const registerUser = async (userData: any) => {
   return result;
 };
 
-export { registerUser };
+const loginUser = async (username: string, password: string) => {
+  const userData = { username, password };
+  const response = await fetch("/user/login/", {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userData),
+  });
+  const result = await response.json();
+  return result;
+};
+
+const verifyUser = async () => {
+  const response = await fetch("/user/verify/", {
+    method: "GET",
+    credentials: "include",
+  });
+  const result = await response.json();
+
+  return result;
+};
+
+export { registerUser, loginUser, verifyUser };
