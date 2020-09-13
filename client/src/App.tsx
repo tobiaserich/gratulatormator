@@ -25,41 +25,41 @@ function App() {
     setCurrentBackground(background);
   }, []);
 
-  const redirection =
-    userVerification === true && actualPath === "/"
-      ? window.location.replace("/main")
-      : "";
+  if (userVerification === true && actualPath === "/") {
+    window.location.replace("/main");
+    return <></>;
+  } else {
+    return (
+      <Router>
+        <ThemeProvider theme={colors}>
+          <GlobalStyles bg={currentBackground} theme={colors} />
+          <Switch>
+            <Route exact path="/">
+              {userVerification === true ? "" : <LandingPage />}
+            </Route>
+            <Route>
+              <Header />
+              <Switch>
+                <Route path="/main">
+                  <Main />
+                </Route>
+                <Route path="/addNewPerson">
+                  <AddNewPerson />
+                </Route>
+                <Route path="/userInfo">
+                  <UserInfo />
+                </Route>
 
-  return (
-    <Router>
-      <ThemeProvider theme={colors}>
-        <GlobalStyles bg={currentBackground} theme={colors} />
-        <Switch>
-          <Route exact path="/">
-            {userVerification === true ? "" : <LandingPage />}
-          </Route>
-          <Route>
-            <Header />
-            <Switch>
-              <Route path="/main">
-                <Main />
-              </Route>
-              <Route path="/addNewPerson">
-                <AddNewPerson />
-              </Route>
-              <Route path="/userInfo">
-                <UserInfo />
-              </Route>
-
-              <Route path="/registration">
-                <Registration />
-              </Route>
-            </Switch>
-          </Route>
-        </Switch>
-      </ThemeProvider>
-    </Router>
-  );
+                <Route path="/registration">
+                  <Registration />
+                </Route>
+              </Switch>
+            </Route>
+          </Switch>
+        </ThemeProvider>
+      </Router>
+    );
+  }
 }
 
 export default App;
