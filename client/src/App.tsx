@@ -1,7 +1,12 @@
 import React from "react";
 import GlobalStyles from "./GlobalStyles";
 import { ThemeProvider } from "emotion-theming";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import colors from "./themes/colors";
 import LandingPage from "./pages/LandingPage";
 import Header from "./components/Header";
@@ -12,7 +17,7 @@ import Registration from "./pages/Registration";
 import { verifyUser } from "./api/user";
 
 function App() {
-  const [currentBackground, setCurrentBackground] = React.useState("none");
+  const [currentBackground, setCurrentBackground] = React.useState("landing");
   const [userVerification, setUserVerification] = React.useState(false);
   const actualPath = window.location.pathname;
   React.useEffect(() => {
@@ -40,7 +45,7 @@ function App() {
             <Route>
               <Header />
               <Switch>
-                <Route path="/main">
+                <Route exact path="/main">
                   <Main />
                 </Route>
                 <Route path="/addNewPerson">
@@ -49,11 +54,16 @@ function App() {
                 <Route path="/userInfo">
                   <UserInfo />
                 </Route>
-
                 <Route path="/registration">
                   <Registration />
                 </Route>
+                <Route path="*">
+                  <Redirect to="/main" />
+                </Route>
               </Switch>
+            </Route>
+            <Route path="*">
+              <Redirect to="/" />
             </Route>
           </Switch>
         </ThemeProvider>
