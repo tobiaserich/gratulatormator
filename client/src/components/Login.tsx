@@ -56,7 +56,6 @@ const Login = () => {
     event.preventDefault();
     const login = await loginUser(username, password);
     if (login === "success") {
-      localStorage.setItem("loggedin", "true");
       window.location.replace("/main");
     }
   };
