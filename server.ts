@@ -4,6 +4,7 @@ const cookieParser = require("cookie-parser");
 const path = require("path");
 const { dbInit } = require("./lib/db");
 const { registerUser, loginUser, verifyUser } = require("./lib/user");
+const { addBirthday } = require("./lib/birthday");
 
 const app = express();
 const PORT = process.env.PORT || 9000;
@@ -16,6 +17,12 @@ app.use(cookieParser());
 app.get("/lol", (req, res) => {
   const hello = " Hello World";
   res.send(JSON.stringify(hello));
+});
+
+app.get("/user/verify", async (req, res) => {
+  const token = req.cookies.access_token;
+  const verify = await verifyUser(token);
+  res.send(verify);
 });
 
 app.post("/user/registration", async (req, res) => {
@@ -40,10 +47,8 @@ app.post("/user/login", async (req, res) => {
   res.send(JSON.stringify(response));
 });
 
-app.get("/user/verify", async (req, res) => {
-  const token = req.cookies.access_token;
-  const verify = await verifyUser(token);
-  res.send(verify);
+app.post("/birthday/add", async (req, res) => {
+  addBirthday(req.body, req.cookies.access_token);
 });
 
 // Serve any static files
