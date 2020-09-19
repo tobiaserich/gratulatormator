@@ -6,7 +6,7 @@ const addBirthday = async (birthdayData: any) => {
     },
     body: JSON.stringify(birthdayData),
   });
-  console.log(birthdayData);
+
   const result = await response.json();
   return result;
 };

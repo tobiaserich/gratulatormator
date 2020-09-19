@@ -61,7 +61,6 @@ const verifyUser = async (token) => {
     return false;
   } else {
     const userID = await verifyToken(token);
-    console.log(userID);
     const user = await collection.findOne({ _id: ObjectID(userID._id) });
     return user ? true : false;
   }
