@@ -14,6 +14,7 @@ import {
 import unchecked from "../assets/checkboxUnchecked.svg";
 import checked from "../assets/checkboxChecked.svg";
 import Button from "../components/Button";
+import { addBirthday } from "../api/birthdays";
 
 type userDataProps = {
   firstName: string;
@@ -70,9 +71,9 @@ const InputCheckbox = styled("input")`
 const AddNewPerson = () => {
   const [animationName, setForwarding] = useTransition("slideIn");
   const [userData, setUserData] = React.useState<userDataProps>({
-    firstName: "",
-    lastName: "",
-    birthday: "",
+    firstName: "bla",
+    lastName: "bla",
+    birthday: "11.11.1989",
     remindMe: false,
   });
 
@@ -127,6 +128,13 @@ const AddNewPerson = () => {
   const handleSubmit = (event: any) => {
     event.preventDefault();
     setSubmit(true);
+    if (
+      validationCheck["firstName"] === true &&
+      validationCheck["lastName"] === true &&
+      validationCheck["birthday"] === true
+    ) {
+      addBirthday(userData);
+    }
   };
 
   return (
