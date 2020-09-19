@@ -47,11 +47,24 @@ const loginUser = async (data) => {
   }
 };
 
+const verifyToken = async (token) => {
+  try {
+    return jwt.verify(token, process.env.TOKEN_SECRET);
+  } catch {
+    return false;
+  }
+};
+
 const verifyUser = async (token) => {
   const collection = getCollection("users");
-  const userID = jwt.verify(token, process.env.TOKEN_SECRET);
-  const user = await collection.findOne({ _id: ObjectID(userID._id) });
-  return user ? true : false;
+  if (!token) {
+    return false;
+  } else {
+    const userID = await verifyToken(token);
+    console.log(userID);
+    const user = await collection.findOne({ _id: ObjectID(userID._id) });
+    return user ? true : false;
+  }
 };
 
 exports.registerUser = registerUser;
