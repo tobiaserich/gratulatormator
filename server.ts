@@ -52,9 +52,9 @@ app.post("/birthday/add", async (req, res) => {
   console.log(birthday);
 
   if (birthday === 200) {
-    res.status(200).send({ code: 200, message: "user created" });
+    res.status(200).send({ code: 200, message: "User created" });
   } else if (birthday === 409) {
-    res.status(409).send({ code: 409, message: "user already exists" });
+    res.status(409).send({ code: 409, message: "User already exists" });
   }
 });
 
