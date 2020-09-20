@@ -19,16 +19,23 @@ function GlobalStyles(props: GlobalStylesProps) {
         body {
           margin: 0;
           font-family: "montserrat", "sans-serif";
+          font-size:16px;
+          background: ${
+            background === "unicolor"
+              ? ""
+              : `linear-gradient(${props.theme.primary300} 0%, ${props.theme.primary200} 70%)`
+          };
+        }
         }
 
         #root {
           min-height: 100vh;
           height: 100%;
+          max-width: 320px;
+          margin: auto;
+          padding-top:0.5rem;
           overflow-x: hidden;
-          background: ${background === "unicolor"
-            ? ""
-            : `linear-gradient(${props.theme.primary300} 0%, ${props.theme.primary200} 70%)`};
-        }
+         
       `}
     />
   );
