@@ -48,7 +48,14 @@ app.post("/user/login", async (req, res) => {
 });
 
 app.post("/birthday/add", async (req, res) => {
-  addBirthday(req.body, req.cookies.access_token);
+  const birthday = await addBirthday(req.body, req.cookies.access_token);
+  console.log(birthday);
+
+  if (birthday === 200) {
+    res.status(200).send({ code: 200, message: "user created" });
+  } else if (birthday === 409) {
+    res.status(409).send({ code: 409, message: "user already exists" });
+  }
 });
 
 // Serve any static files
