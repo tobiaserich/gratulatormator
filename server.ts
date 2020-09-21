@@ -4,7 +4,8 @@ const cookieParser = require("cookie-parser");
 const path = require("path");
 const { dbInit } = require("./lib/db");
 const { registerUser, loginUser, verifyUser } = require("./lib/user");
-const { addBirthday } = require("./lib/birthday");
+const { addBirthday, getAllBirthdays } = require("./lib/birthday");
+const { verifyToken } = require("./lib/verify");
 
 const app = express();
 const PORT = process.env.PORT || 9000;
@@ -23,6 +24,11 @@ app.get("/user/verify", async (req, res) => {
   const token = req.cookies.access_token;
   const verify = await verifyUser(token);
   res.send(verify);
+});
+
+app.get("/birthday/allBirthdays/", verifyToken, async (req, res) => {
+  const allBirthdays = await getAllBirthdays(req.cookies.access_token);
+  res.send(allBirthdays);
 });
 
 app.post("/user/registration", async (req, res) => {
@@ -47,9 +53,8 @@ app.post("/user/login", async (req, res) => {
   res.send(JSON.stringify(response));
 });
 
-app.post("/birthday/add", async (req, res) => {
+app.post("/birthday/add", verifyToken, async (req, res) => {
   const birthday = await addBirthday(req.body, req.cookies.access_token);
-  console.log(birthday);
 
   if (birthday === 200) {
     res.status(200).send({ code: 200, message: "User created" });
