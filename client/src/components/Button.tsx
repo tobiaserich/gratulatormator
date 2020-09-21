@@ -9,6 +9,7 @@ type ThemeProps = {
   weight?: string;
   borderColor?: string;
   buttonWidth?: number;
+  forwarding?: any;
 };
 
 const Button = styled("button")<ThemeProps>`

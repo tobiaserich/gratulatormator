@@ -15,6 +15,7 @@ import unchecked from "../assets/checkboxUnchecked.svg";
 import checked from "../assets/checkboxChecked.svg";
 import Button from "../components/Button";
 import { addBirthday } from "../api/birthdays";
+import Modal from "../components/Modal";
 
 type userDataProps = {
   firstName: string;
@@ -70,10 +71,12 @@ const InputCheckbox = styled("input")`
 
 const AddNewPerson = () => {
   const [animationName, setForwarding] = useTransition("slideIn");
+  const [submitResponse, setSubmitResponse] = React.useState(null);
+  const [showModal, setShowModal] = React.useState(false);
   const [userData, setUserData] = React.useState<userDataProps>({
-    firstName: "bla",
-    lastName: "bla",
-    birthday: "11.11.1989",
+    firstName: "",
+    lastName: "",
+    birthday: "",
     remindMe: false,
   });
 
@@ -90,6 +93,15 @@ const AddNewPerson = () => {
   const inputValidationPopUp = (
     <InputValidation>This field is required</InputValidation>
   );
+
+  const refreshUserData = () => {
+    setUserData({
+      firstName: "",
+      lastName: "",
+      birthday: "",
+      remindMe: false,
+    });
+  };
 
   const inputValidation = () => {
     const birthdayVerification = /^([1-9]{2}).([1-9]{2}).([1-9]{4})/;
@@ -125,7 +137,7 @@ const AddNewPerson = () => {
     setUserData(newUserData);
   };
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
     setSubmit(true);
     if (
@@ -133,12 +145,24 @@ const AddNewPerson = () => {
       validationCheck["lastName"] === true &&
       validationCheck["birthday"] === true
     ) {
-      addBirthday(userData);
+      const response = await addBirthday(userData);
+      setSubmitResponse(response);
+      setShowModal(true);
     }
   };
 
   return (
     <MainContainer font="Arima Madurai" animation={animationName}>
+      {showModal ? (
+        <Modal
+          status={submitResponse}
+          toggleModal={() => setShowModal(!showModal)}
+          forwarding={setForwarding}
+          refresh={refreshUserData}
+        />
+      ) : (
+        <></>
+      )}
       <SubHeading>Add New Person</SubHeading>
       <Formular onSubmit={(event) => handleSubmit(event)}>
         <ImageLabel>
