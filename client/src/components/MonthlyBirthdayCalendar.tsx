@@ -2,7 +2,6 @@ import React from "react";
 import styled from "@emotion/styled";
 import Button from "./Button";
 import { SeparationLine, ShortSeparationLine } from "./SeparationLine";
-import Link from "./Link";
 
 type MonthProps = {
   month: string;
@@ -132,7 +131,6 @@ const MonthlyBirthdayCalendar = ({ month, birthdayChildren }: MonthProps) => {
     const birthdayMonth = birthdayArr[1];
     const birthdayDay = birthdayArr[0];
     const birthdayYear = birthdayArr[2];
-    console.log(currentMonth);
 
     if (currentMonth > birthdayMonth) {
       alreadyBirthday = true;
@@ -160,10 +158,9 @@ const MonthlyBirthdayCalendar = ({ month, birthdayChildren }: MonthProps) => {
       <Table animation={animation}>
         <tbody>
           {birthdayChildren.map((birthdayChild: any) => {
-            const age = checkAge(birthdayChild["birthday"]);
             return (
               <>
-                <Person>
+                <Person key={birthdayChild["_id"]}>
                   <Name>
                     {birthdayChild["firstName"]} {birthdayChild["lastName"]}
                   </Name>
