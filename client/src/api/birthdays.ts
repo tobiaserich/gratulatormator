@@ -11,4 +11,13 @@ const addBirthday = async (birthdayData: any) => {
   return result;
 };
 
-export { addBirthday };
+const getAllBirthdays = async () => {
+  const response = await fetch("/birthday/allBirthdays/", {
+    method: "GET",
+    credentials: "include",
+  });
+  const result = await response.json();
+  return result;
+};
+
+export { addBirthday, getAllBirthdays };
