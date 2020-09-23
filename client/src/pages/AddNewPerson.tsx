@@ -104,7 +104,7 @@ const AddNewPerson = () => {
   };
 
   const inputValidation = () => {
-    const birthdayVerification = /^([1-9]{2}).([1-9]{2}).([1-9]{4})/;
+    const birthdayVerification = /^([0-9]{2}).([0-9]{2}).([0-9]{4})/;
     const validationData: validationDataProps = { ...validationCheck };
 
     Object.keys(userData).forEach((value) => {

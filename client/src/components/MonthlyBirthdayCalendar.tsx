@@ -2,10 +2,10 @@ import React from "react";
 import styled from "@emotion/styled";
 import Button from "./Button";
 import { SeparationLine, ShortSeparationLine } from "./SeparationLine";
-import Link from "./Link";
 
 type MonthProps = {
   month: string;
+  birthdayChildren?: any;
 };
 
 type summaryProps = {
@@ -105,10 +105,9 @@ const Table = styled("table")<tableProps>`
 
   
 `;
-const MonthlyBirthdayCalendar = ({ month }: MonthProps) => {
+const MonthlyBirthdayCalendar = ({ month, birthdayChildren }: MonthProps) => {
   const [notInitialRendering, setNotInitialRendering] = React.useState(false);
   const [animation, setAnimation] = React.useState("");
-
   const handleAnimation = () => {
     switch (animation) {
       case "open":
@@ -121,6 +120,29 @@ const MonthlyBirthdayCalendar = ({ month }: MonthProps) => {
         setAnimation("open");
         break;
     }
+  };
+
+  const checkAge = (birthday: any) => {
+    let alreadyBirthday = false;
+    const birthdayArr = birthday.split(".");
+    const currentMonth = new Date().getMonth() + 1;
+    const currentDay = new Date().getDate();
+    const currentYear = new Date().getFullYear();
+    const birthdayMonth = birthdayArr[1];
+    const birthdayDay = birthdayArr[0];
+    const birthdayYear = birthdayArr[2];
+
+    if (currentMonth > birthdayMonth) {
+      alreadyBirthday = true;
+    } else if (
+      currentMonth === parseInt(birthdayMonth) &&
+      birthdayDay < currentDay
+    ) {
+      alreadyBirthday = true;
+    }
+
+    const calculateBirthday = currentYear - birthdayYear;
+    return alreadyBirthday ? calculateBirthday : calculateBirthday - 1;
   };
   return (
     <Container
@@ -135,43 +157,27 @@ const MonthlyBirthdayCalendar = ({ month }: MonthProps) => {
       </Month>
       <Table animation={animation}>
         <tbody>
-          <Person>
-            <Name>Johannes Mittermayer</Name>
-            <Birthdate>22.11.1998</Birthdate>
-            <Age>22 y </Age>
-            <SeeMore>
-              <Link href="/userInfo">
-                <Button onTouchStart={() => ""}>more</Button>
-              </Link>
-            </SeeMore>
-          </Person>
-          <tr>
-            <Separation colSpan={4}>
-              <SeparationLine autoMargin={true} />
-            </Separation>
-          </tr>
-
-          <Person>
-            <Name>Martin Müller</Name>
-            <Birthdate>11.01.2020</Birthdate>
-            <Age>9 y </Age>
-            <SeeMore>
-              <Button onTouchStart={() => ""}>more</Button>
-            </SeeMore>
-          </Person>
-          <tr>
-            <Separation colSpan={4}>
-              <SeparationLine autoMargin={true} />
-            </Separation>
-          </tr>
-          <Person>
-            <Name>Johannes Mittermayer</Name>
-            <Birthdate>22.11.1998</Birthdate>
-            <Age>22 y </Age>
-            <SeeMore>
-              <Button onTouchStart={() => ""}>more</Button>
-            </SeeMore>
-          </Person>
+          {birthdayChildren.map((birthdayChild: any) => {
+            return (
+              <>
+                <Person key={birthdayChild["_id"]}>
+                  <Name>
+                    {birthdayChild["firstName"]} {birthdayChild["lastName"]}
+                  </Name>
+                  <Birthdate>{birthdayChild["birthday"]}</Birthdate>
+                  <Age>{checkAge(birthdayChild["birthday"])}</Age>
+                  <SeeMore>
+                    <Button onTouchStart={() => ""}>more</Button>
+                  </SeeMore>
+                </Person>
+                <tr>
+                  <Separation colSpan={4}>
+                    <SeparationLine autoMargin={true} />
+                  </Separation>
+                </tr>
+              </>
+            );
+          })}
         </tbody>
       </Table>
     </Container>
