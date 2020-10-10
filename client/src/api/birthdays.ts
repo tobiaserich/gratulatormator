@@ -29,4 +29,12 @@ const getBirthday = async (id: any) => {
   return result;
 };
 
-export { addBirthday, getAllBirthdays, getBirthday };
+const deleteBirthday = async (id: string) => {
+  const response = await fetch(`/birthday/deleteSingleBirthday/${id}`, {
+    method: "DELETE",
+    credentials: "include",
+  });
+  const result = await response.json();
+  return result;
+};
+export { addBirthday, getAllBirthdays, getBirthday, deleteBirthday };
