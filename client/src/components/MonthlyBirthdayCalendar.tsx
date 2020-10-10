@@ -2,6 +2,8 @@ import React from "react";
 import styled from "@emotion/styled";
 import Button from "./Button";
 import { SeparationLine, ShortSeparationLine } from "./SeparationLine";
+import { Link } from "react-router-dom";
+import checkAge from "../assets/helper/checkAge";
 
 type MonthProps = {
   month: string;
@@ -122,28 +124,6 @@ const MonthlyBirthdayCalendar = ({ month, birthdayChildren }: MonthProps) => {
     }
   };
 
-  const checkAge = (birthday: any) => {
-    let alreadyBirthday = false;
-    const birthdayArr = birthday.split(".");
-    const currentMonth = new Date().getMonth() + 1;
-    const currentDay = new Date().getDate();
-    const currentYear = new Date().getFullYear();
-    const birthdayMonth = birthdayArr[1];
-    const birthdayDay = birthdayArr[0];
-    const birthdayYear = birthdayArr[2];
-
-    if (currentMonth > birthdayMonth) {
-      alreadyBirthday = true;
-    } else if (
-      currentMonth === parseInt(birthdayMonth) &&
-      birthdayDay < currentDay
-    ) {
-      alreadyBirthday = true;
-    }
-
-    const calculateBirthday = currentYear - birthdayYear;
-    return alreadyBirthday ? calculateBirthday : calculateBirthday - 1;
-  };
   return (
     <Container
       onClick={() => {
@@ -167,7 +147,9 @@ const MonthlyBirthdayCalendar = ({ month, birthdayChildren }: MonthProps) => {
                   <Birthdate>{birthdayChild["birthday"]}</Birthdate>
                   <Age>{checkAge(birthdayChild["birthday"])}</Age>
                   <SeeMore>
-                    <Button onTouchStart={() => ""}>more</Button>
+                    <Link to={"./userInfo/" + birthdayChild["_id"]}>
+                      <Button onTouchStart={() => ""}>more</Button>
+                    </Link>
                   </SeeMore>
                 </Person>
                 <tr>
