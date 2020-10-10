@@ -40,7 +40,7 @@ const Header = () => {
   return (
     <Link href="./main">
       <Container>
-        <Heading strokeColor="white" topSpacing={0} fontSize={1.9}>
+        <Heading strokeColor="white" topSpacing={10} fontSize={1.9}>
           Gratulatormator
         </Heading>
         <SeparationLine distanceTop={-18} />

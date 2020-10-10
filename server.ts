@@ -4,7 +4,7 @@ const cookieParser = require("cookie-parser");
 const path = require("path");
 const { dbInit } = require("./lib/db");
 const { registerUser, loginUser, verifyUser } = require("./lib/user");
-const { addBirthday, getAllBirthdays } = require("./lib/birthday");
+const { addBirthday, getAllBirthdays, getBirthday } = require("./lib/birthday");
 const { verifyToken } = require("./lib/verify");
 
 const app = express();
@@ -17,6 +17,7 @@ app.use(cookieParser());
 //routes
 app.get("/lol", (req, res) => {
   const hello = " Hello World";
+
   res.send(JSON.stringify(hello));
 });
 
@@ -29,6 +30,14 @@ app.get("/user/verify", async (req, res) => {
 app.get("/birthday/allBirthdays/", verifyToken, async (req, res) => {
   const allBirthdays = await getAllBirthdays(req.cookies.access_token);
   res.send(allBirthdays);
+});
+
+app.get(`/birthday/singleBirthday/:id`, verifyToken, async (req, res) => {
+  const singleBirthday = await getBirthday(
+    req.params.id,
+    req.cookies.access_token
+  );
+  res.send(JSON.stringify(singleBirthday));
 });
 
 app.post("/user/registration", async (req, res) => {

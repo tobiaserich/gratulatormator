@@ -17,14 +17,6 @@ import Button from "../components/Button";
 import { addBirthday } from "../api/birthdays";
 import Modal from "../components/Modal";
 
-type userDataProps = {
-  firstName: string;
-  lastName: string;
-  birthday: string;
-  remindMe: boolean;
-  [index: string]: string | boolean;
-};
-
 type validationDataProps = {
   firstName: boolean;
   lastName: boolean;
@@ -73,12 +65,10 @@ const AddNewPerson = () => {
   const [animationName, setForwarding] = useTransition("slideIn");
   const [submitResponse, setSubmitResponse] = React.useState(null);
   const [showModal, setShowModal] = React.useState(false);
-  const [userData, setUserData] = React.useState<userDataProps>({
-    firstName: "",
-    lastName: "",
-    birthday: "",
-    remindMe: false,
-  });
+  const [firstName, setFirstName] = React.useState("");
+  const [lastName, setLastName] = React.useState("");
+  const [birthday, setBirthday] = React.useState("");
+  const [remindMe, setRemindMe] = React.useState(false);
 
   const [validationCheck, setValidationCheck] = React.useState<
     validationDataProps
@@ -95,46 +85,35 @@ const AddNewPerson = () => {
   );
 
   const refreshUserData = () => {
-    setUserData({
-      firstName: "",
-      lastName: "",
-      birthday: "",
-      remindMe: false,
-    });
+    setFirstName("");
+    setLastName("");
+    setBirthday("");
+    setRemindMe(false);
   };
 
   const inputValidation = () => {
     const birthdayVerification = /^([0-9]{2}).([0-9]{2}).([0-9]{4})/;
     const validationData: validationDataProps = { ...validationCheck };
 
-    Object.keys(userData).forEach((value) => {
-      if (value === "birthday") {
-        userData[value].match(birthdayVerification)
-          ? (validationData[value] = true)
-          : (validationData[value] = false);
-      } else if (value !== "remindMe" && value !== "birthday") {
-        userData[value] === ""
-          ? (validationData[value] = false)
-          : (validationData[value] = true);
-      }
-    });
+    if (birthday.match(birthdayVerification)) {
+      validationData["birthday"] = true;
+    } else {
+      validationData["birthday"] = false;
+    }
+
+    if (firstName) {
+      validationData["firstName"] = true;
+    } else {
+      validationData["firstName"] = false;
+    }
+
+    if (lastName) {
+      validationData["lastName"] = true;
+    } else {
+      validationData["lastName"] = false;
+    }
+
     setValidationCheck(validationData);
-  };
-
-  const handleChange = (
-    arrayPos: string,
-    event:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.MouseEvent<HTMLInputElement>
-  ) => {
-    let newUserData: userDataProps = { ...userData };
-    const eventValue =
-      arrayPos === "remindMe"
-        ? event.currentTarget.checked
-        : event.currentTarget.value;
-
-    newUserData[arrayPos] = eventValue;
-    setUserData(newUserData);
   };
 
   const handleSubmit = async (event: any) => {
@@ -145,6 +124,7 @@ const AddNewPerson = () => {
       validationCheck["lastName"] === true &&
       validationCheck["birthday"] === true
     ) {
+      const userData = { firstName, lastName, birthday, remindMe };
       const response = await addBirthday(userData);
       setSubmitResponse(response);
       setShowModal(true);
@@ -178,9 +158,9 @@ const AddNewPerson = () => {
           First Name
           <Input
             type="text"
-            value={userData["firstName"]}
+            value={firstName}
             placeholder="first name"
-            onChange={(event) => handleChange("firstName", event)}
+            onChange={(event) => setFirstName(event.currentTarget.value)}
           />
         </Label>
 
@@ -194,9 +174,9 @@ const AddNewPerson = () => {
           Last Name
           <Input
             type="text"
-            value={userData["lastName"]}
+            value={lastName}
             placeholder="last name"
-            onChange={(event) => handleChange("lastName", event)}
+            onChange={(event) => setLastName(event.currentTarget.value)}
           />
         </Label>
         {!validationCheck["lastName"]
@@ -209,9 +189,9 @@ const AddNewPerson = () => {
           <Input
             type="text"
             maxLength={10}
-            value={userData["birthday"]}
+            value={birthday}
             placeholder="dd.mm.yyyy"
-            onChange={(event) => handleChange("birthday", event)}
+            onChange={(event) => setBirthday(event.currentTarget.value)}
           />
         </Label>
         {!validationCheck["birthday"]
@@ -220,13 +200,13 @@ const AddNewPerson = () => {
             : ""
           : ""}
         <Label>
-          <RemindContainer checkBoxChecked={userData["remindMe"]}>
+          <RemindContainer checkBoxChecked={remindMe}>
             Remind me <br />
             on birthday
             <InputCheckbox
               type="checkbox"
-              checked={userData["remindMe"]}
-              onChange={(event) => handleChange("remindMe", event)}
+              checked={remindMe}
+              onChange={(event) => setRemindMe(event.currentTarget.checked)}
             />
           </RemindContainer>
         </Label>

@@ -20,4 +20,13 @@ const getAllBirthdays = async () => {
   return result;
 };
 
-export { addBirthday, getAllBirthdays };
+const getBirthday = async (id: any) => {
+  const response = await fetch(`/birthday/singleBirthday/${id}`, {
+    method: "GET",
+    credentials: "include",
+  });
+  const result = await response.json();
+  return result;
+};
+
+export { addBirthday, getAllBirthdays, getBirthday };

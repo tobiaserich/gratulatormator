@@ -1,6 +1,7 @@
 export {};
 const { getCollection } = require("./db");
 const jwt = require("jsonwebtoken");
+const { ObjectID } = require("mongodb");
 
 const addBirthday = async (data, cookie) => {
   const collection = getCollection("birthdays");
@@ -27,5 +28,25 @@ const getAllBirthdays = async (cookie) => {
   return birthdays;
 };
 
+const getBirthday = async (birthdayID, cookie) => {
+  const collection = getCollection("birthdays");
+  const birthdayOwner = jwt.verify(cookie, process.env.TOKEN_SECRET)._id;
+  try {
+    const birthday = await collection.findOne({
+      owner: birthdayOwner,
+      _id: ObjectID(birthdayID),
+    });
+    if (!birthday) {
+      throw 404;
+    } else {
+      console.log(birthday);
+      return birthday;
+    }
+  } catch (error) {
+    return error;
+  }
+};
+
 exports.addBirthday = addBirthday;
 exports.getAllBirthdays = getAllBirthdays;
+exports.getBirthday = getBirthday;
