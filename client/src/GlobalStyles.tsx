@@ -33,7 +33,6 @@ function GlobalStyles(props: GlobalStylesProps) {
           height: 100%;
           max-width: 320px;
           margin: auto;
-          padding-top:0.5rem;
           overflow-x: hidden;
          
       `}
