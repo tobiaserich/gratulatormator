@@ -19,6 +19,7 @@ import { verifyUser } from "./api/user";
 function App() {
   const [currentBackground, setCurrentBackground] = React.useState("landing");
   const [userVerification, setUserVerification] = React.useState(false);
+
   const actualPath = window.location.pathname;
   React.useEffect(() => {
     const verificateUser = async () => {
@@ -48,10 +49,10 @@ function App() {
                 <Route exact path="/main">
                   <Main />
                 </Route>
-                <Route path="/addNewPerson">
+                <Route path="/addNewPerson/">
                   <AddNewPerson />
                 </Route>
-                <Route path="/userInfo">
+                <Route path="/userInfo/:id">
                   <UserInfo />
                 </Route>
                 <Route path="/registration">
