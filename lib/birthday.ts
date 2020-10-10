@@ -47,6 +47,21 @@ const getBirthday = async (birthdayID, cookie) => {
   }
 };
 
+const deleteBirthday = async (birthdayID, cookie) => {
+  const collection = getCollection("birthdays");
+  const owner = jwt.verify(cookie, process.env.TOKEN_SECRET)._id;
+  try {
+    const deleteBirthday = await collection.deleteOne({
+      owner: owner,
+      _id: ObjectID(birthdayID),
+    });
+    throw 200;
+  } catch (error) {
+    return error;
+  }
+};
+
 exports.addBirthday = addBirthday;
 exports.getAllBirthdays = getAllBirthdays;
 exports.getBirthday = getBirthday;
+exports.deleteBirthday = deleteBirthday;

@@ -4,7 +4,12 @@ const cookieParser = require("cookie-parser");
 const path = require("path");
 const { dbInit } = require("./lib/db");
 const { registerUser, loginUser, verifyUser } = require("./lib/user");
-const { addBirthday, getAllBirthdays, getBirthday } = require("./lib/birthday");
+const {
+  addBirthday,
+  getAllBirthdays,
+  getBirthday,
+  deleteBirthday,
+} = require("./lib/birthday");
 const { verifyToken } = require("./lib/verify");
 
 const app = express();
@@ -72,6 +77,17 @@ app.post("/birthday/add", verifyToken, async (req, res) => {
   }
 });
 
+app.delete(
+  "/birthday/deleteSingleBirthday/:id",
+  verifyToken,
+  async (req, res) => {
+    const deleteSingleBirthday = await deleteBirthday(
+      req.params.id,
+      req.cookies.access_token
+    );
+    res.status(200).send({ code: deleteSingleBirthday });
+  }
+);
 // Serve any static files
 app.use(express.static(path.join(__dirname, "client/build")));
 
