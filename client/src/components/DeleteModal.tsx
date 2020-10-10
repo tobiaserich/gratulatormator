@@ -1,10 +1,13 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import styled from "@emotion/styled";
 import closeButton from "../assets/closeButton.svg";
 import Button from "./Button";
+import { deleteBirthday } from "../api/birthdays";
 
 type modalProps = {
   handleVisibility: React.Dispatch<React.SetStateAction<boolean>>;
+  id: string;
 };
 
 type modalContainerProps = {
@@ -54,15 +57,25 @@ const ButtonContainer = styled("div")`
   justify-content: space-evenly;
 `;
 
-const DeleteModal: React.FC<modalProps> = ({ handleVisibility }) => {
+const DeleteModal: React.FC<modalProps> = ({ handleVisibility, id }) => {
+  const [deleted, setDeleted] = React.useState(false);
+
+  const history = useHistory();
   const handleClose = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (event.target === event.currentTarget) {
       handleVisibility(false);
     }
   };
 
-  const deleteUser = () => {
-    //placeholder for delete functionality
+  const deleteUser = async () => {
+    const status = await deleteBirthday(id);
+    if (status.code === 200) {
+      setDeleted(true);
+    }
+  };
+
+  const forwarding = () => {
+    history.push("../main");
   };
 
   return (
@@ -72,25 +85,43 @@ const DeleteModal: React.FC<modalProps> = ({ handleVisibility }) => {
           src={closeButton}
           onClick={() => handleVisibility(false)}
         />
-        <Text>Are you sure you want to delete Max Mustermann?</Text>
-        <ButtonContainer>
-          <Button
-            fontFamily="montserrat"
-            fontSize={16}
-            onClick={() => deleteUser()}
-            onTouchStart={() => ""}
-          >
-            yes
-          </Button>
-          <Button
-            fontFamily="montserrat"
-            fontSize={16}
-            onClick={() => handleVisibility(false)}
-            onTouchStart={() => ""}
-          >
-            no
-          </Button>
-        </ButtonContainer>
+        {!deleted ? (
+          <>
+            <Text>Are you sure you want to delete Max Mustermann?</Text>
+            <ButtonContainer>
+              <Button
+                fontFamily="montserrat"
+                fontSize={16}
+                onClick={() => deleteUser()}
+                onTouchStart={() => ""}
+              >
+                yes
+              </Button>
+              <Button
+                fontFamily="montserrat"
+                fontSize={16}
+                onClick={() => handleVisibility(false)}
+                onTouchStart={() => ""}
+              >
+                no
+              </Button>
+            </ButtonContainer>
+          </>
+        ) : (
+          <>
+            <Text>User deleted</Text>
+            <ButtonContainer>
+              <Button
+                fontFamily="montserrat"
+                fontSize={16}
+                onClick={() => forwarding()}
+                onTouchStart={() => ""}
+              >
+                Ok
+              </Button>
+            </ButtonContainer>
+          </>
+        )}
       </ModalContainer>
     </Background>
   );
