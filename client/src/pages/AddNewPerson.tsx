@@ -11,20 +11,16 @@ import {
   Input,
   InputValidation,
 } from "../components/Formular";
-import unchecked from "../assets/checkboxUnchecked.svg";
-import checked from "../assets/checkboxChecked.svg";
 import Button from "../components/Button";
 import { addBirthday } from "../api/birthdays";
 import Modal from "../components/Modal";
+import RemindMeContainer from "../components/RemindMeContainer";
 
 type validationDataProps = {
   firstName: boolean;
   lastName: boolean;
   birthday: boolean;
   [index: string]: boolean;
-};
-type checkBoxProps = {
-  checkBoxChecked: boolean | undefined;
 };
 
 type themeProps = {
@@ -35,22 +31,6 @@ const ImageLabel = styled("label")`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-const RemindContainer = styled("label")<checkBoxProps>`
-  display: flex;
-  margin-top: 15px;
-  margin-bottom: 25px;
-  align-items: center;
-  line-height: 1;
-  &::after {
-    margin-left: 10px;
-    content: "";
-    min-width: 24px;
-    height: 21px;
-    background-image: ${({ checkBoxChecked }) =>
-      checkBoxChecked ? `url(${checked})` : `url(${unchecked})`};
-  }
 `;
 
 const HiddenFileUpload = styled("input")`
@@ -124,7 +104,13 @@ const AddNewPerson = () => {
       validationCheck["lastName"] === true &&
       validationCheck["birthday"] === true
     ) {
-      const userData = { firstName, lastName, birthday, remindMe };
+      const userData = {
+        firstName,
+        lastName,
+        birthday,
+        remindMe,
+        remindMeDays: "01",
+      };
       const response = await addBirthday(userData);
       setSubmitResponse(response);
       setShowModal(true);
@@ -200,7 +186,7 @@ const AddNewPerson = () => {
             : ""
           : ""}
         <Label>
-          <RemindContainer checkBoxChecked={remindMe}>
+          <RemindMeContainer checkBoxChecked={remindMe}>
             Remind me <br />
             on birthday
             <InputCheckbox
@@ -208,7 +194,7 @@ const AddNewPerson = () => {
               checked={remindMe}
               onChange={(event) => setRemindMe(event.currentTarget.checked)}
             />
-          </RemindContainer>
+          </RemindMeContainer>
         </Label>
         <div>
           <Button
