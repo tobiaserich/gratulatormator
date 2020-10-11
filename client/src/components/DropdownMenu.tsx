@@ -4,6 +4,7 @@ import { ArrowDown } from "../components/Arrows";
 type DropdownMenuProps = {
   items: string[];
   dropdownValue?: React.Dispatch<React.SetStateAction<string>>;
+  status?: boolean;
 };
 
 type itemProps = {
@@ -61,11 +62,20 @@ const Item = styled("li")<itemProps>`
 const DropdownMenu: React.FC<DropdownMenuProps> = ({
   items,
   dropdownValue,
+  status = true,
 }) => {
   const [select, setSelect] = React.useState(items[0]);
   const [openDropdown, setOpenDropdown] = React.useState(false);
+  const [dropdownStatus, setDropdownStatus] = React.useState(true);
+
+  React.useEffect(() => {
+    setDropdownStatus(status);
+  }, [status]);
+
   const openDropdownMenu = () => {
-    setOpenDropdown(true);
+    if (dropdownStatus) {
+      setOpenDropdown(true);
+    }
   };
 
   const closeDropdownMenu = () => {
@@ -109,7 +119,11 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
           )}
         </Dropdown>
       </Container>
-      {!openDropdown ? <ArrowDown onClick={() => openDropdownMenu()} /> : ""}
+      {!openDropdown ? (
+        <ArrowDown onClick={() => openDropdownMenu()} status={status} />
+      ) : (
+        ""
+      )}
       {openDropdown ? (
         <ModalBackground onClick={() => closeDropdownMenu()} />
       ) : (
