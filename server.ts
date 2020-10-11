@@ -9,6 +9,7 @@ const {
   getAllBirthdays,
   getBirthday,
   deleteBirthday,
+  updateRemindMe,
 } = require("./lib/birthday");
 const { verifyToken } = require("./lib/verify");
 
@@ -88,6 +89,12 @@ app.delete(
     res.status(200).send({ code: deleteSingleBirthday });
   }
 );
+
+app.put("/birthday/updateRemindMe/", verifyToken, async (req, res) => {
+  updateRemindMe(req.body, req.cookies.access_token);
+  res.end();
+});
+
 // Serve any static files
 app.use(express.static(path.join(__dirname, "client/build")));
 

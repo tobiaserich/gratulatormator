@@ -37,4 +37,19 @@ const deleteBirthday = async (id: string) => {
   const result = await response.json();
   return result;
 };
-export { addBirthday, getAllBirthdays, getBirthday, deleteBirthday };
+
+const updateRemindMe = async (id: string, remindMeValue: boolean) => {
+  const response = await fetch("/birthday/updateRemindMe/", {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ id, remindMeValue }),
+  });
+};
+
+export {
+  addBirthday,
+  getAllBirthdays,
+  getBirthday,
+  deleteBirthday,
+  updateRemindMe,
+};

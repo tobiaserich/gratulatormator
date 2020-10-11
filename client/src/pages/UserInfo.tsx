@@ -53,6 +53,7 @@ const UserInfo = () => {
           <UserSettings
             handleClick={transition}
             handleDeleteUser={setDeleteUser}
+            remindStatus={birthdayChildData["remindMe"]}
           />
         );
       case "generateGratulation":
