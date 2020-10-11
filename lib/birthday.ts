@@ -39,7 +39,6 @@ const getBirthday = async (birthdayID, cookie) => {
     if (!birthday) {
       throw 404;
     } else {
-      console.log(birthday);
       return birthday;
     }
   } catch (error) {
@@ -61,7 +60,20 @@ const deleteBirthday = async (birthdayID, cookie) => {
   }
 };
 
+const updateRemindMe = async (body, cookie) => {
+  const collection = getCollection("birthdays");
+  const owner = jwt.verify(cookie, process.env.TOKEN_SECRET)._id;
+  try {
+    const update = collection.updateOne(
+      { owner: owner, _id: ObjectID(body.id) },
+      { $set: { remindMe: body.remindMeValue } }
+    );
+  } catch (error) {}
+  return;
+};
+
 exports.addBirthday = addBirthday;
 exports.getAllBirthdays = getAllBirthdays;
 exports.getBirthday = getBirthday;
 exports.deleteBirthday = deleteBirthday;
+exports.updateRemindMe = updateRemindMe;
