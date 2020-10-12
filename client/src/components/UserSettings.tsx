@@ -5,12 +5,13 @@ import Info from "./Info";
 import DropdownMenu from "./DropdownMenu";
 import Button from "./Button";
 import RemindMeContainer from "./RemindMeContainer";
-import { updateRemindMe } from "../api/birthdays";
+import { updateRemindMe, updateRemindMeDays } from "../api/birthdays";
 
 type UserSettingsProps = {
   handleClick: any;
   handleDeleteUser: React.Dispatch<React.SetStateAction<boolean>>;
   remindStatus: boolean;
+  daysToRemind: string;
 };
 
 const InputCheckbox = styled("input")`
@@ -21,13 +22,19 @@ const UserSettings: React.FC<UserSettingsProps> = ({
   handleClick,
   handleDeleteUser,
   remindStatus,
+  daysToRemind,
 }) => {
   const [remindMeDays, setRemindMeDays] = React.useState("xx");
   const [remindMe, setRemindMe] = React.useState(false);
   const { id } = useParams();
   React.useEffect(() => {
+    setRemindMeDays(daysToRemind);
     setRemindMe(remindStatus);
   }, []);
+
+  React.useEffect(() => {
+    updateRemindMeDays(id, remindMeDays);
+  }, [remindMeDays]);
 
   const generateDaysDropdownItems = () => {
     let items: string[] = new Array(30).fill("");
@@ -42,11 +49,21 @@ const UserSettings: React.FC<UserSettingsProps> = ({
     setRemindMe(event.currentTarget.checked);
     updateRemindMe(id, event.currentTarget.checked);
   };
+
+  const handleDaysToRemindChange = (days: string) => {
+    setRemindMeDays(days);
+  };
+
   return (
     <>
       <Info fontSize={1.4} topSpacing={4} status={!remindMe ? "disable" : ""}>
         Remind me{" "}
-        <DropdownMenu items={generateDaysDropdownItems()} status={remindMe} />
+        <DropdownMenu
+          items={generateDaysDropdownItems()}
+          status={remindMe}
+          daysToRemind={daysToRemind}
+          handleDaysToRemind={handleDaysToRemindChange}
+        />
         days before
       </Info>
       <Info fontSize={1}>

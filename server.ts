@@ -10,6 +10,7 @@ const {
   getBirthday,
   deleteBirthday,
   updateRemindMe,
+  updateRemindMeDays,
 } = require("./lib/birthday");
 const { verifyToken } = require("./lib/verify");
 
@@ -92,6 +93,11 @@ app.delete(
 
 app.put("/birthday/updateRemindMe/", verifyToken, async (req, res) => {
   updateRemindMe(req.body, req.cookies.access_token);
+  res.end();
+});
+
+app.put("/birthday/updateRemindMeDays/", verifyToken, async (req, res) => {
+  updateRemindMeDays(req.body, req.cookies.access_token);
   res.end();
 });
 

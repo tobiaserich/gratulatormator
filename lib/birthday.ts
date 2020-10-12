@@ -72,8 +72,21 @@ const updateRemindMe = async (body, cookie) => {
   return;
 };
 
+const updateRemindMeDays = async (body, cookie) => {
+  const collection = getCollection("birthdays");
+  const owner = jwt.verify(cookie, process.env.TOKEN_SECRET)._id;
+  try {
+    const update = collection.updateOne(
+      { owner: owner, _id: ObjectID(body.id) },
+      { $set: { remindMeDays: body.remindMeDays } }
+    );
+  } catch (error) {}
+  return;
+};
+
 exports.addBirthday = addBirthday;
 exports.getAllBirthdays = getAllBirthdays;
 exports.getBirthday = getBirthday;
 exports.deleteBirthday = deleteBirthday;
 exports.updateRemindMe = updateRemindMe;
+exports.updateRemindMeDays = updateRemindMeDays;
