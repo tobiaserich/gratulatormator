@@ -54,6 +54,7 @@ const UserInfo = () => {
             handleClick={transition}
             handleDeleteUser={setDeleteUser}
             remindStatus={birthdayChildData["remindMe"]}
+            daysToRemind={birthdayChildData["remindMeDays"]}
           />
         );
       case "generateGratulation":
