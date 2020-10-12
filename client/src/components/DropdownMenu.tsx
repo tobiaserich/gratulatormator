@@ -5,6 +5,8 @@ type DropdownMenuProps = {
   items: string[];
   dropdownValue?: React.Dispatch<React.SetStateAction<string>>;
   status?: boolean;
+  daysToRemind?: string;
+  handleDaysToRemind?: any;
 };
 
 type itemProps = {
@@ -63,6 +65,8 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
   items,
   dropdownValue,
   status = true,
+  daysToRemind = "0",
+  handleDaysToRemind,
 }) => {
   const [select, setSelect] = React.useState(items[0]);
   const [openDropdown, setOpenDropdown] = React.useState(false);
@@ -71,6 +75,11 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
   React.useEffect(() => {
     setDropdownStatus(status);
   }, [status]);
+
+  React.useEffect(() => {
+    const remindDays = parseInt(daysToRemind) - 1;
+    setSelect(items[remindDays]);
+  }, []);
 
   const openDropdownMenu = () => {
     if (dropdownStatus) {
@@ -92,6 +101,9 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
             closeDropdownMenu();
             if (dropdownValue) {
               dropdownValue(item);
+            }
+            if (handleDaysToRemind) {
+              handleDaysToRemind(item);
             }
           }}
         >
