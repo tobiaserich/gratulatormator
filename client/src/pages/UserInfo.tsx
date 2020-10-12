@@ -84,7 +84,11 @@ const UserInfo = () => {
         </BigButton>
       </MainContainer>
       {deleteUser ? (
-        <DeleteModal handleVisibility={setDeleteUser} id={id} />
+        <DeleteModal
+          handleVisibility={setDeleteUser}
+          birthdayChildName={`${birthdayChildData["firstName"]} ${birthdayChildData["lastName"]}`}
+          id={id}
+        />
       ) : (
         ""
       )}
