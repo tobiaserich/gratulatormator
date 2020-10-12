@@ -46,10 +46,19 @@ const updateRemindMe = async (id: string, remindMeValue: boolean) => {
   });
 };
 
+const updateRemindMeDays = async (id: string, remindMeDays: string) => {
+  const response = fetch("/birthday/updateRemindMeDays/", {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ id, remindMeDays }),
+  });
+};
+
 export {
   addBirthday,
   getAllBirthdays,
   getBirthday,
   deleteBirthday,
   updateRemindMe,
+  updateRemindMeDays,
 };
