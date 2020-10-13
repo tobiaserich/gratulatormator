@@ -8,6 +8,7 @@ import { deleteBirthday } from "../api/birthdays";
 type modalProps = {
   handleVisibility: React.Dispatch<React.SetStateAction<boolean>>;
   id: string;
+  birthdayChildName: string;
 };
 
 type modalContainerProps = {
@@ -57,7 +58,11 @@ const ButtonContainer = styled("div")`
   justify-content: space-evenly;
 `;
 
-const DeleteModal: React.FC<modalProps> = ({ handleVisibility, id }) => {
+const DeleteModal: React.FC<modalProps> = ({
+  handleVisibility,
+  id,
+  birthdayChildName,
+}) => {
   const [deleted, setDeleted] = React.useState(false);
 
   const history = useHistory();
@@ -87,7 +92,7 @@ const DeleteModal: React.FC<modalProps> = ({ handleVisibility, id }) => {
         />
         {!deleted ? (
           <>
-            <Text>Are you sure you want to delete Max Mustermann?</Text>
+            <Text>Are you sure you want to delete {birthdayChildName}?</Text>
             <ButtonContainer>
               <Button
                 fontFamily="montserrat"
