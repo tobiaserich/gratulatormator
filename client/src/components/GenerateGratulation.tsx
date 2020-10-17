@@ -6,6 +6,7 @@ import Button from "./Button";
 import Info from "./Info";
 import randomizeButton from "../assets/randomizeButton.svg";
 import copyButton from "../assets/copyButton.svg";
+import { getAvailableMessages } from "../api/messages";
 
 type generateGratulationProps = {
   handleClick: any;
@@ -13,13 +14,6 @@ type generateGratulationProps = {
 
 type themeProps = {
   theme: any;
-};
-
-type exampleProps = {
-  Friend: string;
-  Boss: string;
-  Partner: string;
-  [index: string]: string;
 };
 
 type copyButtonProps = {
@@ -76,29 +70,27 @@ const CopyButton = styled("div")<copyButtonProps>`
 const GenerateGratulation: React.FC<generateGratulationProps> = ({
   handleClick,
 }) => {
-  const [textBoxText, setTextBoxText] = React.useState("");
+  const [availableMessages, setAvailableMessages]: any = React.useState(null);
+  const [activeMessage, setActiveMessage] = React.useState("");
   const [dropdownValue, setDropdownValue] = React.useState("Friend");
-  const items = ["Friend", "Boss", "Partner"];
-  const exampleText: exampleProps = {
-    Friend: `Ich
-bin
-ein
-Freund`,
-    Boss: `Ich
-bin
-ein
-Boss`,
-    Partner: `Ich
-bin
-ein
-Partner`,
-  };
+  const items = ["Friend"];
+
   React.useEffect(() => {
-    setTextBoxText(exampleText[dropdownValue]);
-  }, [dropdownValue]);
+    const fetchMessages = async () => {
+      const messages = await getAvailableMessages();
+      setAvailableMessages(messages);
+      setActiveMessage(messages[0].message);
+    };
+    fetchMessages();
+  }, []);
+
+  const generateMessage = () => {
+    const randomMessage = Math.floor(Math.random() * availableMessages.length);
+    setActiveMessage(availableMessages[randomMessage].message);
+  };
 
   const handleChange = (event: any) => {
-    setTextBoxText(event.target.value);
+    setActiveMessage(event.target.value);
   };
 
   return (
@@ -108,17 +100,20 @@ Partner`,
         <Info fontSize={1.2}>
           <DropdownMenu items={items} dropdownValue={setDropdownValue} />
         </Info>
-        <RandomizButton onTouchStart={() => ""}>
+        <RandomizButton
+          onTouchStart={() => ""}
+          onClick={() => generateMessage()}
+        >
           <img src={randomizeButton} />
         </RandomizButton>
       </CategoryContainer>
       <TextContainer>
         <TextBox
           onChange={(event: any) => handleChange(event)}
-          value={textBoxText}
+          value={activeMessage}
         ></TextBox>
         <CopyButton
-          onClick={() => navigator.clipboard.writeText(textBoxText)}
+          onClick={() => navigator.clipboard.writeText(activeMessage)}
           onTouchStart={() => ""}
         >
           <img src={copyButton} />
