@@ -47,8 +47,8 @@ app.get(`/birthday/singleBirthday/:id`, verifyToken, async (req, res) => {
   res.send(JSON.stringify(singleBirthday));
 });
 
-app.get("/messages/allAvailable", verifyToken, async (req, res) => {
-  const messages = await getAllAvailableMessages();
+app.get("/messages/allAvailable/:category", verifyToken, async (req, res) => {
+  const messages = await getAllAvailableMessages(req.params.category);
   res.send(JSON.stringify(messages));
 });
 

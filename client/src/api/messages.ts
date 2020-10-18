@@ -1,5 +1,5 @@
-const getAvailableMessages = async () => {
-  const response = await fetch("/messages/allAvailable", {
+const getAvailableMessages = async (category: string) => {
+  const response = await fetch(`/messages/allAvailable/${category}`, {
     method: "GET",
     credentials: "include",
   });
