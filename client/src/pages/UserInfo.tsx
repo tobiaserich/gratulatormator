@@ -58,7 +58,12 @@ const UserInfo = () => {
           />
         );
       case "generateGratulation":
-        return <GenerateGratulation handleClick={transition} />;
+        return (
+          <GenerateGratulation
+            handleClick={transition}
+            firstName={birthdayChildData.firstName}
+          />
+        );
     }
   };
 

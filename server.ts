@@ -12,6 +12,7 @@ const {
   updateRemindMe,
   updateRemindMeDays,
 } = require("./lib/birthday");
+const { getAllAvailableMessages } = require("./lib/messages");
 const { verifyToken } = require("./lib/verify");
 
 const app = express();
@@ -45,6 +46,11 @@ app.get(`/birthday/singleBirthday/:id`, verifyToken, async (req, res) => {
     req.cookies.access_token
   );
   res.send(JSON.stringify(singleBirthday));
+});
+
+app.get("/messages/allAvailable/:category", verifyToken, async (req, res) => {
+  const messages = await getAllAvailableMessages(req.params.category);
+  res.send(JSON.stringify(messages));
 });
 
 app.post("/user/registration", async (req, res) => {
