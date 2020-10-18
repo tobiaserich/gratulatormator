@@ -79,7 +79,8 @@ const GenerateGratulation: React.FC<generateGratulationProps> = ({
     const fetchMessages = async () => {
       const messages = await getAvailableMessages();
       setAvailableMessages(messages);
-      setActiveMessage(messages[0].message);
+      const randomNumber = Math.floor(Math.random() * messages.length);
+      setActiveMessage(messages[randomNumber].message);
     };
     fetchMessages();
   }, []);
