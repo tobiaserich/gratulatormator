@@ -10,6 +10,7 @@ import { getAvailableMessages } from "../api/messages";
 
 type generateGratulationProps = {
   handleClick: any;
+  firstName: string;
 };
 
 type themeProps = {
@@ -69,6 +70,7 @@ const CopyButton = styled("div")<copyButtonProps>`
 
 const GenerateGratulation: React.FC<generateGratulationProps> = ({
   handleClick,
+  firstName,
 }) => {
   const [availableMessages, setAvailableMessages]: any = React.useState(null);
   const [activeMessage, setActiveMessage] = React.useState("");
@@ -77,17 +79,27 @@ const GenerateGratulation: React.FC<generateGratulationProps> = ({
 
   React.useEffect(() => {
     const fetchMessages = async () => {
-      const messages = await getAvailableMessages();
+      const messages = await getAvailableMessages(dropdownValue);
       setAvailableMessages(messages);
       const randomNumber = Math.floor(Math.random() * messages.length);
-      setActiveMessage(messages[randomNumber].message);
+      const messageWithName = individualizeMessage(
+        messages[randomNumber].message
+      );
+      setActiveMessage(messageWithName);
     };
     fetchMessages();
   }, []);
 
+  const individualizeMessage = (message: string) => {
+    const indidualizedMessage = message.replace(/(\[firstName\])/, firstName);
+    return indidualizedMessage;
+  };
   const generateMessage = () => {
     const randomMessage = Math.floor(Math.random() * availableMessages.length);
-    setActiveMessage(availableMessages[randomMessage].message);
+    const messageWithName = individualizeMessage(
+      availableMessages[randomMessage].message
+    );
+    setActiveMessage(messageWithName);
   };
 
   const handleChange = (event: any) => {
