@@ -1,15 +1,11 @@
 import React from "react";
 import MonthlyBirthdayCalendar from "./MonthlyBirthdayCalendar";
-import { getAllBirthdays } from "../api/birthdays";
+import sortBirthday from "../assets/helper/sortBirthday";
 
-const BirthdayCalendar = () => {
-  const [allBirthdays, setAllBirthdays] = React.useState([
-    { birthday: "01.01.1111" },
-  ]);
-
+const BirthdayCalendar = ({ allBirthdays }: any) => {
   const showBirthday = (month: any) => {
     const birthdays: any = [];
-    allBirthdays?.map(async (birthday: any, index) => {
+    allBirthdays.map(async (birthday: any, index: any) => {
       const regex = /(\.)\d{2}/;
       const result = birthday["birthday"];
       const regexCheck = regex.exec(result);
@@ -20,45 +16,9 @@ const BirthdayCalendar = () => {
       }
     });
 
-    const splitBirthday = (birthday: string) => {
-      const splittedBirthday = birthday.split(".");
-      splittedBirthday[0] = `${splittedBirthday[0]}.${splittedBirthday[1]}`;
-      splittedBirthday.splice(1, 1);
-      return splittedBirthday;
-    };
-
-    birthdays.sort((initialBirthday: any, comparingBirthday: any) => {
-      const splittedInitialBirthday = splitBirthday(initialBirthday.birthday);
-      const splittedComparingBirthday = splitBirthday(
-        comparingBirthday.birthday
-      );
-
-      if (splittedInitialBirthday[0] === splittedComparingBirthday[0]) {
-        if (splittedInitialBirthday[1] < splittedComparingBirthday[1]) {
-          return 1;
-        }
-        if (splittedInitialBirthday[1] > splittedComparingBirthday[1]) {
-          return -1;
-        }
-      } else {
-        if (initialBirthday.birthday < comparingBirthday.birthday) {
-          return -1;
-        }
-        if (initialBirthday.birthday > comparingBirthday.birthday) {
-          return 1;
-        }
-      }
-    });
-    return birthdays;
+    const sortedBirthdays = sortBirthday(birthdays);
+    return sortedBirthdays;
   };
-
-  React.useEffect(() => {
-    const getBirthdays = async () => {
-      const birthdays = await getAllBirthdays();
-      setAllBirthdays(birthdays);
-    };
-    getBirthdays();
-  }, []);
 
   return (
     <>

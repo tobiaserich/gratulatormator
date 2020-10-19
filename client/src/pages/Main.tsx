@@ -4,13 +4,25 @@ import MainContainer from "../components/MainContainer";
 import NextBirthday from "../components/NextBirthday";
 import Button from "../components/Button";
 import BirthdayCalendar from "../components/BirthdayCalendar";
+import { getAllBirthdays } from "../api/birthdays";
 
 const Main = () => {
   const [animationName, setForwarding] = useTransition("slideIn");
-  React.useEffect(() => {}, [animationName]);
+  const [allBirthdays, setAllBirthdays] = React.useState([
+    { birthday: "01.01.1111" },
+  ]);
+
+  React.useEffect(() => {
+    const getBirthdays = async () => {
+      const birthdays = await getAllBirthdays();
+      setAllBirthdays(birthdays);
+    };
+    getBirthdays();
+  }, []);
+
   return (
     <MainContainer font="Arima Madurai" animation={animationName}>
-      <NextBirthday />
+      <NextBirthday birthdays={allBirthdays} />
       <Button
         fontSize={20}
         onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -20,7 +32,7 @@ const Main = () => {
       >
         Add new person
       </Button>
-      <BirthdayCalendar />
+      <BirthdayCalendar allBirthdays={allBirthdays} />
     </MainContainer>
   );
 };
