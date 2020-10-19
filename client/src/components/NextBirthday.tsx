@@ -89,12 +89,12 @@ const NextBirthday = ({ birthdays }: any) => {
     getNextBirthday();
   }, [birthdays]);
 
-  const getNextBirthday = async (additor: number = 1) => {
+  const getNextBirthday = (additor: number = 1) => {
     const currentMonth = new Date().getMonth() + 1;
     const comparingMonth = new Date().getMonth() + additor;
     const month =
       comparingMonth >= 10 ? `.${comparingMonth}` : `.0${comparingMonth}`;
-    const nextBirthdays = await showBirthdayForMonth(month, birthdays);
+    const nextBirthdays = showBirthdayForMonth(month, birthdays);
     if (nextBirthdays.length === 0) {
       comparingMonth >= 12
         ? getNextBirthday(additor - 11)
@@ -190,7 +190,11 @@ const NextBirthday = ({ birthdays }: any) => {
   return (
     <>
       <Container
-        onTouchStart={(event: any) => handleTouch("start", event)}
+        onTouchStart={(event: any) => {
+          if (nextBirthdays.length > 1) {
+            handleTouch("start", event);
+          }
+        }}
         onTouchEnd={(event: any) => handleTouch("end", event)}
         animation={animation}
       >
