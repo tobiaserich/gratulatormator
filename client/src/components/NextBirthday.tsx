@@ -100,6 +100,7 @@ const NextBirthday = ({ birthdays }: any) => {
         ? getNextBirthday(additor - 11)
         : getNextBirthday(additor + 1);
     }
+    
     if (nextBirthdays.length > 0) {
       if (comparingMonth > currentMonth || comparingMonth < currentMonth) {
         let birthdays: any = [];
@@ -148,7 +149,14 @@ const NextBirthday = ({ birthdays }: any) => {
             }
           }
         });
-        setNextBirthdays(birthdays);
+
+        if (birthdays.length === 0) {
+          comparingMonth >= 12
+            ? getNextBirthday(additor - 11)
+            : getNextBirthday(additor + 1);
+        } else {
+          setNextBirthdays(birthdays);
+        }
       }
     }
   };
