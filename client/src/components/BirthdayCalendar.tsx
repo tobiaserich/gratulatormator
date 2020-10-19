@@ -1,6 +1,5 @@
 import React from "react";
 import MonthlyBirthdayCalendar from "./MonthlyBirthdayCalendar";
-import splitBirthday from "../assets/helper/splitBirthdays";
 import sortBirthday from "../assets/helper/sortBirthday";
 
 const BirthdayCalendar = ({ allBirthdays }: any) => {
