@@ -81,7 +81,9 @@ const UserDetail = styled("p")`
 
 const NextBirthday = ({ birthdays }: any) => {
   const [currentBirthday, setCurrentBirthday] = React.useState(0);
-  const [nextBirthdays, setNextBirthdays] = React.useState();
+  const [nextBirthdays, setNextBirthdays] = React.useState([
+    { firstName: "Tobias", lastName: "Erich", birthday: "24.12.1989" },
+  ]);
   const [animation, setAnimation] = React.useState("initial-state");
   let swipeStart: any;
   let swipeEnd: any;
@@ -89,21 +91,21 @@ const NextBirthday = ({ birthdays }: any) => {
     getNextBirthday();
   }, [birthdays]);
 
-  const getNextBirthday = (additor: number = 1) => {
+  const getNextBirthday = async (additor: number = 1) => {
     const currentMonth = new Date().getMonth() + 1;
     const comparingMonth = new Date().getMonth() + additor;
     const month =
       comparingMonth >= 10 ? `.${comparingMonth}` : `.0${comparingMonth}`;
-    const nextBirthdays = showBirthdayForMonth(month, birthdays);
-    if (nextBirthdays.length === 0) {
+    const nextBirthday = await showBirthdayForMonth(month, birthdays);
+    if (nextBirthday.length === 0) {
       comparingMonth >= 12
         ? getNextBirthday(additor - 11)
         : getNextBirthday(additor + 1);
     }
-    if (nextBirthdays.length > 0) {
+    if (nextBirthday.length > 0) {
       if (comparingMonth > currentMonth || comparingMonth < currentMonth) {
         let birthdays: any = [];
-        const sortedBirthdays = sortBirthday(nextBirthdays);
+        const sortedBirthdays = sortBirthday(nextBirthday);
         sortedBirthdays.map((birthday: any, index: any) => {
           if (index === 0) {
             birthdays.push(birthday);
@@ -148,7 +150,13 @@ const NextBirthday = ({ birthdays }: any) => {
             }
           }
         });
-        setNextBirthdays(birthdays);
+        if (birthdays.length === 0) {
+          comparingMonth >= 12
+            ? getNextBirthday(additor - 11)
+            : getNextBirthday(additor + 1);
+        } else {
+          setNextBirthdays(birthdays);
+        }
       }
     }
   };
