@@ -77,8 +77,10 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
   }, [status]);
 
   React.useEffect(() => {
-    const remindDays = parseInt(daysToRemind) - 1;
-    setSelect(items[remindDays]);
+    if (handleDaysToRemind) {
+      const remindDays = parseInt(daysToRemind) - 1;
+      setSelect(items[remindDays]);
+    }
   }, []);
 
   const openDropdownMenu = () => {
@@ -112,7 +114,6 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
       );
     });
   };
-
   return (
     <>
       <Container dropdownActive={openDropdown}>
