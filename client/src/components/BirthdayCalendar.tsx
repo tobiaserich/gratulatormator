@@ -20,6 +20,35 @@ const BirthdayCalendar = () => {
       }
     });
 
+    const splitBirthday = (birthday: string) => {
+      const splittedBirthday = birthday.split(".");
+      splittedBirthday[0] = `${splittedBirthday[0]}.${splittedBirthday[1]}`;
+      splittedBirthday.splice(1, 1);
+      return splittedBirthday;
+    };
+
+    birthdays.sort((initialBirthday: any, comparingBirthday: any) => {
+      const splittedInitialBirthday = splitBirthday(initialBirthday.birthday);
+      const splittedComparingBirthday = splitBirthday(
+        comparingBirthday.birthday
+      );
+
+      if (splittedInitialBirthday[0] === splittedComparingBirthday[0]) {
+        if (splittedInitialBirthday[1] < splittedComparingBirthday[1]) {
+          return 1;
+        }
+        if (splittedInitialBirthday[1] > splittedComparingBirthday[1]) {
+          return -1;
+        }
+      } else {
+        if (initialBirthday.birthday < comparingBirthday.birthday) {
+          return -1;
+        }
+        if (initialBirthday.birthday > comparingBirthday.birthday) {
+          return 1;
+        }
+      }
+    });
     return birthdays;
   };
 
