@@ -13,7 +13,7 @@ type animationProps = {
 };
 const Container = styled("section")<animationProps>`
   position: relative;
-  margin-top: 7px;
+  margin-top: 0px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -91,21 +91,21 @@ const NextBirthday = ({ birthdays }: any) => {
     getNextBirthday();
   }, [birthdays]);
 
-  const getNextBirthday = async (additor: number = 1) => {
+  const getNextBirthday = (additor: number = 1) => {
     const currentMonth = new Date().getMonth() + 1;
     const comparingMonth = new Date().getMonth() + additor;
     const month =
       comparingMonth >= 10 ? `.${comparingMonth}` : `.0${comparingMonth}`;
-    const nextBirthday = await showBirthdayForMonth(month, birthdays);
-    if (nextBirthday.length === 0) {
+    const nextBirthdays = showBirthdayForMonth(month, birthdays);
+    if (nextBirthdays.length === 0) {
       comparingMonth >= 12
         ? getNextBirthday(additor - 11)
         : getNextBirthday(additor + 1);
     }
-    if (nextBirthday.length > 0) {
+    if (nextBirthdays.length > 0) {
       if (comparingMonth > currentMonth || comparingMonth < currentMonth) {
         let birthdays: any = [];
-        const sortedBirthdays = sortBirthday(nextBirthday);
+        const sortedBirthdays = sortBirthday(nextBirthdays);
         sortedBirthdays.map((birthday: any, index: any) => {
           if (index === 0) {
             birthdays.push(birthday);
@@ -197,6 +197,7 @@ const NextBirthday = ({ birthdays }: any) => {
   };
   return (
     <>
+      <SubHeading>Next Birthday</SubHeading>
       <Container
         onTouchStart={(event: any) => {
           if (nextBirthdays.length > 1) {
@@ -206,7 +207,6 @@ const NextBirthday = ({ birthdays }: any) => {
         onTouchEnd={(event: any) => handleTouch("end", event)}
         animation={animation}
       >
-        <SubHeading>Next Birthday</SubHeading>
         <UserContainer>
           <UserImage src={user} imageWidth={70} />
           <UserDetails>
