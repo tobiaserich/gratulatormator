@@ -13,7 +13,7 @@ type animationProps = {
 };
 const Container = styled("section")<animationProps>`
   position: relative;
-  margin-top: 7px;
+  margin-top: 0px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -100,7 +100,7 @@ const NextBirthday = ({ birthdays }: any) => {
         ? getNextBirthday(additor - 11)
         : getNextBirthday(additor + 1);
     }
-    
+
     if (nextBirthdays.length > 0) {
       if (comparingMonth > currentMonth || comparingMonth < currentMonth) {
         let birthdays: any = [];
@@ -197,6 +197,8 @@ const NextBirthday = ({ birthdays }: any) => {
   };
   return (
     <>
+
+      <SubHeading>Next Birthday</SubHeading>
       <Container
         onTouchStart={(event: any) => {
           if (nextBirthdays.length > 1) {
@@ -206,7 +208,6 @@ const NextBirthday = ({ birthdays }: any) => {
         onTouchEnd={(event: any) => handleTouch("end", event)}
         animation={animation}
       >
-        <SubHeading>Next Birthday</SubHeading>
         <UserContainer>
           <UserImage src={user} imageWidth={70} />
           <UserDetails>
