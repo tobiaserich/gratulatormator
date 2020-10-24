@@ -81,14 +81,15 @@ const UserDetail = styled("p")`
 
 const NextBirthday = ({ birthdays }: any) => {
   const [currentBirthday, setCurrentBirthday] = React.useState(0);
-  const [nextBirthdays, setNextBirthdays] = React.useState();
+  const [nextBirthdays, setNextBirthdays] = React.useState([
+    { firstName: "Tobias", lastName: "Erich", birthday: "24.12.1989" },
+  ]);
   const [animation, setAnimation] = React.useState("initial-state");
   let swipeStart: any;
   let swipeEnd: any;
   React.useEffect(() => {
     getNextBirthday(1, true);
   }, [birthdays]);
-  console.log(birthdays);
   const getNextBirthday = (additor: number = 1, initial = false) => {
     const currentMonth = new Date().getMonth() + 1;
     const comparingMonth = new Date().getMonth() + additor;
@@ -98,13 +99,11 @@ const NextBirthday = ({ birthdays }: any) => {
     if (birthdays[0] === undefined) {
       return;
     }
-    console.log(nextBirthdays);
     if (nextBirthdays.length === 0) {
       comparingMonth >= 12
         ? getNextBirthday(additor - 11, false)
         : getNextBirthday(additor + 1, false);
     }
-
     if (nextBirthdays.length > 0) {
       if (comparingMonth > currentMonth || comparingMonth < currentMonth) {
         let birthdays: any = [];
