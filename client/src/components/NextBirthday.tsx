@@ -81,26 +81,29 @@ const UserDetail = styled("p")`
 
 const NextBirthday = ({ birthdays }: any) => {
   const [currentBirthday, setCurrentBirthday] = React.useState(0);
-  const [nextBirthdays, setNextBirthdays] = React.useState();
+  const [nextBirthdays, setNextBirthdays] = React.useState([
+    { firstName: "Tobias", lastName: "Erich", birthday: "24.12.1989" },
+  ]);
   const [animation, setAnimation] = React.useState("initial-state");
   let swipeStart: any;
   let swipeEnd: any;
   React.useEffect(() => {
     getNextBirthday();
   }, [birthdays]);
-
-  const getNextBirthday = (additor: number = 1) => {
+  const getNextBirthday = (additor: number = 1, initial = false) => {
     const currentMonth = new Date().getMonth() + 1;
     const comparingMonth = new Date().getMonth() + additor;
     const month =
       comparingMonth >= 10 ? `.${comparingMonth}` : `.0${comparingMonth}`;
     const nextBirthdays = showBirthdayForMonth(month, birthdays);
+    if (birthdays[0] === undefined) {
+      return;
+    }
     if (nextBirthdays.length === 0) {
       comparingMonth >= 12
         ? getNextBirthday(additor - 11)
         : getNextBirthday(additor + 1);
     }
-
     if (nextBirthdays.length > 0) {
       if (comparingMonth > currentMonth || comparingMonth < currentMonth) {
         let birthdays: any = [];
@@ -149,7 +152,6 @@ const NextBirthday = ({ birthdays }: any) => {
             }
           }
         });
-
         if (birthdays.length === 0) {
           comparingMonth >= 12
             ? getNextBirthday(additor - 11)
@@ -197,7 +199,6 @@ const NextBirthday = ({ birthdays }: any) => {
   };
   return (
     <>
-
       <SubHeading>Next Birthday</SubHeading>
       <Container
         onTouchStart={(event: any) => {
