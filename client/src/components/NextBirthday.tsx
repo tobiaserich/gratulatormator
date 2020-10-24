@@ -88,23 +88,34 @@ const NextBirthday = ({ birthdays }: any) => {
   let swipeStart: any;
   let swipeEnd: any;
   React.useEffect(() => {
-    getNextBirthday();
+    getNextBirthday(1, true);
   }, [birthdays]);
+<<<<<<< HEAD
   
+=======
+  console.log(birthdays);
+>>>>>>> Solve a recursion error
   const getNextBirthday = (additor: number = 1, initial = false) => {
     const currentMonth = new Date().getMonth() + 1;
     const comparingMonth = new Date().getMonth() + additor;
     const month =
       comparingMonth >= 10 ? `.${comparingMonth}` : `.0${comparingMonth}`;
     const nextBirthdays = showBirthdayForMonth(month, birthdays);
+<<<<<<< HEAD
 
     if (birthdays[0] === undefined) {
       return;
     }
+=======
+    if (birthdays[0] === undefined) {
+      return;
+    }
+    console.log(nextBirthdays);
+>>>>>>> Solve a recursion error
     if (nextBirthdays.length === 0) {
       comparingMonth >= 12
-        ? getNextBirthday(additor - 11)
-        : getNextBirthday(additor + 1);
+        ? getNextBirthday(additor - 11, false)
+        : getNextBirthday(additor + 1, false);
     }
     if (nextBirthdays.length > 0) {
       if (comparingMonth > currentMonth || comparingMonth < currentMonth) {
@@ -154,12 +165,36 @@ const NextBirthday = ({ birthdays }: any) => {
             }
           }
         });
+<<<<<<< HEAD
         if (birthdays.length === 0) {
+=======
+
+        if (birthdays.length === 0 && initial === false) {
+          sortedBirthdays.map((birthday: any) => {
+            const birthdayDay = parseInt(
+              birthday.birthday.split(".").splice(0, 1)
+            );
+            if (!birthdays[0]) {
+              birthdays.push(birthday);
+            } else {
+              const comparingBirthdayDay = parseInt(
+                birthdays[0].birthday.split(".").splice(0, 1)
+              );
+              if (birthdayDay === comparingBirthdayDay) {
+                birthdays.push(birthday);
+              }
+              if (birthdayDay < comparingBirthdayDay) {
+                birthdays = [birthday];
+              }
+            }
+          });
+        }
+        setNextBirthdays(birthdays);
+        if (birthdays.length === 0 && initial) {
+>>>>>>> Solve a recursion error
           comparingMonth >= 12
-            ? getNextBirthday(additor - 11)
-            : getNextBirthday(additor + 1);
-        } else {
-          setNextBirthdays(birthdays);
+            ? getNextBirthday(additor - 11, false)
+            : getNextBirthday(additor + 1, false);
         }
       }
     }
@@ -202,35 +237,41 @@ const NextBirthday = ({ birthdays }: any) => {
   return (
     <>
       <SubHeading>Next Birthday</SubHeading>
-      <Container
-        onTouchStart={(event: any) => {
-          if (nextBirthdays.length > 1) {
-            handleTouch("start", event);
-          }
-        }}
-        onTouchEnd={(event: any) => handleTouch("end", event)}
-        animation={animation}
-      >
-        <UserContainer>
-          <UserImage src={user} imageWidth={70} />
-          <UserDetails>
-            <UserDetail>{`${
-              nextBirthdays
-                ? `${nextBirthdays[currentBirthday].firstName} ${nextBirthdays[currentBirthday].lastName}`
-                : ""
-            }`}</UserDetail>
-            <UserDetail>{`${
-              nextBirthdays ? `${nextBirthdays[currentBirthday].birthday}` : ""
-            }`}</UserDetail>
-            <UserDetail>
-              {nextBirthdays
-                ? checkAge(nextBirthdays[currentBirthday].birthday) + 1
-                : ""}{" "}
-              Years old
-            </UserDetail>
-          </UserDetails>
-        </UserContainer>
-      </Container>
+      {nextBirthdays ? (
+        <Container
+          onTouchStart={(event: any) => {
+            if (nextBirthdays.length > 1) {
+              handleTouch("start", event);
+            }
+          }}
+          onTouchEnd={(event: any) => handleTouch("end", event)}
+          animation={animation}
+        >
+          <UserContainer>
+            <UserImage src={user} imageWidth={70} />
+            <UserDetails>
+              <UserDetail>{`${
+                nextBirthdays
+                  ? `${nextBirthdays[currentBirthday].firstName} ${nextBirthdays[currentBirthday].lastName}`
+                  : ""
+              }`}</UserDetail>
+              <UserDetail>{`${
+                nextBirthdays
+                  ? `${nextBirthdays[currentBirthday].birthday}`
+                  : ""
+              }`}</UserDetail>
+              <UserDetail>
+                {nextBirthdays
+                  ? checkAge(nextBirthdays[currentBirthday].birthday) + 1
+                  : ""}{" "}
+                Years old
+              </UserDetail>
+            </UserDetails>
+          </UserContainer>
+        </Container>
+      ) : (
+        <></>
+      )}
       <SeparationLine distanceBottom={10} />
     </>
   );

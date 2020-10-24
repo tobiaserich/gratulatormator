@@ -8,14 +8,14 @@ import { getAllBirthdays } from "../api/birthdays";
 
 const Main = () => {
   const [animationName, setForwarding] = useTransition("slideIn");
-  const [allBirthdays, setAllBirthdays] = React.useState([
-    { birthday: "01.01.1111" },
-  ]);
+  const [allBirthdays, setAllBirthdays] = React.useState([]);
 
   React.useEffect(() => {
     const getBirthdays = async () => {
       const birthdays = await getAllBirthdays();
-      setAllBirthdays(birthdays);
+      if (birthdays) {
+        setAllBirthdays(birthdays);
+      }
     };
     getBirthdays();
   }, []);
