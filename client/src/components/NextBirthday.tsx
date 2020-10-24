@@ -90,23 +90,17 @@ const NextBirthday = ({ birthdays }: any) => {
   React.useEffect(() => {
     getNextBirthday();
   }, [birthdays]);
-<<<<<<< Updated upstream
 
-  const getNextBirthday = (additor: number = 1) => {
-=======
   const getNextBirthday = (additor: number = 1, initial = false) => {
->>>>>>> Stashed changes
     const currentMonth = new Date().getMonth() + 1;
     const comparingMonth = new Date().getMonth() + additor;
     const month =
       comparingMonth >= 10 ? `.${comparingMonth}` : `.0${comparingMonth}`;
     const nextBirthdays = showBirthdayForMonth(month, birthdays);
-<<<<<<< Updated upstream
-=======
+
     if (birthdays[0] === undefined) {
       return;
     }
->>>>>>> Stashed changes
     if (nextBirthdays.length === 0) {
       comparingMonth >= 12
         ? getNextBirthday(additor - 11)
