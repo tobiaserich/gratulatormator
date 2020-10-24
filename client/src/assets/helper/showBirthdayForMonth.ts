@@ -1,3 +1,4 @@
+
 const showBirthdayForMonth = (month: string, allBirthdays: any) => {
   if (allBirthdays) {
     const birthdays: string[] = [];
