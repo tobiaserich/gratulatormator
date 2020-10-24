@@ -90,7 +90,7 @@ const NextBirthday = ({ birthdays }: any) => {
   React.useEffect(() => {
     getNextBirthday();
   }, [birthdays]);
-
+  
   const getNextBirthday = (additor: number = 1, initial = false) => {
     const currentMonth = new Date().getMonth() + 1;
     const comparingMonth = new Date().getMonth() + additor;
