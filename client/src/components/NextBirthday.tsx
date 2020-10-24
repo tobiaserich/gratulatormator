@@ -90,28 +90,17 @@ const NextBirthday = ({ birthdays }: any) => {
   React.useEffect(() => {
     getNextBirthday(1, true);
   }, [birthdays]);
-<<<<<<< HEAD
-  
-=======
-  console.log(birthdays);
->>>>>>> Solve a recursion error
+
   const getNextBirthday = (additor: number = 1, initial = false) => {
     const currentMonth = new Date().getMonth() + 1;
     const comparingMonth = new Date().getMonth() + additor;
     const month =
       comparingMonth >= 10 ? `.${comparingMonth}` : `.0${comparingMonth}`;
     const nextBirthdays = showBirthdayForMonth(month, birthdays);
-<<<<<<< HEAD
 
     if (birthdays[0] === undefined) {
       return;
     }
-=======
-    if (birthdays[0] === undefined) {
-      return;
-    }
-    console.log(nextBirthdays);
->>>>>>> Solve a recursion error
     if (nextBirthdays.length === 0) {
       comparingMonth >= 12
         ? getNextBirthday(additor - 11, false)
@@ -165,9 +154,6 @@ const NextBirthday = ({ birthdays }: any) => {
             }
           }
         });
-<<<<<<< HEAD
-        if (birthdays.length === 0) {
-=======
 
         if (birthdays.length === 0 && initial === false) {
           sortedBirthdays.map((birthday: any) => {
@@ -191,7 +177,6 @@ const NextBirthday = ({ birthdays }: any) => {
         }
         setNextBirthdays(birthdays);
         if (birthdays.length === 0 && initial) {
->>>>>>> Solve a recursion error
           comparingMonth >= 12
             ? getNextBirthday(additor - 11, false)
             : getNextBirthday(additor + 1, false);
