@@ -1,6 +1,6 @@
-const showBirthdayForMonth = (month: any, allBirthdays: any) => {
+const showBirthdayForMonth = (month: string, allBirthdays: any) => {
   if (allBirthdays) {
-    const birthdays: any = [];
+    const birthdays: string[] = [];
     allBirthdays.map(async (birthday: any, index: any) => {
       const regex = /(\.)\d{2}/;
       const result = birthday["birthday"];

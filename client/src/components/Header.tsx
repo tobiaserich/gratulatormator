@@ -12,22 +12,23 @@ const Container = styled("header")`
 `;
 
 const Header = () => {
-  const [userVerification, setUserVerification] = React.useState(null);
-  React.useEffect(() => {
-    const verificateUser = async () => {
+  const [userVerification, setUserVerification] = React.useState<
+    boolean | null
+  >(null);
+  React.useEffect((): void => {
+    const verificateUser = async (): Promise<void> => {
       const verification = await verifyUser();
       setUserVerification(verification);
     };
     verificateUser();
   }, []);
-  const redirection = () => {
+  const redirection = (): void => {
     if (
       window.location.pathname === "/registration" &&
       userVerification === true
     ) {
       window.location.replace("/main");
     }
-
     if (
       userVerification === false &&
       window.location.pathname !== "/registration"

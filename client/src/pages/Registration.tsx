@@ -19,6 +19,13 @@ type registrationDataType = {
   email: string;
 };
 
+type validationProps = {
+  [index: string]: boolean;
+  username: boolean;
+  email: boolean;
+  password: boolean;
+};
+
 const Title = styled(Heading)`
   font-family: "Arima Madurai";
 `;
@@ -31,33 +38,24 @@ const ButtonContainer = styled("div")`
 `;
 
 const Registration = () => {
-  const [registrationData, setRegistrationData] = React.useState({
+  const [registrationData, setRegistrationData] = React.useState<
+    registrationDataType
+  >({
     username: "",
     email: "",
     password: "",
   });
-  const [validation, setValidation] = React.useState({
+  const [validation, setValidation] = React.useState<validationProps>({
     username: false,
     email: false,
     password: false,
   });
 
-  const [emailUsed, setEmailUsed] = React.useState(false);
-  const [usernameUsed, setUsernameUsed] = React.useState(false);
-  const [isSubmitted, setIsSubmitted] = React.useState(false);
+  const [emailUsed, setEmailUsed] = React.useState<boolean>(false);
+  const [usernameUsed, setUsernameUsed] = React.useState<boolean>(false);
+  const [isSubmitted, setIsSubmitted] = React.useState<boolean>(false);
 
-  const inputValidationPopUp = (
-    <InputValidation>This field is required</InputValidation>
-  );
-
-  const emailInUsePopUp = (
-    <InputValidation>This email is already in use</InputValidation>
-  );
-  const usernameInUsePopUp = (
-    <InputValidation>This username is already in use</InputValidation>
-  );
-
-  const validateInput = () => {
+  const validateInput = (): void => {
     const newValidation = { ...validation };
     newValidation.username = registrationData.username !== "" ? true : false;
     newValidation.email = registrationData.email !== "" ? true : false;
@@ -65,7 +63,9 @@ const Registration = () => {
     setValidation(newValidation);
   };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (
+    event: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     event.preventDefault();
     setIsSubmitted(true);
 
@@ -78,7 +78,7 @@ const Registration = () => {
       } else {
         setEmailUsed(false);
         setUsernameUsed(false);
-        response.map((item: string) => {
+        response.map((item: string): void => {
           if (item === "emailInUse") {
             setEmailUsed(true);
           } else if (item === "usernameInUse") {
@@ -89,24 +89,42 @@ const Registration = () => {
     }
   };
 
-  const handleChange = (pos: any, event: any) => {
+  const handleChange = (
+    pos: string,
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
     const newValue: registrationDataType = { ...registrationData };
     newValue[pos] = event.target.value;
     setRegistrationData(newValue);
   };
 
+  const inputValidationPopUp = (
+    <InputValidation>This field is required</InputValidation>
+  );
+
+  const emailInUsePopUp = (
+    <InputValidation>This email is already in use</InputValidation>
+  );
+  const usernameInUsePopUp = (
+    <InputValidation>This username is already in use</InputValidation>
+  );
+
   return (
     <MainContainer font="Arima Madurai" animation="zoomIn">
       <Title>Registration</Title>
 
-      <Formular onSubmit={(event) => handleSubmit(event)}>
+      <Formular
+        onSubmit={(event: React.FormEvent<HTMLFormElement>): Promise<void> =>
+          handleSubmit(event)
+        }
+      >
         <Label labelWidth="90%">
           Username
           <Input
             type="Text"
             placeholder="Username"
             value={registrationData.username}
-            onChange={(event) => {
+            onChange={(event: React.ChangeEvent<HTMLInputElement>): void => {
               handleChange("username", event);
             }}
           ></Input>
@@ -123,7 +141,7 @@ const Registration = () => {
             type="Text"
             placeholder="Email"
             value={registrationData.email}
-            onChange={(event) => {
+            onChange={(event: React.ChangeEvent<HTMLInputElement>): void => {
               handleChange("email", event);
             }}
           ></Input>
@@ -136,7 +154,7 @@ const Registration = () => {
             type="password"
             placeholder="Password"
             value={registrationData.password}
-            onChange={(event) => {
+            onChange={(event: React.ChangeEvent<HTMLInputElement>): void => {
               handleChange("password", event);
             }}
           ></Input>
@@ -154,7 +172,9 @@ const Registration = () => {
             fontSize={20}
             type="submit"
             onTouchStart={() => ""}
-            onClick={(event) => {
+            onClick={(
+              event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+            ): void => {
               validateInput();
             }}
           >

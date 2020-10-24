@@ -17,12 +17,16 @@ import Registration from "./pages/Registration";
 import { verifyUser } from "./api/user";
 
 function App() {
-  const [currentBackground, setCurrentBackground] = React.useState("landing");
-  const [userVerification, setUserVerification] = React.useState(false);
+  const [currentBackground, setCurrentBackground] = React.useState<string>(
+    "landing"
+  );
+  const [userVerification, setUserVerification] = React.useState<boolean>(
+    false
+  );
 
   const actualPath = window.location.pathname;
   React.useEffect(() => {
-    const verificateUser = async () => {
+    const verificateUser = async (): Promise<void> => {
       const verification = await verifyUser();
       setUserVerification(verification);
     };

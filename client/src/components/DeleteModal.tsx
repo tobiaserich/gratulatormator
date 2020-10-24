@@ -63,7 +63,7 @@ const DeleteModal: React.FC<modalProps> = ({
   id,
   birthdayChildName,
 }) => {
-  const [deleted, setDeleted] = React.useState(false);
+  const [deleted, setDeleted] = React.useState<boolean>(false);
 
   const history = useHistory();
   const handleClose = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -72,19 +72,23 @@ const DeleteModal: React.FC<modalProps> = ({
     }
   };
 
-  const deleteUser = async () => {
+  const deleteUser = async (): Promise<void> => {
     const status = await deleteBirthday(id);
     if (status.code === 200) {
       setDeleted(true);
     }
   };
 
-  const forwarding = () => {
+  const forwarding = (): void => {
     history.push("../main");
   };
 
   return (
-    <Background onClick={(event) => handleClose(event)}>
+    <Background
+      onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
+        handleClose(event)
+      }
+    >
       <ModalContainer>
         <CloseButton
           src={closeButton}
@@ -97,7 +101,7 @@ const DeleteModal: React.FC<modalProps> = ({
               <Button
                 fontFamily="montserrat"
                 fontSize={16}
-                onClick={() => deleteUser()}
+                onClick={(): Promise<void> => deleteUser()}
                 onTouchStart={() => ""}
               >
                 yes
@@ -105,7 +109,7 @@ const DeleteModal: React.FC<modalProps> = ({
               <Button
                 fontFamily="montserrat"
                 fontSize={16}
-                onClick={() => handleVisibility(false)}
+                onClick={(): void => handleVisibility(false)}
                 onTouchStart={() => ""}
               >
                 no
@@ -119,7 +123,7 @@ const DeleteModal: React.FC<modalProps> = ({
               <Button
                 fontFamily="montserrat"
                 fontSize={16}
-                onClick={() => forwarding()}
+                onClick={(): void => forwarding()}
                 onTouchStart={() => ""}
               >
                 Ok

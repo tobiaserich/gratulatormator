@@ -12,15 +12,15 @@ const UserSettings: React.FC<UserInformationProps> = ({
   handleClick,
   birthdayDate,
 }) => {
-  const [birthday, setBirthday] = React.useState("1989-02-02");
-  const [daysToBirthday, setDaysToBirthday] = React.useState(0);
+  const [birthday, setBirthday] = React.useState<string>("1989-02-02");
+  const [daysToBirthday, setDaysToBirthday] = React.useState<number>(0);
 
-  React.useEffect(() => {
+  React.useEffect((): void => {
     setBirthday(birthdayDate);
     const sum = daysUntilBirthday(birthday);
     setDaysToBirthday(sum);
   });
-  const birthdayRearrange = (birthday: string) => {
+  const birthdayRearrange = (birthday: string): number => {
     const birthdayArr = birthday.split(".").reverse();
     const birthdayMonth = new Date(birthdayArr.join("-")).getMonth();
     const birthdayDay = new Date(birthdayArr.join("-")).getDate();
@@ -35,7 +35,7 @@ const UserSettings: React.FC<UserInformationProps> = ({
     return Date.parse(birthdayArr.join("-"));
   };
 
-  const daysUntilBirthday = (birthday: string) => {
+  const daysUntilBirthday = (birthday: string): number => {
     const birthdayConverted = birthdayRearrange(birthday);
     const today = Date.now();
     const daysUntilBDay = Math.ceil((birthdayConverted - today) / 86400000);

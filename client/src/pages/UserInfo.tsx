@@ -13,14 +13,15 @@ import { useParams } from "react-router-dom";
 import { getBirthday } from "../api/birthdays";
 
 const UserInfo = () => {
-  const [activeMenu, setActiveMenu] = React.useState("userInfo");
   const [animationName, setForwarding] = useTransition("slideIn");
-  const [deleteUser, setDeleteUser] = React.useState(false);
-  const [birthdayChildData, setBirthdayChildData]: any = React.useState({});
+  const [activeMenu, setActiveMenu] = React.useState<string>("userInfo");
+  const [deleteUser, setDeleteUser] = React.useState<boolean>(false);
+  const [birthdayChildData, setBirthdayChildData] = React.useState();
+
   let transitionTimer: NodeJS.Timeout;
   const { id } = useParams();
 
-  const getBirthdayChild = async () => {
+  const getBirthdayChild = async (): Promise<object> => {
     const response = await getBirthday(id);
     setBirthdayChildData(response);
     return response;
@@ -53,15 +54,15 @@ const UserInfo = () => {
           <UserSettings
             handleClick={transition}
             handleDeleteUser={setDeleteUser}
-            remindStatus={birthdayChildData["remindMe"]}
-            daysToRemind={birthdayChildData["remindMeDays"]}
+            remindStatus={birthdayChildData!["remindMe"]}
+            daysToRemind={birthdayChildData!["remindMeDays"]}
           />
         );
       case "generateGratulation":
         return (
           <GenerateGratulation
             handleClick={transition}
-            firstName={birthdayChildData.firstName}
+            firstName={birthdayChildData!.firstName}
           />
         );
     }
@@ -71,11 +72,11 @@ const UserInfo = () => {
     <>
       <MainContainer font="Arima Madurai" animation={animationName}>
         <Info topSpacing={20}>
-          {birthdayChildData["firstName"]} {birthdayChildData["lastName"]}
+          {birthdayChildData!["firstName"]} {birthdayChildData!["lastName"]}
         </Info>
         <UserImage src={userImg} imageWidth={150} spacingTop={10} />
-        {birthdayChildData["birthday"]
-          ? component(birthdayChildData["birthday"])
+        {birthdayChildData!["birthday"]
+          ? component(birthdayChildData!["birthday"])
           : component("1.1.0000")}
         <BigButton
           fontFamily="montserrat"
@@ -92,7 +93,9 @@ const UserInfo = () => {
       {deleteUser ? (
         <DeleteModal
           handleVisibility={setDeleteUser}
-          birthdayChildName={`${birthdayChildData["firstName"]} ${birthdayChildData["lastName"]}`}
+          birthdayChildName={`${birthdayChildData!["firstName"]} ${
+            birthdayChildData!["lastName"]
+          }`}
           id={id}
         />
       ) : (

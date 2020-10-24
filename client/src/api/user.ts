@@ -1,4 +1,4 @@
-const registerUser = async (userData: any) => {
+const registerUser = async (userData: any): Promise<any> => {
   const response = await fetch("/user/registration/", {
     method: "POST",
     headers: {
@@ -10,7 +10,7 @@ const registerUser = async (userData: any) => {
   return result;
 };
 
-const loginUser = async (username: string, password: string) => {
+const loginUser = async (username: string, password: string): Promise<any> => {
   const userData = { username, password };
   const response = await fetch("/user/login/", {
     method: "POST",
@@ -24,7 +24,7 @@ const loginUser = async (username: string, password: string) => {
   return result;
 };
 
-const verifyUser = async () => {
+const verifyUser = async (): Promise<any> => {
   const response = await fetch("/user/verify/", {
     method: "GET",
     credentials: "include",

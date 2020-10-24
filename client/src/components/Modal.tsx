@@ -56,9 +56,9 @@ const ButtonBar = styled("div")`
 `;
 
 const Modal = ({ status, toggleModal, forwarding, refresh }: any) => {
-  const [animation, setAnimation] = React.useState("none");
+  const [animation, setAnimation] = React.useState<string>("none");
 
-  const closeModal = () => {
+  const closeModal = (): void => {
     setAnimation("shrink");
     setTimeout(() => {
       toggleModal();
@@ -67,29 +67,36 @@ const Modal = ({ status, toggleModal, forwarding, refresh }: any) => {
 
   const clickOutOfModal = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
+  ): void => {
     if (event.target === event.currentTarget) {
       closeModal();
     }
   };
 
-  const backToMain = (event: any) => {
+  const backToMain = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ): void => {
     forwarding(event, "slideOut", "./main");
   };
 
-  const addNewPerson = () => {
+  const addNewPerson = (): void => {
     refresh();
     closeModal();
   };
 
-  const Buttons = () => {
+  const Buttons = (): JSX.Element | undefined => {
     if (status.code === 200) {
       return (
         <>
-          <Button fontSize={18} onClick={(event: any) => backToMain(event)}>
+          <Button
+            fontSize={18}
+            onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
+              backToMain(event)
+            }
+          >
             Back to main
           </Button>
-          <Button fontSize={18} onClick={() => addNewPerson()}>
+          <Button fontSize={18} onClick={(): void => addNewPerson()}>
             Add person
           </Button>
         </>
@@ -97,7 +104,7 @@ const Modal = ({ status, toggleModal, forwarding, refresh }: any) => {
     } else if (status.code === 409) {
       return (
         <>
-          <Button fontSize={18} onClick={() => closeModal()}>
+          <Button fontSize={18} onClick={(): void => closeModal()}>
             Okay
           </Button>
         </>
@@ -106,13 +113,13 @@ const Modal = ({ status, toggleModal, forwarding, refresh }: any) => {
   };
   return (
     <Container
-      onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
+      onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent>): void =>
         clickOutOfModal(event)
       }
     >
       <ModalContainer animation={animation}>
         <ExitButton
-          onClick={() => {
+          onClick={(): void => {
             closeModal();
           }}
         >

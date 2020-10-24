@@ -17,9 +17,6 @@ type themeProps = {
   theme: any;
 };
 
-type copyButtonProps = {
-  theme: any;
-};
 const CategoryContainer = styled("div")`
   display: flex;
   flex-direction: column;
@@ -55,7 +52,7 @@ const TextBox = styled("textarea")`
   width: 260px;
 `;
 
-const CopyButton = styled("div")<copyButtonProps>`
+const CopyButton = styled("div")<themeProps>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -72,13 +69,13 @@ const GenerateGratulation: React.FC<generateGratulationProps> = ({
   handleClick,
   firstName,
 }) => {
-  const [availableMessages, setAvailableMessages]: any = React.useState(null);
-  const [activeMessage, setActiveMessage] = React.useState("");
-  const [dropdownValue, setDropdownValue] = React.useState("Friend");
-  const items = ["Friend"];
+  const [availableMessages, setAvailableMessages]: any = React.useState([]);
+  const [activeMessage, setActiveMessage] = React.useState<string>("");
+  const [dropdownValue, setDropdownValue] = React.useState<string>("Friend");
+  const items: string[] = ["Friend"];
 
-  React.useEffect(() => {
-    const fetchMessages = async () => {
+  React.useEffect((): void => {
+    const fetchMessages = async (): Promise<void> => {
       const messages = await getAvailableMessages(dropdownValue);
       setAvailableMessages(messages);
       const randomNumber = Math.floor(Math.random() * messages.length);
@@ -90,11 +87,11 @@ const GenerateGratulation: React.FC<generateGratulationProps> = ({
     fetchMessages();
   }, []);
 
-  const individualizeMessage = (message: string) => {
+  const individualizeMessage = (message: string): string => {
     const indidualizedMessage = message.replace(/(\[firstName\])/, firstName);
     return indidualizedMessage;
   };
-  const generateMessage = () => {
+  const generateMessage = (): void => {
     const randomMessage = Math.floor(Math.random() * availableMessages.length);
     const messageWithName = individualizeMessage(
       availableMessages[randomMessage].message
@@ -102,7 +99,9 @@ const GenerateGratulation: React.FC<generateGratulationProps> = ({
     setActiveMessage(messageWithName);
   };
 
-  const handleChange = (event: any) => {
+  const handleChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ): void => {
     setActiveMessage(event.target.value);
   };
 
@@ -115,18 +114,22 @@ const GenerateGratulation: React.FC<generateGratulationProps> = ({
         </Info>
         <RandomizButton
           onTouchStart={() => ""}
-          onClick={() => generateMessage()}
+          onClick={(): void => generateMessage()}
         >
           <img src={randomizeButton} />
         </RandomizButton>
       </CategoryContainer>
       <TextContainer>
         <TextBox
-          onChange={(event: any) => handleChange(event)}
+          onChange={(event: React.ChangeEvent<HTMLTextAreaElement>): void =>
+            handleChange(event)
+          }
           value={activeMessage}
         ></TextBox>
         <CopyButton
-          onClick={() => navigator.clipboard.writeText(activeMessage)}
+          onClick={(): Promise<void> =>
+            navigator.clipboard.writeText(activeMessage)
+          }
           onTouchStart={() => ""}
         >
           <img src={copyButton} />
@@ -134,9 +137,9 @@ const GenerateGratulation: React.FC<generateGratulationProps> = ({
       </TextContainer>
       <Button
         spacingTop={5}
-        onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
-          handleClick(event, "options")
-        }
+        onClick={(
+          event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+        ): void => handleClick(event, "options")}
       >
         back to options
       </Button>

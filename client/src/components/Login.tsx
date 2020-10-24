@@ -49,10 +49,12 @@ const SmallPrint = styled("a")<ThemeProps>`
   color: ${({ theme }) => theme.font};
 `;
 const Login = () => {
-  const [username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [username, setUsername] = React.useState<string>("");
+  const [password, setPassword] = React.useState<string>("");
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (
+    event: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     event.preventDefault();
     const login = await loginUser(username, password);
     if (login === "success") {
@@ -62,14 +64,20 @@ const Login = () => {
 
   return (
     <Container>
-      <form onSubmit={(event) => handleSubmit(event)}>
+      <form
+        onSubmit={(event: React.FormEvent<HTMLFormElement>): Promise<void> =>
+          handleSubmit(event)
+        }
+      >
         <Label>
           Username
           <Input
             name="Username"
             type="text"
             value={username}
-            onChange={(event) => setUsername(event.target.value)}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>): void =>
+              setUsername(event.target.value)
+            }
           />
         </Label>
         <Label>
@@ -78,7 +86,9 @@ const Login = () => {
             name="Password"
             type="password"
             value={password}
-            onChange={(event) => setPassword(event.target.value)}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>): void =>
+              setPassword(event.target.value)
+            }
           />
         </Label>
         <FlexContainer>
