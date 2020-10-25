@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { ArrowDown } from "../components/Arrows";
+
 type DropdownMenuProps = {
   items: string[];
   dropdownValue?: React.Dispatch<React.SetStateAction<string>>;
@@ -9,13 +10,17 @@ type DropdownMenuProps = {
   handleDaysToRemind?: any;
 };
 
+type ThemeProps = {
+  [index: string]: string;
+};
+
 type itemProps = {
   colorChangeOnHover?: boolean;
 };
 
 type dropdownProps = {
   dropdownActive: boolean;
-  theme: any;
+  theme: ThemeProps;
 };
 
 const ModalBackground = styled("div")`

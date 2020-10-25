@@ -5,7 +5,11 @@ import Button from "./Button";
 import Link from "./Link";
 
 type ThemeProps = {
-  theme: any;
+  [index: string]: string;
+};
+
+type SmallPrintProps = {
+  theme: ThemeProps;
 };
 
 const Container = styled("section")`
@@ -41,7 +45,7 @@ const Input = styled("input")`
   margin-top: 3px;
 `;
 
-const SmallPrint = styled("a")<ThemeProps>`
+const SmallPrint = styled("a")<SmallPrintProps>`
   margin: 0;
   margin-top: 20px;
   font-size: 10px;

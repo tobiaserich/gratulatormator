@@ -1,10 +1,14 @@
 import styled from "@emotion/styled";
 
+type ThemeProps = {
+  [index: string]: string;
+};
+
 type infoprops = {
   fontSize?: number;
   topSpacing?: number;
   status?: string;
-  theme: any;
+  theme: ThemeProps;
 };
 
 const Info = styled("div")<infoprops>`

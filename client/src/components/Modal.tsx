@@ -3,8 +3,12 @@ import styled from "@emotion/styled";
 import ExitButton from "./ExitButton";
 import Button from "./Button";
 
-type themeProps = {
-  theme: any;
+type ThemeProps = {
+  [index: string]: string;
+};
+
+type ModalContainerProps = {
+  theme: ThemeProps;
   animation: any;
 };
 
@@ -15,7 +19,8 @@ const Container = styled("div")`
   background-color: rgba(255, 255, 255, 0.2);
   z-index: 50;
 `;
-const ModalContainer = styled("div")<themeProps>`
+
+const ModalContainer = styled("div")<ModalContainerProps>`
   width: 90%;
   height: 6em;
   background-color: ${({ theme }) => theme.primary300};

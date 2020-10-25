@@ -1,8 +1,12 @@
 import styled from "@emotion/styled";
 
+type ThemeProps = {
+  [index: string]: string;
+};
+
 type ArrowDownProps = {
   status?: boolean;
-  theme: any;
+  theme: ThemeProps;
 };
 
 const ArrowDown = styled("div")<ArrowDownProps>`

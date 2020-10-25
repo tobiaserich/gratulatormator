@@ -1,6 +1,11 @@
 import styled from "@emotion/styled";
-type themeProps = {
-  theme: any;
+
+type ThemeProps = {
+  [index: string]: string;
+};
+
+type InputValidationProps = {
+  theme: ThemeProps;
 };
 type InputProps = {
   spacingTop?: string;
@@ -34,7 +39,7 @@ const Input = styled("input")<InputProps>`
   box-shadow: inset 3px 3px 7px -6px ${({ theme }: any) => theme.neutral500};
 `;
 
-const InputValidation = styled("div")<themeProps>`
+const InputValidation = styled("div")<InputValidationProps>`
   margin-top: -10px;
   font-size: 12px;
   color: ${({ theme }) => theme.error200};

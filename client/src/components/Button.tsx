@@ -1,7 +1,10 @@
 import styled from "@emotion/styled";
 
 type ThemeProps = {
-  theme: any;
+  [index: string]: string;
+};
+type ButtonProps = {
+  theme: ThemeProps;
   fontSize?: number;
   fontFamily?: string;
   spacingRight?: number;
@@ -12,7 +15,7 @@ type ThemeProps = {
   forwarding?: any;
 };
 
-const Button = styled("button")<ThemeProps>`
+const Button = styled("button")<ButtonProps>`
   font-family: ${({ fontFamily = "inherit" }) => fontFamily};
   ${({ fontSize }) => (fontSize ? `font-size:${fontSize}px` : "")};
   ${({ weight }) => (weight ? `font-weight:${weight}` : "")}};

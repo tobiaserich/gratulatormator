@@ -11,8 +11,12 @@ type modalProps = {
   birthdayChildName: string;
 };
 
+type ThemeProps = {
+  [index: string]: string;
+};
+
 type modalContainerProps = {
-  theme: any;
+  theme: ThemeProps;
 };
 const Background = styled("div")`
   position: absolute;

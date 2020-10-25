@@ -13,8 +13,12 @@ type generateGratulationProps = {
   firstName: string;
 };
 
-type themeProps = {
-  theme: any;
+type ThemeProps = {
+  [index: string]: string;
+};
+
+type ButtonProps = {
+  theme: ThemeProps;
 };
 
 const CategoryContainer = styled("div")`
@@ -23,7 +27,7 @@ const CategoryContainer = styled("div")`
   align-items: center;
 `;
 
-const RandomizButton = styled("div")<themeProps>`
+const RandomizButton = styled("div")<ButtonProps>`
   display: flex;
   align-content: center;
   justify-content: center;
@@ -52,7 +56,7 @@ const TextBox = styled("textarea")`
   width: 260px;
 `;
 
-const CopyButton = styled("div")<themeProps>`
+const CopyButton = styled("div")<ButtonProps>`
   display: flex;
   justify-content: center;
   align-items: center;
