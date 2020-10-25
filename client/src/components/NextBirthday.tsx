@@ -84,6 +84,7 @@ const NextBirthday = ({ birthdays }: any) => {
   const [nextBirthdays, setNextBirthdays] = React.useState<any>([
     { firstName: "Tobias", lastName: "Erich", birthday: "24.12.1989" },
   ]);
+
   const [animation, setAnimation] = React.useState<string>("initial-state");
   let swipeStart: number;
   let swipeEnd: number;
@@ -96,6 +97,7 @@ const NextBirthday = ({ birthdays }: any) => {
     const month =
       comparingMonth >= 10 ? `.${comparingMonth}` : `.0${comparingMonth}`;
     const nextBirthdays = showBirthdayForMonth(month, birthdays);
+
     if (birthdays[0] === undefined) {
       return;
     }
@@ -227,6 +229,7 @@ const NextBirthday = ({ birthdays }: any) => {
               handleTouch("start", event);
             }
           }}
+
           onTouchEnd={(event: React.TouchEvent<HTMLElement>) =>
             handleTouch("end", event)
           }

@@ -8,8 +8,8 @@ import { getAllBirthdays } from "../api/birthdays";
 
 const Main = () => {
   const [animationName, setForwarding] = useTransition("slideIn");
-  const [allBirthdays, setAllBirthdays] = React.useState<object>([]);
 
+  const [allBirthdays, setAllBirthdays] = React.useState<object>([]);
   React.useEffect((): void => {
     const getBirthdays = async () => {
       const birthdays = await getAllBirthdays();
