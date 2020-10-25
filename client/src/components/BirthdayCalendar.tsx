@@ -1,11 +1,14 @@
 import React from "react";
 import MonthlyBirthdayCalendar from "./MonthlyBirthdayCalendar";
 import sortBirthday from "../assets/helper/sortBirthday";
-
-const BirthdayCalendar = ({ allBirthdays }: any) => {
-  const showBirthday = (month: any) => {
-    const birthdays: any = [];
-    allBirthdays.map(async (birthday: any, index: any) => {
+type mapBirthdayProps = {
+  [index: number]: string;
+  birthday: string;
+};
+const BirthdayCalendar = ({ allBirthdays }: any): JSX.Element => {
+  const showBirthday = (month: string) => {
+    const birthdays: object[] = [];
+    allBirthdays.map(async (birthday: mapBirthdayProps, index: number) => {
       const regex = /(\.)\d{2}/;
       const result = birthday["birthday"];
       const regexCheck = regex.exec(result);

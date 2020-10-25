@@ -11,7 +11,7 @@ type UserSettingsProps = {
   handleClick: any;
   handleDeleteUser: React.Dispatch<React.SetStateAction<boolean>>;
   remindStatus: boolean;
-  daysToRemind: string;
+  daysToRemind: string | undefined;
 };
 
 const InputCheckbox = styled("input")`
@@ -24,19 +24,19 @@ const UserSettings: React.FC<UserSettingsProps> = ({
   remindStatus,
   daysToRemind,
 }) => {
-  const [remindMeDays, setRemindMeDays] = React.useState("xx");
-  const [remindMe, setRemindMe] = React.useState(false);
+  const [remindMeDays, setRemindMeDays] = React.useState<string>("xx");
+  const [remindMe, setRemindMe] = React.useState<boolean>(false);
   const { id } = useParams();
-  React.useEffect(() => {
-    setRemindMeDays(daysToRemind);
+  React.useEffect((): void => {
+    setRemindMeDays(daysToRemind!);
     setRemindMe(remindStatus);
   }, []);
 
-  React.useEffect(() => {
+  React.useEffect((): void => {
     updateRemindMeDays(id, remindMeDays);
   }, [remindMeDays]);
 
-  const generateDaysDropdownItems = () => {
+  const generateDaysDropdownItems = (): string[] => {
     let items: string[] = new Array(30).fill("");
     items.forEach((item, index) => {
       const newValue =
@@ -50,7 +50,7 @@ const UserSettings: React.FC<UserSettingsProps> = ({
     updateRemindMe(id, event.currentTarget.checked);
   };
 
-  const handleDaysToRemindChange = (days: string) => {
+  const handleDaysToRemindChange = (days: string): void => {
     setRemindMeDays(days);
   };
 
@@ -71,7 +71,9 @@ const UserSettings: React.FC<UserSettingsProps> = ({
           <InputCheckbox
             type="checkbox"
             checked={remindMe}
-            onChange={(event) => handleRemindChange(event)}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>): void =>
+              handleRemindChange(event)
+            }
           />
           remind me
         </RemindMeContainer>
@@ -79,7 +81,9 @@ const UserSettings: React.FC<UserSettingsProps> = ({
       <Button
         fontSize={18}
         weight="bold"
-        onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        onClick={(
+          event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+        ): void => {
           handleClick(event, "generateGratulation");
         }}
         onTouchStart={() => ""}
@@ -91,7 +95,7 @@ const UserSettings: React.FC<UserSettingsProps> = ({
         borderColor="red"
         spacingTop={50}
         buttonWidth={110}
-        onClick={() => {
+        onClick={(): void => {
           handleDeleteUser(true);
         }}
         onTouchStart={() => ""}
@@ -102,7 +106,9 @@ const UserSettings: React.FC<UserSettingsProps> = ({
       <Button
         spacingTop={5}
         buttonWidth={110}
-        onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        onClick={(
+          event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+        ): void => {
           handleClick(event, "userInfo");
         }}
         onTouchStart={() => ""}

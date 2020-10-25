@@ -31,7 +31,7 @@ const UserImage: React.FC<userImageProps> = ({
   imageWidth,
   spacingTop,
 }) => {
-  const [imgLoaded, setImgLoaded] = React.useState(false);
+  const [imgLoaded, setImgLoaded] = React.useState<boolean>(false);
 
   return (
     <>

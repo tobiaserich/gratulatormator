@@ -1,4 +1,4 @@
-const addBirthday = async (birthdayData: any) => {
+const addBirthday = async (birthdayData: object): Promise<string> => {
   const response = await fetch("/birthday/add/", {
     method: "POST",
     headers: {
@@ -11,7 +11,7 @@ const addBirthday = async (birthdayData: any) => {
   return result;
 };
 
-const getAllBirthdays = async () => {
+const getAllBirthdays = async (): Promise<object> => {
   const response = await fetch("/birthday/allBirthdays/", {
     method: "GET",
     credentials: "include",
@@ -20,7 +20,7 @@ const getAllBirthdays = async () => {
   return result;
 };
 
-const getBirthday = async (id: any) => {
+const getBirthday = async (id: string): Promise<object> => {
   const response = await fetch(`/birthday/singleBirthday/${id}`, {
     method: "GET",
     credentials: "include",
@@ -29,7 +29,7 @@ const getBirthday = async (id: any) => {
   return result;
 };
 
-const deleteBirthday = async (id: string) => {
+const deleteBirthday = async (id: string): Promise<any> => {
   const response = await fetch(`/birthday/deleteSingleBirthday/${id}`, {
     method: "DELETE",
     credentials: "include",
@@ -38,7 +38,10 @@ const deleteBirthday = async (id: string) => {
   return result;
 };
 
-const updateRemindMe = async (id: string, remindMeValue: boolean) => {
+const updateRemindMe = async (
+  id: string,
+  remindMeValue: boolean
+): Promise<void> => {
   const response = await fetch("/birthday/updateRemindMe/", {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
@@ -46,7 +49,10 @@ const updateRemindMe = async (id: string, remindMeValue: boolean) => {
   });
 };
 
-const updateRemindMeDays = async (id: string, remindMeDays: string) => {
+const updateRemindMeDays = async (
+  id: string,
+  remindMeDays: string
+): Promise<void> => {
   const response = fetch("/birthday/updateRemindMeDays/", {
     method: "PUT",
     headers: { "Content-Type": "application/json" },

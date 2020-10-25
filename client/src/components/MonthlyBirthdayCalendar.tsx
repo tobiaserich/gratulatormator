@@ -108,9 +108,12 @@ const Table = styled("table")<tableProps>`
   
 `;
 const MonthlyBirthdayCalendar = ({ month, birthdayChildren }: MonthProps) => {
-  const [notInitialRendering, setNotInitialRendering] = React.useState(false);
-  const [animation, setAnimation] = React.useState("");
-  const handleAnimation = () => {
+  const [notInitialRendering, setNotInitialRendering] = React.useState<boolean>(
+    false
+  );
+  const [animation, setAnimation] = React.useState<string>("");
+
+  const handleAnimation = (): void => {
     switch (animation) {
       case "open":
         setAnimation("close");
@@ -126,7 +129,7 @@ const MonthlyBirthdayCalendar = ({ month, birthdayChildren }: MonthProps) => {
 
   return (
     <Container
-      onClick={() => {
+      onClick={(): void => {
         setNotInitialRendering(true);
         handleAnimation();
       }}
@@ -137,7 +140,7 @@ const MonthlyBirthdayCalendar = ({ month, birthdayChildren }: MonthProps) => {
       </Month>
       <Table animation={animation}>
         <tbody>
-          {birthdayChildren.map((birthdayChild: any) => {
+          {birthdayChildren!.map((birthdayChild: any) => {
             return (
               <>
                 <Person key={birthdayChild["_id"]}>

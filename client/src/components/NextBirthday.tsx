@@ -80,18 +80,18 @@ const UserDetail = styled("p")`
 `;
 
 const NextBirthday = ({ birthdays }: any) => {
-  const [currentBirthday, setCurrentBirthday] = React.useState(0);
-  const [nextBirthdays, setNextBirthdays] = React.useState([
+  const [currentBirthday, setCurrentBirthday] = React.useState<number>(0);
+  const [nextBirthdays, setNextBirthdays] = React.useState<any>([
     { firstName: "Tobias", lastName: "Erich", birthday: "24.12.1989" },
   ]);
-  const [animation, setAnimation] = React.useState("initial-state");
-  let swipeStart: any;
-  let swipeEnd: any;
-  React.useEffect(() => {
+
+  const [animation, setAnimation] = React.useState<string>("initial-state");
+  let swipeStart: number;
+  let swipeEnd: number;
+  React.useEffect((): void => {
     getNextBirthday(1, true);
   }, [birthdays]);
-
-  const getNextBirthday = (additor: number = 1, initial = false) => {
+  const getNextBirthday = (additor: number = 1, initial: boolean = false) => {
     const currentMonth = new Date().getMonth() + 1;
     const comparingMonth = new Date().getMonth() + additor;
     const month =
@@ -101,12 +101,12 @@ const NextBirthday = ({ birthdays }: any) => {
     if (birthdays[0] === undefined) {
       return;
     }
-    if (nextBirthdays.length === 0) {
+    if (nextBirthdays!.length === 0) {
       comparingMonth >= 12
         ? getNextBirthday(additor - 11, false)
         : getNextBirthday(additor + 1, false);
     }
-    if (nextBirthdays.length > 0) {
+    if (nextBirthdays!.length > 0) {
       if (comparingMonth > currentMonth || comparingMonth < currentMonth) {
         let birthdays: any = [];
         const sortedBirthdays = sortBirthday(nextBirthdays);
@@ -129,7 +129,7 @@ const NextBirthday = ({ birthdays }: any) => {
         });
         setNextBirthdays(birthdays);
       } else {
-        let birthdays: any = [];
+        let birthdays: any[] = [];
         const sortedBirthdays = sortBirthday(nextBirthdays);
         const currentDay = new Date().getDate();
 
@@ -185,7 +185,7 @@ const NextBirthday = ({ birthdays }: any) => {
     }
   };
 
-  const handleTouch = (pos: any, event: any) => {
+  const handleTouch = (pos: string, event: React.TouchEvent<HTMLElement>) => {
     if (pos === "start") {
       swipeStart = event.changedTouches[0].clientX;
     }
@@ -224,12 +224,15 @@ const NextBirthday = ({ birthdays }: any) => {
       <SubHeading>Next Birthday</SubHeading>
       {nextBirthdays ? (
         <Container
-          onTouchStart={(event: any) => {
+          onTouchStart={(event: React.TouchEvent<HTMLElement>) => {
             if (nextBirthdays.length > 1) {
               handleTouch("start", event);
             }
           }}
-          onTouchEnd={(event: any) => handleTouch("end", event)}
+
+          onTouchEnd={(event: React.TouchEvent<HTMLElement>) =>
+            handleTouch("end", event)
+          }
           animation={animation}
         >
           <UserContainer>

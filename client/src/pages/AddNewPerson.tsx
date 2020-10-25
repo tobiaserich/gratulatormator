@@ -23,10 +23,6 @@ type validationDataProps = {
   [index: string]: boolean;
 };
 
-type themeProps = {
-  theme: any;
-};
-
 const ImageLabel = styled("label")`
   display: flex;
   flex-direction: column;
@@ -43,12 +39,14 @@ const InputCheckbox = styled("input")`
 
 const AddNewPerson = () => {
   const [animationName, setForwarding] = useTransition("slideIn");
-  const [submitResponse, setSubmitResponse] = React.useState(null);
-  const [showModal, setShowModal] = React.useState(false);
-  const [firstName, setFirstName] = React.useState("");
-  const [lastName, setLastName] = React.useState("");
-  const [birthday, setBirthday] = React.useState("");
-  const [remindMe, setRemindMe] = React.useState(false);
+  const [submitResponse, setSubmitResponse] = React.useState<null | string>(
+    null
+  );
+  const [showModal, setShowModal] = React.useState<boolean>(false);
+  const [firstName, setFirstName] = React.useState<string>("");
+  const [lastName, setLastName] = React.useState<string>("");
+  const [birthday, setBirthday] = React.useState<string>("");
+  const [remindMe, setRemindMe] = React.useState<boolean>(false);
 
   const [validationCheck, setValidationCheck] = React.useState<
     validationDataProps
@@ -58,20 +56,20 @@ const AddNewPerson = () => {
     birthday: false,
   });
 
-  const [submit, setSubmit] = React.useState(false);
+  const [submit, setSubmit] = React.useState<boolean>(false);
 
   const inputValidationPopUp = (
     <InputValidation>This field is required</InputValidation>
   );
 
-  const refreshUserData = () => {
+  const refreshUserData = (): void => {
     setFirstName("");
     setLastName("");
     setBirthday("");
     setRemindMe(false);
   };
 
-  const inputValidation = () => {
+  const inputValidation = (): void => {
     const birthdayVerification = /^([0-9]{2}).([0-9]{2}).([0-9]{4})/;
     const validationData: validationDataProps = { ...validationCheck };
 
@@ -96,7 +94,9 @@ const AddNewPerson = () => {
     setValidationCheck(validationData);
   };
 
-  const handleSubmit = async (event: any) => {
+  const handleSubmit = async (
+    event: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     event.preventDefault();
     setSubmit(true);
     if (
@@ -130,7 +130,11 @@ const AddNewPerson = () => {
         <></>
       )}
       <SubHeading>Add New Person</SubHeading>
-      <Formular onSubmit={(event) => handleSubmit(event)}>
+      <Formular
+        onSubmit={(event: React.FormEvent<HTMLFormElement>): Promise<void> =>
+          handleSubmit(event)
+        }
+      >
         <ImageLabel>
           <UserImage src={user} imageWidth={120} />
           Add image
@@ -146,7 +150,9 @@ const AddNewPerson = () => {
             type="text"
             value={firstName}
             placeholder="first name"
-            onChange={(event) => setFirstName(event.currentTarget.value)}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>): void =>
+              setFirstName(event.currentTarget.value)
+            }
           />
         </Label>
 
@@ -162,7 +168,9 @@ const AddNewPerson = () => {
             type="text"
             value={lastName}
             placeholder="last name"
-            onChange={(event) => setLastName(event.currentTarget.value)}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>): void =>
+              setLastName(event.currentTarget.value)
+            }
           />
         </Label>
         {!validationCheck["lastName"]
@@ -177,7 +185,9 @@ const AddNewPerson = () => {
             maxLength={10}
             value={birthday}
             placeholder="dd.mm.yyyy"
-            onChange={(event) => setBirthday(event.currentTarget.value)}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>): void =>
+              setBirthday(event.currentTarget.value)
+            }
           />
         </Label>
         {!validationCheck["birthday"]
@@ -192,7 +202,9 @@ const AddNewPerson = () => {
             <InputCheckbox
               type="checkbox"
               checked={remindMe}
-              onChange={(event) => setRemindMe(event.currentTarget.checked)}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>): void =>
+                setRemindMe(event.currentTarget.checked)
+              }
             />
           </RemindMeContainer>
         </Label>

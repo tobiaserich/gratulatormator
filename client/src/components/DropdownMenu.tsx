@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { ArrowDown } from "../components/Arrows";
+
 type DropdownMenuProps = {
   items: string[];
   dropdownValue?: React.Dispatch<React.SetStateAction<string>>;
@@ -9,13 +10,17 @@ type DropdownMenuProps = {
   handleDaysToRemind?: any;
 };
 
+type ThemeProps = {
+  [index: string]: string;
+};
+
 type itemProps = {
   colorChangeOnHover?: boolean;
 };
 
 type dropdownProps = {
   dropdownActive: boolean;
-  theme: any;
+  theme: ThemeProps;
 };
 
 const ModalBackground = styled("div")`
@@ -68,37 +73,37 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
   daysToRemind = "0",
   handleDaysToRemind,
 }) => {
-  const [select, setSelect] = React.useState(items[0]);
-  const [openDropdown, setOpenDropdown] = React.useState(false);
-  const [dropdownStatus, setDropdownStatus] = React.useState(true);
+  const [select, setSelect] = React.useState<string>(items[0]);
+  const [openDropdown, setOpenDropdown] = React.useState<boolean>(false);
+  const [dropdownStatus, setDropdownStatus] = React.useState<boolean>(true);
 
-  React.useEffect(() => {
+  React.useEffect((): void => {
     setDropdownStatus(status);
   }, [status]);
 
-  React.useEffect(() => {
+  React.useEffect((): void => {
     if (handleDaysToRemind) {
       const remindDays = parseInt(daysToRemind) - 1;
       setSelect(items[remindDays]);
     }
   }, []);
 
-  const openDropdownMenu = () => {
+  const openDropdownMenu = (): void => {
     if (dropdownStatus) {
       setOpenDropdown(true);
     }
   };
 
-  const closeDropdownMenu = () => {
+  const closeDropdownMenu = (): void => {
     setOpenDropdown(false);
   };
 
-  const showItems = () => {
+  const showItems = (): JSX.Element[] => {
     return items.map((item, index) => {
       return (
         <Item
           key={item}
-          onClick={() => {
+          onClick={(): void => {
             setSelect(item);
             closeDropdownMenu();
             if (dropdownValue) {
@@ -122,7 +127,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
             showItems()
           ) : (
             <Item
-              onClick={() => {
+              onClick={(): void => {
                 openDropdownMenu();
               }}
               colorChangeOnHover={false}
@@ -133,12 +138,12 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
         </Dropdown>
       </Container>
       {!openDropdown ? (
-        <ArrowDown onClick={() => openDropdownMenu()} status={status} />
+        <ArrowDown onClick={(): void => openDropdownMenu()} status={status} />
       ) : (
         ""
       )}
       {openDropdown ? (
-        <ModalBackground onClick={() => closeDropdownMenu()} />
+        <ModalBackground onClick={(): void => closeDropdownMenu()} />
       ) : (
         ""
       )}

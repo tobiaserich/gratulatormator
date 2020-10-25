@@ -1,4 +1,4 @@
-const getAvailableMessages = async (category: string) => {
+const getAvailableMessages = async (category: string): Promise<any> => {
   const response = await fetch(`/messages/allAvailable/${category}`, {
     method: "GET",
     credentials: "include",

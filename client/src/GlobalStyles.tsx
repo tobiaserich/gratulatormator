@@ -1,9 +1,12 @@
 import React from "react";
 import { Global, css } from "@emotion/core";
 
+type ThemeProps = {
+  [index: string]: string;
+};
 type GlobalStylesProps = {
   bg: string;
-  theme?: any;
+  theme?: ThemeProps;
 };
 function GlobalStyles(props: GlobalStylesProps) {
   const background = props.bg === "landing" ? "unicolor" : "";
@@ -23,7 +26,9 @@ function GlobalStyles(props: GlobalStylesProps) {
           background: ${
             background === "unicolor"
               ? ""
-              : `linear-gradient(${props.theme.primary300} 0%, ${props.theme.primary200} 70%)`
+              : `linear-gradient(${props.theme!.primary300} 0%, ${
+                  props.theme!.primary200
+                } 70%)`
           };
         }
         }

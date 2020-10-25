@@ -1,16 +1,19 @@
 import styled from "@emotion/styled";
 
 type ThemeProps = {
-  theme: any;
+  [index: string]: string;
+};
+type ButtonProps = {
+  theme: ThemeProps;
   fontSize?: number;
   fontFamily?: string;
   spacingTop?: number;
 };
 
-const BigButton = styled("button")<ThemeProps>`
+const BigButton = styled("button")<ButtonProps>`
   font-family: ${({ fontFamily = "inherit" }) => fontFamily};
   font-size: ${({ fontSize }) => fontSize}px};
-  background-color: ${({ theme }) => theme.action200};
+  background-color: ${({ theme }) => theme["action200"]};
   color:white;
   border:none;
   padding:5px 20px 5px 20px;

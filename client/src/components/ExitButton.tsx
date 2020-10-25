@@ -1,10 +1,14 @@
 import styled from "@emotion/styled";
 
-type themeProps = {
-  theme: any;
+type ThemeProps = {
+  [index: string]: string;
 };
 
-const ExitButton = styled("button")<themeProps>`
+type ExitButtonProps = {
+  theme: ThemeProps;
+};
+
+const ExitButton = styled("button")<ExitButtonProps>`
   height: 30px;
   width: 30px;
   position: absolute;

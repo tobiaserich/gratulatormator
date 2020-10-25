@@ -16,6 +16,7 @@ import UserInfo from "./pages/UserInfo";
 import Registration from "./pages/Registration";
 import { verifyUser } from "./api/user";
 
+
 function App(): JSX.Element {
   const [currentBackground, setCurrentBackground] = React.useState<string>(
     "landing"
@@ -24,8 +25,8 @@ function App(): JSX.Element {
     false
   );
 
-  const currentPath = window.location.pathname;
 
+  const currentPath = window.location.pathname;
   //Check the current path for background color adjustment.
   //Also check if the user is logged in, to forward him to the user section.
   React.useEffect((): void => {
