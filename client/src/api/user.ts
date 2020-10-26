@@ -1,4 +1,4 @@
-const registerUser = async (userData: any): Promise<any> => {
+const registerUser = async (userData: object): Promise<string[]> => {
   const response = await fetch("/user/registration/", {
     method: "POST",
     headers: {

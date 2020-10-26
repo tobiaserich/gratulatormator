@@ -16,7 +16,6 @@ import UserInfo from "./pages/UserInfo";
 import Registration from "./pages/Registration";
 import { verifyUser } from "./api/user";
 
-
 function App(): JSX.Element {
   const [currentBackground, setCurrentBackground] = React.useState<string>(
     "landing"
