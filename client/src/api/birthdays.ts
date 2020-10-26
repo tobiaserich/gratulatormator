@@ -1,3 +1,4 @@
+
 type getBirthdayProps = {
   [index: string]: string | boolean;
 };
@@ -23,6 +24,7 @@ const getAllBirthdays = async (): Promise<object> => {
   const result = await response.json();
   return result;
 };
+
 
 const getBirthday = async (id: string): Promise<getBirthdayProps> => {
   const response = await fetch(`/birthday/singleBirthday/${id}`, {
