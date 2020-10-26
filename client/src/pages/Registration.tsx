@@ -38,6 +38,9 @@ const ButtonContainer = styled("div")`
 `;
 
 const Registration = () => {
+  const [emailUsed, setEmailUsed] = React.useState<boolean>(false);
+  const [usernameUsed, setUsernameUsed] = React.useState<boolean>(false);
+  const [isSubmitted, setIsSubmitted] = React.useState<boolean>(false);
   const [registrationData, setRegistrationData] = React.useState<
     registrationDataType
   >({
@@ -50,11 +53,7 @@ const Registration = () => {
     email: false,
     password: false,
   });
-
-  const [emailUsed, setEmailUsed] = React.useState<boolean>(false);
-  const [usernameUsed, setUsernameUsed] = React.useState<boolean>(false);
-  const [isSubmitted, setIsSubmitted] = React.useState<boolean>(false);
-
+  //checks if every input field is filled
   const validateInput = (): void => {
     const newValidation = { ...validation };
     newValidation.username = registrationData.username !== "" ? true : false;
@@ -98,6 +97,7 @@ const Registration = () => {
     setRegistrationData(newValue);
   };
 
+  //set the popups to show them after conditional comparing of the associated state in the return
   const inputValidationPopUp = (
     <InputValidation>This field is required</InputValidation>
   );

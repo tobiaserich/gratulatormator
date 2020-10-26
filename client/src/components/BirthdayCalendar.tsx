@@ -1,16 +1,19 @@
 import React from "react";
 import MonthlyBirthdayCalendar from "./MonthlyBirthdayCalendar";
 import sortBirthday from "../assets/helper/sortBirthday";
+
 type mapBirthdayProps = {
   [index: number]: string;
   birthday: string;
 };
+
 const BirthdayCalendar = ({ allBirthdays }: any): JSX.Element => {
-  const showBirthday = (month: string) => {
+  const showBirthdays = (month: string) => {
     const birthdays: object[] = [];
     allBirthdays.map(async (birthday: mapBirthdayProps, index: number) => {
       const regex = /(\.)\d{2}/;
       const result = birthday["birthday"];
+      // check if the month in the birthday is the same as in the function call.
       const regexCheck = regex.exec(result);
       if (regexCheck![0] !== null) {
         if (regexCheck![0] === month) {
@@ -19,107 +22,106 @@ const BirthdayCalendar = ({ allBirthdays }: any): JSX.Element => {
       }
     });
 
-    const sortedBirthdays = sortBirthday(birthdays);
-    return sortedBirthdays;
+    return sortBirthday(birthdays);
   };
 
   return (
     <>
-      {showBirthday(".01").length > 0 ? (
+      {showBirthdays(".01").length > 0 ? (
         <MonthlyBirthdayCalendar
           month="January"
-          birthdayChildren={showBirthday(".01")}
+          birthdayChildren={showBirthdays(".01")}
         />
       ) : (
         <></>
       )}
 
-      {showBirthday(".02").length > 0 ? (
+      {showBirthdays(".02").length > 0 ? (
         <MonthlyBirthdayCalendar
           month="February"
-          birthdayChildren={showBirthday(".02")}
+          birthdayChildren={showBirthdays(".02")}
         />
       ) : (
         <></>
       )}
 
-      {showBirthday(".03").length > 0 ? (
+      {showBirthdays(".03").length > 0 ? (
         <MonthlyBirthdayCalendar
           month="March"
-          birthdayChildren={showBirthday(".03")}
+          birthdayChildren={showBirthdays(".03")}
         />
       ) : (
         <></>
       )}
 
-      {showBirthday(".04").length > 0 ? (
+      {showBirthdays(".04").length > 0 ? (
         <MonthlyBirthdayCalendar
           month="April"
-          birthdayChildren={showBirthday(".04")}
+          birthdayChildren={showBirthdays(".04")}
         />
       ) : (
         <></>
       )}
-      {showBirthday(".05").length > 0 ? (
+      {showBirthdays(".05").length > 0 ? (
         <MonthlyBirthdayCalendar
           month="May"
-          birthdayChildren={showBirthday(".05")}
+          birthdayChildren={showBirthdays(".05")}
         />
       ) : (
         <></>
       )}
-      {showBirthday(".06").length > 0 ? (
+      {showBirthdays(".06").length > 0 ? (
         <MonthlyBirthdayCalendar
           month="June"
-          birthdayChildren={showBirthday(".06")}
+          birthdayChildren={showBirthdays(".06")}
         />
       ) : (
         <></>
       )}
-      {showBirthday(".07").length > 0 ? (
+      {showBirthdays(".07").length > 0 ? (
         <MonthlyBirthdayCalendar
           month="July"
-          birthdayChildren={showBirthday(".07")}
+          birthdayChildren={showBirthdays(".07")}
         />
       ) : (
         <></>
       )}
-      {showBirthday(".08").length > 0 ? (
+      {showBirthdays(".08").length > 0 ? (
         <MonthlyBirthdayCalendar
           month="August"
-          birthdayChildren={showBirthday(".08")}
+          birthdayChildren={showBirthdays(".08")}
         />
       ) : (
         <></>
       )}
-      {showBirthday(".09").length > 0 ? (
+      {showBirthdays(".09").length > 0 ? (
         <MonthlyBirthdayCalendar
           month="September"
-          birthdayChildren={showBirthday(".09")}
+          birthdayChildren={showBirthdays(".09")}
         />
       ) : (
         <></>
       )}
-      {showBirthday(".10").length > 0 ? (
+      {showBirthdays(".10").length > 0 ? (
         <MonthlyBirthdayCalendar
           month="October"
-          birthdayChildren={showBirthday(".10")}
+          birthdayChildren={showBirthdays(".10")}
         />
       ) : (
         <></>
       )}
-      {showBirthday(".11").length > 0 ? (
+      {showBirthdays(".11").length > 0 ? (
         <MonthlyBirthdayCalendar
           month="November"
-          birthdayChildren={showBirthday(".11")}
+          birthdayChildren={showBirthdays(".11")}
         />
       ) : (
         <></>
       )}
-      {showBirthday(".12").length > 0 ? (
+      {showBirthdays(".12").length > 0 ? (
         <MonthlyBirthdayCalendar
           month="December"
-          birthdayChildren={showBirthday(".12")}
+          birthdayChildren={showBirthdays(".12")}
         />
       ) : (
         <></>

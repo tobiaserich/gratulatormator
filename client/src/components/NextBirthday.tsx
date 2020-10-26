@@ -91,6 +91,8 @@ const NextBirthday = ({ birthdays }: any) => {
   React.useEffect((): void => {
     getNextBirthday(1, true);
   }, [birthdays]);
+
+  //recursion function to determine the next birthday child
   const getNextBirthday = (additor: number = 1, initial: boolean = false) => {
     const currentMonth = new Date().getMonth() + 1;
     const comparingMonth = new Date().getMonth() + additor;
@@ -98,15 +100,20 @@ const NextBirthday = ({ birthdays }: any) => {
       comparingMonth >= 10 ? `.${comparingMonth}` : `.0${comparingMonth}`;
     const nextBirthdays = showBirthdayForMonth(month, birthdays);
 
+    //do nothing if there are no data
     if (birthdays[0] === undefined) {
       return;
     }
+
+    //call the function again if there is no birthday in the current+additor month
     if (nextBirthdays!.length === 0) {
       comparingMonth >= 12
         ? getNextBirthday(additor - 11, false)
         : getNextBirthday(additor + 1, false);
     }
+
     if (nextBirthdays!.length > 0) {
+      //sorts and filters the next birthday, if the comparing month is bigger than the current month
       if (comparingMonth > currentMonth || comparingMonth < currentMonth) {
         let birthdays: any = [];
         const sortedBirthdays = sortBirthday(nextBirthdays);
@@ -129,6 +136,7 @@ const NextBirthday = ({ birthdays }: any) => {
         });
         setNextBirthdays(birthdays);
       } else {
+        // if there is a birthday in the future of the current month, this part is used
         let birthdays: any[] = [];
         const sortedBirthdays = sortBirthday(nextBirthdays);
         const currentDay = new Date().getDate();
@@ -154,7 +162,8 @@ const NextBirthday = ({ birthdays }: any) => {
             }
           }
         });
-
+        // if there is only a birthday in the past of the current month and no birthday else this part is called
+        // to determine the next birthday
         if (birthdays.length === 0 && initial === false) {
           sortedBirthdays.map((birthday: any) => {
             const birthdayDay = parseInt(
@@ -184,7 +193,7 @@ const NextBirthday = ({ birthdays }: any) => {
       }
     }
   };
-
+  //calculates the swipe distance
   const handleTouch = (pos: string, event: React.TouchEvent<HTMLElement>) => {
     if (pos === "start") {
       swipeStart = event.changedTouches[0].clientX;
@@ -194,7 +203,7 @@ const NextBirthday = ({ birthdays }: any) => {
       calcSwipe();
     }
   };
-
+  //set the swipe direction after calculating the direction + a minimum distance of swipeLength
   const calcSwipe = () => {
     const swipeLength = 25;
     if (swipeStart > swipeEnd + swipeLength) {
@@ -229,7 +238,6 @@ const NextBirthday = ({ birthdays }: any) => {
               handleTouch("start", event);
             }
           }}
-
           onTouchEnd={(event: React.TouchEvent<HTMLElement>) =>
             handleTouch("end", event)
           }

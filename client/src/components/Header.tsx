@@ -15,6 +15,8 @@ const Header = () => {
   const [userVerification, setUserVerification] = React.useState<
     boolean | null
   >(null);
+
+  // verificate if user is logged in and cookie is valid
   React.useEffect((): void => {
     const verificateUser = async (): Promise<void> => {
       const verification = await verifyUser();
@@ -22,6 +24,8 @@ const Header = () => {
     };
     verificateUser();
   }, []);
+
+  //Forwarding of the user depending on the login verification
   const redirection = (): void => {
     if (
       window.location.pathname === "/registration" &&

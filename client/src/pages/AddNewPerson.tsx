@@ -47,7 +47,7 @@ const AddNewPerson = () => {
   const [lastName, setLastName] = React.useState<string>("");
   const [birthday, setBirthday] = React.useState<string>("");
   const [remindMe, setRemindMe] = React.useState<boolean>(false);
-
+  const [submit, setSubmit] = React.useState<boolean>(false);
   const [validationCheck, setValidationCheck] = React.useState<
     validationDataProps
   >({
@@ -55,8 +55,6 @@ const AddNewPerson = () => {
     lastName: false,
     birthday: false,
   });
-
-  const [submit, setSubmit] = React.useState<boolean>(false);
 
   const inputValidationPopUp = (
     <InputValidation>This field is required</InputValidation>
@@ -68,7 +66,7 @@ const AddNewPerson = () => {
     setBirthday("");
     setRemindMe(false);
   };
-
+  //validates the input data and the correct format of the birthday
   const inputValidation = (): void => {
     const birthdayVerification = /^([0-9]{2}).([0-9]{2}).([0-9]{4})/;
     const validationData: validationDataProps = { ...validationCheck };
@@ -93,7 +91,7 @@ const AddNewPerson = () => {
 
     setValidationCheck(validationData);
   };
-
+  // checks if all data pass the validation and send it to the database
   const handleSubmit = async (
     event: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {

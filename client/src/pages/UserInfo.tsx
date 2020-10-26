@@ -16,21 +16,24 @@ const UserInfo = () => {
   const [animationName, setForwarding] = useTransition("slideIn");
   const [activeMenu, setActiveMenu] = React.useState<string>("userInfo");
   const [deleteUser, setDeleteUser] = React.useState<boolean>(false);
-  const [birthdayChildData, setBirthdayChildData] = React.useState();
+  const [birthdayChildData, setBirthdayChildData] = React.useState<any>([]);
 
   let transitionTimer: NodeJS.Timeout;
   const { id } = useParams();
 
-  const getBirthdayChild = async (): Promise<object> => {
+  // fetch data function
+  const getBirthdayChild = async (): Promise<any> => {
     const response = await getBirthday(id);
     setBirthdayChildData(response);
     return response;
   };
 
+  // call fetch function
   React.useEffect(() => {
     getBirthdayChild();
   }, []);
 
+  //transition function for changing the menu item
   const transition = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     target: string
@@ -43,7 +46,7 @@ const UserInfo = () => {
     }, 250);
   };
 
-  const component = (birthday: string) => {
+  const activeSubMenu = (birthday: string) => {
     switch (activeMenu) {
       case "userInfo":
         return (
@@ -76,8 +79,8 @@ const UserInfo = () => {
         </Info>
         <UserImage src={userImg} imageWidth={150} spacingTop={10} />
         {birthdayChildData!["birthday"]
-          ? component(birthdayChildData!["birthday"])
-          : component("1.1.0000")}
+          ? activeSubMenu(birthdayChildData!["birthday"])
+          : ""}
         <BigButton
           fontFamily="montserrat"
           fontSize={23}
