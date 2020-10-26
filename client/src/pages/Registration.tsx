@@ -9,7 +9,7 @@ import {
 } from "../components/Formular";
 import MainContainer from "../components/MainContainer";
 import Button from "../components/Button";
-import Link from "../components/Link";
+import { RouterlessLink } from "../components/Link";
 import { registerUser } from "../api/user";
 
 type registrationDataType = {
@@ -166,7 +166,7 @@ const Registration = () => {
           : ""}
         <ButtonContainer>
           <Button fontSize={20} type="button" onTouchStart={() => ""}>
-            <Link href="/">cancel</Link>
+            <RouterlessLink href="/">cancel</RouterlessLink>
           </Button>
           <Button
             fontSize={20}

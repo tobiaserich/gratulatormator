@@ -2,7 +2,7 @@ import React from "react";
 import { loginUser } from "../api/user";
 import styled from "@emotion/styled";
 import Button from "./Button";
-import Link from "./Link";
+import { RouterlessLink } from "./Link";
 
 type ThemeProps = {
   [index: string]: string;
@@ -100,7 +100,7 @@ const Login = () => {
             Login
           </Button>
           <Button type="button" onTouchStart={() => ""}>
-            <Link href="./registration"> Register</Link>
+            <RouterlessLink href="./registration"> Register</RouterlessLink>
           </Button>
         </FlexContainer>
         <FlexContainer>

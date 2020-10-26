@@ -2,7 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import { Heading } from "./Heading";
 import { SeparationLine } from "./SeparationLine";
-import Link from "../components/Link";
+import { RouterlessLink } from "../components/Link";
 import { verifyUser } from "../api/user";
 
 const Container = styled("header")`
@@ -43,14 +43,14 @@ const Header = () => {
 
   redirection();
   return (
-    <Link href="./main">
+    <RouterlessLink href="./main">
       <Container>
         <Heading strokeColor="white" topSpacing={10} fontSize={1.9}>
           Gratulatormator
         </Heading>
         <SeparationLine distanceTop={-18} />
       </Container>
-    </Link>
+    </RouterlessLink>
   );
 };
 
