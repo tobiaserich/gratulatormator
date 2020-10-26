@@ -23,8 +23,6 @@ function App(): JSX.Element {
   const [userVerification, setUserVerification] = React.useState<boolean>(
     false
   );
-
-
   const currentPath = window.location.pathname;
   //Check the current path for background color adjustment.
   //Also check if the user is logged in, to forward him to the user section.
