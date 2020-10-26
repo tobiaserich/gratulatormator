@@ -89,6 +89,7 @@ const Modal = ({ status, toggleModal, forwarding, refresh }: any) => {
     closeModal();
   };
 
+  // shows a different button bar depending on the status code
   const Buttons = (): JSX.Element | undefined => {
     if (status.code === 200) {
       return (

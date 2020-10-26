@@ -27,7 +27,7 @@ const CategoryContainer = styled("div")`
   align-items: center;
 `;
 
-const RandomizButton = styled("div")<ButtonProps>`
+const RandomizeButton = styled("div")<ButtonProps>`
   display: flex;
   align-content: center;
   justify-content: center;
@@ -78,10 +78,12 @@ const GenerateGratulation: React.FC<generateGratulationProps> = ({
   const [dropdownValue, setDropdownValue] = React.useState<string>("Friend");
   const items: string[] = ["Friend"];
 
+  //fetch all available messages from the database
   React.useEffect((): void => {
     const fetchMessages = async (): Promise<void> => {
       const messages = await getAvailableMessages(dropdownValue);
       setAvailableMessages(messages);
+      //set a random message as initial message
       const randomNumber = Math.floor(Math.random() * messages.length);
       const messageWithName = individualizeMessage(
         messages[randomNumber].message
@@ -91,10 +93,13 @@ const GenerateGratulation: React.FC<generateGratulationProps> = ({
     fetchMessages();
   }, []);
 
+  // replace [firstName] in message with the name of the birthday child
   const individualizeMessage = (message: string): string => {
     const indidualizedMessage = message.replace(/(\[firstName\])/, firstName);
     return indidualizedMessage;
   };
+
+  //sets a new random message when the user clicks on the randomize button
   const generateMessage = (): void => {
     const randomMessage = Math.floor(Math.random() * availableMessages.length);
     const messageWithName = individualizeMessage(
@@ -116,12 +121,12 @@ const GenerateGratulation: React.FC<generateGratulationProps> = ({
         <Info fontSize={1.2}>
           <DropdownMenu items={items} dropdownValue={setDropdownValue} />
         </Info>
-        <RandomizButton
+        <RandomizeButton
           onTouchStart={() => ""}
           onClick={(): void => generateMessage()}
         >
           <img src={randomizeButton} />
-        </RandomizButton>
+        </RandomizeButton>
       </CategoryContainer>
       <TextContainer>
         <TextBox

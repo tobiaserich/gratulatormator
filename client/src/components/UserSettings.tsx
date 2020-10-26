@@ -27,17 +27,22 @@ const UserSettings: React.FC<UserSettingsProps> = ({
   const [remindMeDays, setRemindMeDays] = React.useState<string>("xx");
   const [remindMe, setRemindMe] = React.useState<boolean>(false);
   const { id } = useParams();
+
+  //set the states in the initial rendering phase
   React.useEffect((): void => {
     setRemindMeDays(daysToRemind!);
     setRemindMe(remindStatus);
   }, []);
 
+  //update the remindDays value in the database every time the users change it
   React.useEffect((): void => {
     updateRemindMeDays(id, remindMeDays);
   }, [remindMeDays]);
 
+  //generate an array with {days} positions to pass it to the dropdownmenu
   const generateDaysDropdownItems = (): string[] => {
-    let items: string[] = new Array(30).fill("");
+    const days = 30;
+    let items: string[] = new Array(days).fill("");
     items.forEach((item, index) => {
       const newValue =
         index + 1 < 10 ? "0" + (index + 1) : (index + 1).toString();
@@ -45,6 +50,7 @@ const UserSettings: React.FC<UserSettingsProps> = ({
     });
     return items;
   };
+
   const handleRemindChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRemindMe(event.currentTarget.checked);
     updateRemindMe(id, event.currentTarget.checked);

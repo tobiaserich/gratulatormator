@@ -104,7 +104,7 @@ const Login = () => {
           </Button>
         </FlexContainer>
         <FlexContainer>
-          <SmallPrint href="./main">continue without login</SmallPrint>
+          <SmallPrint href="">continue without login</SmallPrint>
         </FlexContainer>
       </form>
     </Container>

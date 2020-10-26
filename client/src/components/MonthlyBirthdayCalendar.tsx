@@ -108,7 +108,7 @@ const Table = styled("table")<tableProps>`
   
 `;
 const MonthlyBirthdayCalendar = ({ month, birthdayChildren }: MonthProps) => {
-  const [notInitialRendering, setNotInitialRendering] = React.useState<boolean>(
+  const [initialRendering, setInitialRendering] = React.useState<boolean>(
     false
   );
   const [animation, setAnimation] = React.useState<string>("");
@@ -130,11 +130,11 @@ const MonthlyBirthdayCalendar = ({ month, birthdayChildren }: MonthProps) => {
   return (
     <Container
       onClick={(): void => {
-        setNotInitialRendering(true);
+        setInitialRendering(true);
         handleAnimation();
       }}
     >
-      <Month rendered={notInitialRendering}>
+      <Month rendered={initialRendering}>
         {month}
         <ShortSeparationLine />
       </Month>

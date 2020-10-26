@@ -70,7 +70,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
   items,
   dropdownValue,
   status = true,
-  daysToRemind = "0",
+  daysToRemind,
   handleDaysToRemind,
 }) => {
   const [select, setSelect] = React.useState<string>(items[0]);
@@ -81,9 +81,10 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
     setDropdownStatus(status);
   }, [status]);
 
+  // sets the days to remember to the value from the database
   React.useEffect((): void => {
     if (handleDaysToRemind) {
-      const remindDays = parseInt(daysToRemind) - 1;
+      const remindDays = parseInt(daysToRemind!) - 1;
       setSelect(items[remindDays]);
     }
   }, []);

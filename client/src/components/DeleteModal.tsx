@@ -18,6 +18,7 @@ type ThemeProps = {
 type modalContainerProps = {
   theme: ThemeProps;
 };
+
 const Background = styled("div")`
   position: absolute;
   top: 0;
@@ -68,8 +69,8 @@ const DeleteModal: React.FC<modalProps> = ({
   birthdayChildName,
 }) => {
   const [deleted, setDeleted] = React.useState<boolean>(false);
-
   const history = useHistory();
+
   const handleClose = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (event.target === event.currentTarget) {
       handleVisibility(false);
