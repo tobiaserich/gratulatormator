@@ -46,11 +46,11 @@ const getBirthday = async (birthdayID, cookie) => {
   }
 };
 
-const deleteBirthday = async (birthdayID, cookie) => {
+const deleteBirthday = (birthdayID, cookie) => {
   const collection = getCollection("birthdays");
   const owner = jwt.verify(cookie, process.env.TOKEN_SECRET)._id;
   try {
-    const deleteBirthday = await collection.deleteOne({
+    collection.deleteOne({
       owner: owner,
       _id: ObjectID(birthdayID),
     });
@@ -60,11 +60,11 @@ const deleteBirthday = async (birthdayID, cookie) => {
   }
 };
 
-const updateRemindMe = async (body, cookie) => {
+const updateRemindMe = (body, cookie) => {
   const collection = getCollection("birthdays");
   const owner = jwt.verify(cookie, process.env.TOKEN_SECRET)._id;
   try {
-    const update = collection.updateOne(
+    collection.updateOne(
       { owner: owner, _id: ObjectID(body.id) },
       { $set: { remindMe: body.remindMeValue } }
     );
@@ -72,11 +72,11 @@ const updateRemindMe = async (body, cookie) => {
   return;
 };
 
-const updateRemindMeDays = async (body, cookie) => {
+const updateRemindMeDays = (body, cookie) => {
   const collection = getCollection("birthdays");
   const owner = jwt.verify(cookie, process.env.TOKEN_SECRET)._id;
   try {
-    const update = collection.updateOne(
+    collection.updateOne(
       { owner: owner, _id: ObjectID(body.id) },
       { $set: { remindMeDays: body.remindMeDays } }
     );

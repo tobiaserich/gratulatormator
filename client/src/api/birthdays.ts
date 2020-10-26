@@ -1,4 +1,3 @@
-
 type getBirthdayProps = {
   [index: string]: string | boolean;
 };
@@ -25,7 +24,6 @@ const getAllBirthdays = async (): Promise<object> => {
   return result;
 };
 
-
 const getBirthday = async (id: string): Promise<getBirthdayProps> => {
   const response = await fetch(`/birthday/singleBirthday/${id}`, {
     method: "GET",
@@ -44,22 +42,16 @@ const deleteBirthday = async (id: string): Promise<any> => {
   return result;
 };
 
-const updateRemindMe = async (
-  id: string,
-  remindMeValue: boolean
-): Promise<void> => {
-  const response = await fetch("/birthday/updateRemindMe/", {
+const updateRemindMe = (id: string, remindMeValue: boolean): void => {
+  fetch("/birthday/updateRemindMe/", {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ id, remindMeValue }),
   });
 };
 
-const updateRemindMeDays = async (
-  id: string,
-  remindMeDays: string
-): Promise<void> => {
-  const response = fetch("/birthday/updateRemindMeDays/", {
+const updateRemindMeDays = (id: string, remindMeDays: string): void => {
+  fetch("/birthday/updateRemindMeDays/", {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ id, remindMeDays }),

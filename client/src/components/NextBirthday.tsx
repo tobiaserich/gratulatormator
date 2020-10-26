@@ -234,7 +234,7 @@ const NextBirthday = ({ birthdays }: any) => {
     <>
       <SubHeading>Next Birthday</SubHeading>
       {nextBirthdays ? (
-        <Link href={"./userInfo/" + nextBirthdays[currentBirthday]._id}>
+        <Link to={"./userInfo/" + nextBirthdays[currentBirthday]._id}>
           <Container
             onTouchStart={(event: React.TouchEvent<HTMLElement>) => {
               if (nextBirthdays.length > 1) {
@@ -249,20 +249,10 @@ const NextBirthday = ({ birthdays }: any) => {
             <UserContainer>
               <UserImage src={user} imageWidth={70} />
               <UserDetails>
-                <UserDetail>{`${
-                  nextBirthdays
-                    ? `${nextBirthdays[currentBirthday].firstName} ${nextBirthdays[currentBirthday].lastName}`
-                    : ""
-                }`}</UserDetail>
-                <UserDetail>{`${
-                  nextBirthdays
-                    ? `${nextBirthdays[currentBirthday].birthday}`
-                    : ""
-                }`}</UserDetail>
+                <UserDetail>{`${nextBirthdays[currentBirthday].firstName} ${nextBirthdays[currentBirthday].lastName}`}</UserDetail>
+                <UserDetail>{`${nextBirthdays[currentBirthday].birthday}`}</UserDetail>
                 <UserDetail>
-                  {nextBirthdays
-                    ? checkAge(nextBirthdays[currentBirthday].birthday) + 1
-                    : ""}{" "}
+                  {checkAge(nextBirthdays[currentBirthday].birthday) + 1}
                   Years old
                 </UserDetail>
               </UserDetails>
