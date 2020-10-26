@@ -57,7 +57,10 @@ const Registration = () => {
   const validateInput = (): void => {
     const newValidation = { ...validation };
     newValidation.username = registrationData.username !== "" ? true : false;
-    newValidation.email = registrationData.email !== "" ? true : false;
+    newValidation.email =
+      registrationData.email !== "" && registrationData.email.match(/@/g)
+        ? true
+        : false;
     newValidation.password = registrationData.password !== "" ? true : false;
     setValidation(newValidation);
   };
