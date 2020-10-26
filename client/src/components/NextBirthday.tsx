@@ -2,6 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import { SubHeading } from "../components/Heading";
 import UserImage from "../components/UserImage";
+import Link from "../components/Link";
 import user from "../assets/user.svg";
 import { SeparationLine } from "./SeparationLine";
 import showBirthdayForMonth from "../assets/helper/showBirthdayForMonth";
@@ -228,43 +229,46 @@ const NextBirthday = ({ birthdays }: any) => {
       }
     }
   };
+
   return (
     <>
       <SubHeading>Next Birthday</SubHeading>
       {nextBirthdays ? (
-        <Container
-          onTouchStart={(event: React.TouchEvent<HTMLElement>) => {
-            if (nextBirthdays.length > 1) {
-              handleTouch("start", event);
+        <Link href={"./userInfo/" + nextBirthdays[currentBirthday]._id}>
+          <Container
+            onTouchStart={(event: React.TouchEvent<HTMLElement>) => {
+              if (nextBirthdays.length > 1) {
+                handleTouch("start", event);
+              }
+            }}
+            onTouchEnd={(event: React.TouchEvent<HTMLElement>) =>
+              handleTouch("end", event)
             }
-          }}
-          onTouchEnd={(event: React.TouchEvent<HTMLElement>) =>
-            handleTouch("end", event)
-          }
-          animation={animation}
-        >
-          <UserContainer>
-            <UserImage src={user} imageWidth={70} />
-            <UserDetails>
-              <UserDetail>{`${
-                nextBirthdays
-                  ? `${nextBirthdays[currentBirthday].firstName} ${nextBirthdays[currentBirthday].lastName}`
-                  : ""
-              }`}</UserDetail>
-              <UserDetail>{`${
-                nextBirthdays
-                  ? `${nextBirthdays[currentBirthday].birthday}`
-                  : ""
-              }`}</UserDetail>
-              <UserDetail>
-                {nextBirthdays
-                  ? checkAge(nextBirthdays[currentBirthday].birthday) + 1
-                  : ""}{" "}
-                Years old
-              </UserDetail>
-            </UserDetails>
-          </UserContainer>
-        </Container>
+            animation={animation}
+          >
+            <UserContainer>
+              <UserImage src={user} imageWidth={70} />
+              <UserDetails>
+                <UserDetail>{`${
+                  nextBirthdays
+                    ? `${nextBirthdays[currentBirthday].firstName} ${nextBirthdays[currentBirthday].lastName}`
+                    : ""
+                }`}</UserDetail>
+                <UserDetail>{`${
+                  nextBirthdays
+                    ? `${nextBirthdays[currentBirthday].birthday}`
+                    : ""
+                }`}</UserDetail>
+                <UserDetail>
+                  {nextBirthdays
+                    ? checkAge(nextBirthdays[currentBirthday].birthday) + 1
+                    : ""}{" "}
+                  Years old
+                </UserDetail>
+              </UserDetails>
+            </UserContainer>
+          </Container>
+        </Link>
       ) : (
         <></>
       )}
