@@ -1,3 +1,7 @@
+type getBirthdayProps = {
+  [index: string]: string | boolean;
+};
+
 const addBirthday = async (birthdayData: object): Promise<string> => {
   const response = await fetch("/birthday/add/", {
     method: "POST",
@@ -20,7 +24,7 @@ const getAllBirthdays = async (): Promise<object> => {
   return result;
 };
 
-const getBirthday = async (id: string): Promise<object> => {
+const getBirthday = async (id: string): Promise<getBirthdayProps> => {
   const response = await fetch(`/birthday/singleBirthday/${id}`, {
     method: "GET",
     credentials: "include",
