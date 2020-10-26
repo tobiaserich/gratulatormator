@@ -12,7 +12,6 @@ const UserInformation: React.FC<UserInformationProps> = ({
   handleClick,
   birthdayDate,
 }) => {
-
   const [birthday, setBirthday] = React.useState<string>("");
   const [daysToBirthday, setDaysToBirthday] = React.useState<number>(0);
   //calculates the days until birthday an sets the state
@@ -25,19 +24,17 @@ const UserInformation: React.FC<UserInformationProps> = ({
   //converts the birthday in ms
   const birthdayToMs = (birthday: string): number => {
     const birthdayArr = birthday.split(".").reverse();
-    const birthdayMonth = new Date(birthdayArr.join("-")).getMonth() + 1;
-    const birthdayDay = new Date(birthdayArr.join("-")).getDate();
+    const joinedBirthday = birthdayArr.join("-");
+    const birthdayMonth = new Date(joinedBirthday).getMonth() + 1;
+    const birthdayDay = new Date(joinedBirthday).getDate();
     const currentMonth = new Date().getMonth() + 1;
     const currentDay = new Date().getDate();
     const currentYear = new Date().getFullYear();
-    console.log(birthdayMonth);
-    console.log(currentMonth);
     birthdayArr[0] =
       birthdayMonth > currentMonth ||
       (birthdayMonth === currentMonth && birthdayDay >= currentDay)
         ? currentYear.toString()
         : (currentYear + 1).toString();
-    console.log(birthdayArr[0]);
     return Date.parse(birthdayArr.join("-"));
   };
 
