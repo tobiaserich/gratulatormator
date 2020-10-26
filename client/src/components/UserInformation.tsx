@@ -12,9 +12,9 @@ const UserInformation: React.FC<UserInformationProps> = ({
   handleClick,
   birthdayDate,
 }) => {
+
   const [birthday, setBirthday] = React.useState<string>("");
   const [daysToBirthday, setDaysToBirthday] = React.useState<number>(0);
-
   //calculates the days until birthday an sets the state
   React.useEffect((): void => {
     setBirthday(birthdayDate);
