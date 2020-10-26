@@ -8,35 +8,42 @@ type UserInformationProps = {
   birthdayDate: string;
 };
 
-const UserSettings: React.FC<UserInformationProps> = ({
+const UserInformation: React.FC<UserInformationProps> = ({
   handleClick,
   birthdayDate,
 }) => {
-  const [birthday, setBirthday] = React.useState<string>("1989-02-02");
+  const [birthday, setBirthday] = React.useState<string>("");
   const [daysToBirthday, setDaysToBirthday] = React.useState<number>(0);
 
+  //calculates the days until birthday an sets the state
   React.useEffect((): void => {
     setBirthday(birthdayDate);
-    const sum = daysUntilBirthday(birthday);
+    const sum = daysUntilBirthday(birthdayDate);
     setDaysToBirthday(sum);
-  });
-  const birthdayRearrange = (birthday: string): number => {
+  }, []);
+
+  //converts the birthday in ms
+  const birthdayToMs = (birthday: string): number => {
     const birthdayArr = birthday.split(".").reverse();
-    const birthdayMonth = new Date(birthdayArr.join("-")).getMonth();
+    const birthdayMonth = new Date(birthdayArr.join("-")).getMonth() + 1;
     const birthdayDay = new Date(birthdayArr.join("-")).getDate();
-    const currentMonth = new Date().getMonth();
+    const currentMonth = new Date().getMonth() + 1;
     const currentDay = new Date().getDate();
     const currentYear = new Date().getFullYear();
+    console.log(birthdayMonth);
+    console.log(currentMonth);
     birthdayArr[0] =
-      birthdayMonth >= currentMonth && birthdayDay >= currentDay
+      birthdayMonth > currentMonth ||
+      (birthdayMonth === currentMonth && birthdayDay >= currentDay)
         ? currentYear.toString()
         : (currentYear + 1).toString();
-
+    console.log(birthdayArr[0]);
     return Date.parse(birthdayArr.join("-"));
   };
 
+  //calculate days until birthday
   const daysUntilBirthday = (birthday: string): number => {
-    const birthdayConverted = birthdayRearrange(birthday);
+    const birthdayConverted = birthdayToMs(birthday);
     const today = Date.now();
     const daysUntilBDay = Math.ceil((birthdayConverted - today) / 86400000);
     return daysUntilBDay;
@@ -64,4 +71,4 @@ const UserSettings: React.FC<UserInformationProps> = ({
   );
 };
 
-export default UserSettings;
+export default UserInformation;
