@@ -72,11 +72,11 @@ const updateRemindMe = (body, cookie) => {
   return;
 };
 
-const updateRemindMeDays = async (body, cookie) => {
+const updateRemindMeDays = (body, cookie) => {
   const collection = getCollection("birthdays");
   const owner = jwt.verify(cookie, process.env.TOKEN_SECRET)._id;
   try {
-    const update = collection.updateOne(
+    collection.updateOne(
       { owner: owner, _id: ObjectID(body.id) },
       { $set: { remindMeDays: body.remindMeDays } }
     );
