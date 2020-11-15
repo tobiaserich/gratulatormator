@@ -82,16 +82,24 @@ const UserDetail = styled("p")`
 
 const NextBirthday = ({ birthdays }: any) => {
   const [currentBirthday, setCurrentBirthday] = React.useState<number>(0);
-  const [nextBirthdays, setNextBirthdays] = React.useState<any>([
-    { firstName: "Tobias", lastName: "Erich", birthday: "24.12.1989" },
-  ]);
+  const [nextBirthdays, setNextBirthdays] = React.useState<any>([]);
 
   const [animation, setAnimation] = React.useState<string>("initial-state");
+  const [timeOutAuto, setTimeOutAuto] = React.useState();
   let swipeStart: number;
   let swipeEnd: number;
+
   React.useEffect((): void => {
     getNextBirthday(1, true);
   }, [birthdays]);
+
+  React.useEffect(() => {
+    clearTimeout(timeOutAuto);
+    const timeoutAutoSwipe = setTimeout(() => {
+      autoSwipe();
+    }, 4000);
+    setTimeOutAuto(timeoutAutoSwipe);
+  }, [currentBirthday, nextBirthdays]);
 
   //recursion function to determine the next birthday child
   const getNextBirthday = (additor: number = 1, initial: boolean = false) => {
@@ -230,10 +238,23 @@ const NextBirthday = ({ birthdays }: any) => {
     }
   };
 
+  const autoSwipe = () => {
+    if (nextBirthdays.length > 1) {
+      setAnimation("swipeLeft");
+      if (currentBirthday < nextBirthdays.length - 1) {
+        setTimeout(() => setCurrentBirthday(currentBirthday + 1), 150);
+      } else {
+        setTimeout(() => setCurrentBirthday(0), 150);
+      }
+      setTimeout(() => {
+        setAnimation("none");
+      }, 500);
+    }
+  };
   return (
     <>
       <SubHeading>Next Birthday</SubHeading>
-      {nextBirthdays ? (
+      {nextBirthdays[0] ? (
         <Link to={"./userInfo/" + nextBirthdays[currentBirthday]._id}>
           <Container
             onTouchStart={(event: React.TouchEvent<HTMLElement>) => {
@@ -252,8 +273,8 @@ const NextBirthday = ({ birthdays }: any) => {
                 <UserDetail>{`${nextBirthdays[currentBirthday].firstName} ${nextBirthdays[currentBirthday].lastName}`}</UserDetail>
                 <UserDetail>{`${nextBirthdays[currentBirthday].birthday}`}</UserDetail>
                 <UserDetail>
-                  {checkAge(nextBirthdays[currentBirthday].birthday) + 1}
-                  Years old
+                  {checkAge(nextBirthdays[currentBirthday].birthday) + 1} Years
+                  old
                 </UserDetail>
               </UserDetails>
             </UserContainer>
