@@ -125,7 +125,7 @@ const GenerateGratulation: React.FC<generateGratulationProps> = ({
           onTouchStart={() => ""}
           onClick={(): void => generateMessage()}
         >
-          <img src={randomizeButton} />
+          <img src={randomizeButton} alt="button to start randomizer" />
         </RandomizeButton>
       </CategoryContainer>
       <TextContainer>
@@ -141,7 +141,7 @@ const GenerateGratulation: React.FC<generateGratulationProps> = ({
           }
           onTouchStart={() => ""}
         >
-          <img src={copyButton} />
+          <img src={copyButton} alt="close Button" />
         </CopyButton>
       </TextContainer>
       <Button
