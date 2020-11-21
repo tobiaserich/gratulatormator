@@ -51,9 +51,11 @@ const TextContainer = styled("div")`
   margin-bottom: 10px;
 `;
 
-const TextBox = styled("textarea")`
+const TextBox = styled("div")`
   height: 100px;
   width: 260px;
+  background-color: white;
+  font-size: 0.7em;
 `;
 
 const CopyButton = styled("div")<ButtonProps>`
@@ -76,7 +78,7 @@ const GenerateGratulation: React.FC<generateGratulationProps> = ({
   const [availableMessages, setAvailableMessages]: any = React.useState([]);
   const [activeMessage, setActiveMessage] = React.useState<string>("");
   const [dropdownValue, setDropdownValue] = React.useState<string>("Friend");
-  const items: string[] = ["Friend"];
+  const items: string[] = ["Friend", "Friends"];
 
   //fetch all available messages from the database
   React.useEffect((): void => {
@@ -108,12 +110,22 @@ const GenerateGratulation: React.FC<generateGratulationProps> = ({
     setActiveMessage(messageWithName);
   };
 
-  const handleChange = (
-    event: React.ChangeEvent<HTMLTextAreaElement>
-  ): void => {
-    setActiveMessage(event.target.value);
+  const beautify = (message: string) => {
+    const msgToArray = message.split("\n");
+    console.log(msgToArray);
+    return (
+      <>
+        {msgToArray.map((item) => {
+          return (
+            <>
+              {item}
+              <br />
+            </>
+          );
+        })}
+      </>
+    );
   };
-
   return (
     <>
       <CategoryContainer>
@@ -129,12 +141,7 @@ const GenerateGratulation: React.FC<generateGratulationProps> = ({
         </RandomizeButton>
       </CategoryContainer>
       <TextContainer>
-        <TextBox
-          onChange={(event: React.ChangeEvent<HTMLTextAreaElement>): void =>
-            handleChange(event)
-          }
-          value={activeMessage}
-        ></TextBox>
+        <TextBox>{beautify(activeMessage)}</TextBox>
         <CopyButton
           onClick={(): Promise<void> =>
             navigator.clipboard.writeText(activeMessage)
