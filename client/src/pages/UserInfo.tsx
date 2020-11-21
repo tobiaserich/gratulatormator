@@ -14,7 +14,9 @@ import { getBirthday } from "../api/birthdays";
 
 const UserInfo = () => {
   const [animationName, setForwarding] = useTransition("slideIn");
-  const [activeMenu, setActiveMenu] = React.useState<string>("userInfo");
+  const [activeMenu, setActiveMenu] = React.useState<string>(
+    "generateGratulation"
+  );
   const [deleteUser, setDeleteUser] = React.useState<boolean>(false);
   const [birthdayChildData, setBirthdayChildData] = React.useState<any>([]);
 
