@@ -41,6 +41,7 @@ const UserImage: React.FC<userImageProps> = ({
           imageWidth={imageWidth}
           spacingTop={spacingTop}
           onLoad={() => setImgLoaded(true)}
+          alt="User image"
         />
       </ImgPlaceholder>
     </>

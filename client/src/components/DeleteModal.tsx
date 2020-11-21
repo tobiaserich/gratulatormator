@@ -98,6 +98,7 @@ const DeleteModal: React.FC<modalProps> = ({
         <CloseButton
           src={closeButton}
           onClick={() => handleVisibility(false)}
+          alt="close Button"
         />
         {!deleted ? (
           <>

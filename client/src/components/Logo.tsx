@@ -26,7 +26,7 @@ const LogoBackground = styled("div")<LogoBackgroundProps>`
 const Logo = ({ w = 200, h = 200 }): JSX.Element => {
   return (
     <LogoBackground w={w} h={h}>
-      <img src={LogoImg} alt="img" />
+      <img src={LogoImg} alt="logo" />
     </LogoBackground>
   );
 };
