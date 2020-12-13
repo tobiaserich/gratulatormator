@@ -255,7 +255,7 @@ const NextBirthday = ({ birthdays }: any) => {
     <>
       <SubHeading>Next Birthday</SubHeading>
       {nextBirthdays[0] ? (
-        <Link to={"./BirthdayChildInfo/" + nextBirthdays[currentBirthday]._id}>
+        <Link to={"./birthdayChildInfo/" + nextBirthdays[currentBirthday]._id}>
           <Container
             onTouchStart={(event: React.TouchEvent<HTMLElement>) => {
               if (nextBirthdays.length > 1) {

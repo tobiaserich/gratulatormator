@@ -115,7 +115,7 @@ const BirthdayChildSettings: React.FC<BirthdayChildSettingsProps> = ({
         onClick={(
           event: React.MouseEvent<HTMLButtonElement, MouseEvent>
         ): void => {
-          handleClick(event, "BirthdayCHildInfo");
+          handleClick(event, "birthdayCHildInfo");
         }}
         onTouchStart={() => ""}
       >

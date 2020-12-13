@@ -150,7 +150,7 @@ const MonthlyBirthdayCalendar = ({ month, birthdayChildren }: MonthProps) => {
                   <Birthdate>{birthdayChild["birthday"]}</Birthdate>
                   <Age>{checkAge(birthdayChild["birthday"])}</Age>
                   <SeeMore>
-                    <Link to={"./BirthdayChildInfo/" + birthdayChild["_id"]}>
+                    <Link to={"./birthdayChildInfo/" + birthdayChild["_id"]}>
                       <Button onTouchStart={() => ""}>more</Button>
                     </Link>
                   </SeeMore>
