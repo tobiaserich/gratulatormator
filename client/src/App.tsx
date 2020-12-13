@@ -12,7 +12,7 @@ import LandingPage from "./pages/LandingPage";
 import Header from "./components/Header";
 import Main from "./pages/Main";
 import AddNewPerson from "./pages/AddNewPerson";
-import UserInfo from "./pages/UserInfo";
+import BirthdayChildInfo from "./pages/BirthdayChildInfo";
 import Registration from "./pages/Registration";
 import { verifyUser } from "./api/user";
 
@@ -57,8 +57,8 @@ function App(): JSX.Element {
                 <Route path="/addNewPerson/">
                   <AddNewPerson />
                 </Route>
-                <Route path="/userInfo/:id">
-                  <UserInfo />
+                <Route path="/BirthdayChildInfo/:id">
+                  <BirthdayChildInfo />
                 </Route>
                 <Route path="/registration">
                   <Registration />
