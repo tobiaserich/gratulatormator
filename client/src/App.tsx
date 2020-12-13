@@ -14,6 +14,8 @@ import Main from "./pages/Main";
 import AddNewPerson from "./pages/AddNewPerson";
 import BirthdayChildInfo from "./pages/BirthdayChildInfo";
 import Registration from "./pages/Registration";
+import UserSettings from "./pages/UserSettings";
+import Footer from "./components/Footer";
 import { verifyUser } from "./api/user";
 
 function App(): JSX.Element {
@@ -57,16 +59,20 @@ function App(): JSX.Element {
                 <Route path="/addNewPerson/">
                   <AddNewPerson />
                 </Route>
-                <Route path="/BirthdayChildInfo/:id">
+                <Route path="/birthdayChildInfo/:id">
                   <BirthdayChildInfo />
                 </Route>
                 <Route path="/registration">
                   <Registration />
                 </Route>
+                <Route path="/userSettings">
+                  <UserSettings />
+                </Route>
                 <Route path="*">
                   <Redirect to="/main" />
                 </Route>
               </Switch>
+              <Footer />
             </Route>
             <Route path="*">
               <Redirect to="/" />
