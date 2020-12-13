@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "@emotion/styled";
 import MonthlyBirthdayCalendar from "./MonthlyBirthdayCalendar";
 import sortBirthday from "../assets/helper/sortBirthday";
 
@@ -6,6 +7,10 @@ type mapBirthdayProps = {
   [index: number]: string;
   birthday: string;
 };
+
+const Spacer = styled("div")`
+  height: 50px;
+`;
 
 const BirthdayCalendar = ({ allBirthdays }: any): JSX.Element => {
   const showBirthdays = (month: string) => {
@@ -126,6 +131,7 @@ const BirthdayCalendar = ({ allBirthdays }: any): JSX.Element => {
       ) : (
         <></>
       )}
+      <Spacer />
     </>
   );
 };
