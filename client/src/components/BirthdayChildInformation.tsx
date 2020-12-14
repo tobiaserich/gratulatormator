@@ -3,12 +3,12 @@ import Info from "../components/Info";
 import Button from "../components/Button";
 import checkAge from "../assets/helper/checkAge";
 
-type UserInformationProps = {
+type BirthdayChildInformationProps = {
   handleClick: any;
   birthdayDate: string;
 };
 
-const UserInformation: React.FC<UserInformationProps> = ({
+const BirthdayChildInformation: React.FC<BirthdayChildInformationProps> = ({
   handleClick,
   birthdayDate,
 }) => {
@@ -68,4 +68,4 @@ const UserInformation: React.FC<UserInformationProps> = ({
   );
 };
 
-export default UserInformation;
+export default BirthdayChildInformation;

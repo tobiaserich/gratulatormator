@@ -77,7 +77,7 @@ const DeleteModal: React.FC<modalProps> = ({
     }
   };
 
-  const deleteUser = async (): Promise<void> => {
+  const deleteBirthdayChild = async (): Promise<void> => {
     const status = await deleteBirthday(id);
     if (status.code === 200) {
       setDeleted(true);
@@ -107,7 +107,7 @@ const DeleteModal: React.FC<modalProps> = ({
               <Button
                 fontFamily="montserrat"
                 fontSize={16}
-                onClick={(): Promise<void> => deleteUser()}
+                onClick={(): Promise<void> => deleteBirthdayChild()}
                 onTouchStart={() => ""}
               >
                 yes
@@ -124,7 +124,7 @@ const DeleteModal: React.FC<modalProps> = ({
           </>
         ) : (
           <>
-            <Text>User deleted</Text>
+            <Text>{birthdayChildName} deleted</Text>
             <ButtonContainer>
               <Button
                 fontFamily="montserrat"

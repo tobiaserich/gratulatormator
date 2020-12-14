@@ -7,9 +7,9 @@ import Button from "./Button";
 import RemindMeContainer from "./RemindMeContainer";
 import { updateRemindMe, updateRemindMeDays } from "../api/birthdays";
 
-type UserSettingsProps = {
+type BirthdayChildSettingsProps = {
   handleClick: any;
-  handleDeleteUser: React.Dispatch<React.SetStateAction<boolean>>;
+  handleDeleteBirthdayChild: React.Dispatch<React.SetStateAction<boolean>>;
   remindStatus: boolean;
   daysToRemind: string | undefined;
 };
@@ -18,9 +18,9 @@ const InputCheckbox = styled("input")`
   opacity: 0;
 `;
 
-const UserSettings: React.FC<UserSettingsProps> = ({
+const BirthdayChildSettings: React.FC<BirthdayChildSettingsProps> = ({
   handleClick,
-  handleDeleteUser,
+  handleDeleteBirthdayChild,
   remindStatus,
   daysToRemind,
 }) => {
@@ -102,7 +102,7 @@ const UserSettings: React.FC<UserSettingsProps> = ({
         spacingTop={50}
         buttonWidth={110}
         onClick={(): void => {
-          handleDeleteUser(true);
+          handleDeleteBirthdayChild(true);
         }}
         onTouchStart={() => ""}
       >
@@ -115,7 +115,7 @@ const UserSettings: React.FC<UserSettingsProps> = ({
         onClick={(
           event: React.MouseEvent<HTMLButtonElement, MouseEvent>
         ): void => {
-          handleClick(event, "userInfo");
+          handleClick(event, "BirthdayCHildInfo");
         }}
         onTouchStart={() => ""}
       >
@@ -125,4 +125,4 @@ const UserSettings: React.FC<UserSettingsProps> = ({
   );
 };
 
-export default UserSettings;
+export default BirthdayChildSettings;
