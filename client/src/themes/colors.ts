@@ -20,7 +20,7 @@ const colors: colorValues = {
   action300: "#3c5d62",
   neutral400: "#737581",
   neutral500: "#2D2D33",
-  font: "#000000",
+  font: "#141417",
   error200: "#df4e55",
 };
 

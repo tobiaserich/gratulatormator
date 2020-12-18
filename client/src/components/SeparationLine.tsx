@@ -25,6 +25,8 @@ const ShortSeparationLine = styled(SeparationLine)`
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 40px;
+  right: 0;
+  margin: auto;
+  width: 280px;
 `;
 export { SeparationLine, ShortSeparationLine };

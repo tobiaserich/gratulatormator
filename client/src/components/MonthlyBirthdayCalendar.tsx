@@ -12,6 +12,7 @@ type MonthProps = {
 
 type summaryProps = {
   rendered: boolean;
+  theme: any;
 };
 
 type tableProps = {
@@ -51,7 +52,7 @@ const Month = styled("summary")<summaryProps>`
     height: 0;
     border-top: 7px solid transparent;
     border-bottom: 7px solid transparent;
-    border-left: 10px solid black;
+    border-left: 10px solid ${({ theme }) => theme.neutral500};
     content: "";
     animation: ${({ rendered }) => (rendered ? "rotations" : "")} 0.2s both;
     @keyframes rotations {

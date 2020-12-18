@@ -23,6 +23,7 @@ function GlobalStyles(props: GlobalStylesProps) {
           margin: 0;
           font-family: "montserrat", "sans-serif";
           font-size:16px;
+          color: ${props.theme!.font};
           background: ${
             background === "unicolor"
               ? ""
