@@ -7,6 +7,7 @@ import Info from "./Info";
 import randomizeButton from "../assets/randomizeButton.svg";
 import copyButton from "../assets/copyButton.svg";
 import { getAvailableMessages } from "../api/messages";
+import { TextSpan } from "typescript";
 
 type generateGratulationProps = {
   handleClick: any;
@@ -19,6 +20,10 @@ type ThemeProps = {
 
 type ButtonProps = {
   theme: ThemeProps;
+};
+
+type TextboxProps = {
+  theme: any;
 };
 
 const CategoryContainer = styled("div")`
@@ -51,11 +56,16 @@ const TextContainer = styled("div")`
   margin-bottom: 10px;
 `;
 
-const TextBox = styled("div")`
+const TextBox = styled("div")<TextboxProps>`
   height: 100px;
   width: 260px;
-  background-color: white;
   font-size: 0.7em;
+  padding: 5px;
+  padding-top: 2px;
+  border: 2px solid ${({ theme }) => theme.secondary300};
+  border-radius: 4px;
+  -webkit-box-shadow: 0px 0px 4px 1px ${({ theme }) => theme.secondary300};
+  box-shadow: 0px 0px 4px 1px ${({ theme }) => theme.secondary300};
 `;
 
 const CopyButton = styled("div")<ButtonProps>`

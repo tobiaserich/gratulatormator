@@ -61,7 +61,9 @@ const Container = styled("section")<animationProps>`
 const UserContainer = styled("div")`
   margin-top: -5px;
   margin-bottom: 5px;
-  display: flex;
+  padding-left: 5px;
+  padding-right: 15px;
+  display: flex;  
 
   }
 `;

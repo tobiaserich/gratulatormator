@@ -4,9 +4,11 @@ type HeadingProps = {
   strokeColor?: string;
   topSpacing?: number;
   fontSize?: number;
+  theme: any;
 };
 
 const Heading = styled("h1")<HeadingProps>`
+  color: ${({ theme }) => theme.font};
   margin-top: ${({ topSpacing }) => topSpacing}px;
   font-family: "Luckiest guy", "sans-serif";
   font-size: ${({ fontSize = "" }) => (fontSize ? fontSize : "")}em;

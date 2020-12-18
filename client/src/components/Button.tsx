@@ -23,6 +23,8 @@ const Button = styled("button")<ButtonProps>`
   border: 2.3px solid ${({ borderColor, theme }) =>
     borderColor ? borderColor : theme.action100};
   border-radius: 4px;
+  -webkit-box-shadow: 0px 0px 4px 1px #6498A0; 
+box-shadow: 0px 0px 4px 1px #6498A0;
   ${({ spacingRight }) => `margin-right: ${spacingRight}px`};
   ${({ spacingTop }) => `margin-top: ${spacingTop}px`};
  ${({ buttonWidth }) => (buttonWidth ? `width:${buttonWidth}px` : "")};
