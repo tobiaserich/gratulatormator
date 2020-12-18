@@ -2,22 +2,24 @@ import React from "react";
 import useTransition from "../hooks/useTransition";
 import MainContainer from "../components/MainContainer";
 import Info from "../components/Info";
-import UserImage from "../components/UserImage";
-import userImg from "../assets/user.svg";
-import UserInformation from "../components/UserInformation";
-import UserSettings from "../components/UserSettings";
+import BirthdayChildImage from "../components/BirthdayChildImage";
+import birthdayChildPlaceholder from "../assets/birthdayChildPlaceholder.svg";
+import BirthdayChildInformation from "../components/BirthdayChildInformation";
+import BirthdayChildSettings from "../components/BirthdayChildSettings";
 import BigButton from "../components/BigButton";
 import GenerateGratulation from "../components/GenerateGratulation";
 import DeleteModal from "../components/DeleteModal";
 import { useParams } from "react-router-dom";
 import { getBirthday } from "../api/birthdays";
 
-const UserInfo = () => {
+const BirthdayChildInfo = () => {
   const [animationName, setForwarding] = useTransition("slideIn");
   const [activeMenu, setActiveMenu] = React.useState<string>(
     "generateGratulation"
   );
-  const [deleteUser, setDeleteUser] = React.useState<boolean>(false);
+  const [deleteBirthdayChild, setDeleteBirthdayChild] = React.useState<boolean>(
+    false
+  );
   const [birthdayChildData, setBirthdayChildData] = React.useState<any>([]);
 
   let transitionTimer: NodeJS.Timeout;
@@ -50,15 +52,18 @@ const UserInfo = () => {
 
   const activeSubMenu = (birthday: string) => {
     switch (activeMenu) {
-      case "userInfo":
+      case "BirthdayChildInfo":
         return (
-          <UserInformation handleClick={transition} birthdayDate={birthday} />
+          <BirthdayChildInformation
+            handleClick={transition}
+            birthdayDate={birthday}
+          />
         );
       case "options":
         return (
-          <UserSettings
+          <BirthdayChildSettings
             handleClick={transition}
-            handleDeleteUser={setDeleteUser}
+            handleDeleteBirthdayChild={setDeleteBirthdayChild}
             remindStatus={birthdayChildData!["remindMe"]}
             daysToRemind={birthdayChildData!["remindMeDays"]}
           />
@@ -79,7 +84,11 @@ const UserInfo = () => {
         <Info topSpacing={20}>
           {birthdayChildData!["firstName"]} {birthdayChildData!["lastName"]}
         </Info>
-        <UserImage src={userImg} imageWidth={150} spacingTop={10} />
+        <BirthdayChildImage
+          src={birthdayChildPlaceholder}
+          imageWidth={150}
+          spacingTop={10}
+        />
         {birthdayChildData!["birthday"]
           ? activeSubMenu(birthdayChildData!["birthday"])
           : ""}
@@ -95,9 +104,9 @@ const UserInfo = () => {
           back
         </BigButton>
       </MainContainer>
-      {deleteUser ? (
+      {deleteBirthdayChild ? (
         <DeleteModal
-          handleVisibility={setDeleteUser}
+          handleVisibility={setDeleteBirthdayChild}
           birthdayChildName={`${birthdayChildData!["firstName"]} ${
             birthdayChildData!["lastName"]
           }`}
@@ -110,4 +119,4 @@ const UserInfo = () => {
   );
 };
 
-export default UserInfo;
+export default BirthdayChildInfo;

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 
-type userImageProps = {
+type BirthdayChildImageProps = {
   src: string;
   imageWidth: number;
   spacingTop?: number;
@@ -26,7 +26,7 @@ const ImgPlaceholder = styled("div")<placeholderProps>`
   height: ${({ containerWidth }) => containerWidth + "px"};
 `;
 
-const UserImage: React.FC<userImageProps> = ({
+const BirthdayChildImage: React.FC<BirthdayChildImageProps> = ({
   src,
   imageWidth,
   spacingTop,
@@ -41,10 +41,10 @@ const UserImage: React.FC<userImageProps> = ({
           imageWidth={imageWidth}
           spacingTop={spacingTop}
           onLoad={() => setImgLoaded(true)}
-          alt="User image"
+          alt="Birthday child image"
         />
       </ImgPlaceholder>
     </>
   );
 };
-export default UserImage;
+export default BirthdayChildImage;

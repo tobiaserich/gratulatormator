@@ -3,8 +3,8 @@ import styled from "@emotion/styled";
 import useTransition from "../hooks/useTransition";
 import MainContainer from "../components/MainContainer";
 import { SubHeading } from "../components/Heading";
-import UserImage from "../components/UserImage";
-import user from "../assets/user.svg";
+import BirthdayChildImage from "../components/BirthdayChildImage";
+import birthdayChildPlaceholder from "../assets/birthdayChildPlaceholder.svg";
 import {
   Formular,
   Label,
@@ -60,7 +60,7 @@ const AddNewPerson = () => {
     <InputValidation>This field is required</InputValidation>
   );
 
-  const refreshUserData = (): void => {
+  const refreshBirthdayChildData = (): void => {
     setFirstName("");
     setLastName("");
     setBirthday("");
@@ -102,14 +102,14 @@ const AddNewPerson = () => {
       validationCheck["lastName"] === true &&
       validationCheck["birthday"] === true
     ) {
-      const userData = {
+      const BirthdayChildData = {
         firstName,
         lastName,
         birthday,
         remindMe,
         remindMeDays: "01",
       };
-      const response = await addBirthday(userData);
+      const response = await addBirthday(BirthdayChildData);
       setSubmitResponse(response);
       setShowModal(true);
     }
@@ -122,7 +122,7 @@ const AddNewPerson = () => {
           status={submitResponse}
           toggleModal={() => setShowModal(!showModal)}
           forwarding={setForwarding}
-          refresh={refreshUserData}
+          refresh={refreshBirthdayChildData}
         />
       ) : (
         <></>
@@ -134,7 +134,7 @@ const AddNewPerson = () => {
         }
       >
         <ImageLabel>
-          <UserImage src={user} imageWidth={120} />
+          <BirthdayChildImage src={birthdayChildPlaceholder} imageWidth={120} />
           Add image
           <HiddenFileUpload
             type="file"
